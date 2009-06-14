@@ -1,0 +1,21 @@
+    # Be sure to only have this line once in your configuration
+    NameVirtualHost 127.0.0.1:80
+
+    # This is the configuration for tibiahu
+    Listen 127.0.0.1:80
+
+    <VirtualHost 127.0.0.1:80>
+      ServerName tibiahu.localhost
+      DocumentRoot "D:\xampp\htdocs\tibiahu\web"
+      DirectoryIndex index.php
+      <Directory "D:\xampp\htdocs\tibiahu\web">
+        AllowOverride All
+        Allow from All
+      </Directory>
+
+      Alias /sf "D:\xampp\htdocs\tibiahu\lib\vendor\symfony\data\web\sf"
+      <Directory "D:\xampp\htdocs\tibiahu\lib\vendor\symfony\data\web\sf">
+        AllowOverride All
+        Allow from All
+      </Directory>
+    </VirtualHost>

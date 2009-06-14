@@ -1,0 +1,69 @@
+propel:
+  
+  tibia_character:
+    _attributes: { phpName: Character }
+    id:          ~
+    name:        { type: varchar(255), required: true, index: true }
+    level:       { type: integer, required: true }
+    slug:        { type: varchar(255), index: unique, primaryKey: true }
+    last_seen:   { type: timestamp }
+    guild_id:    { type: integer, foreignTable: tibia_guild, foreignReference: id, onDelete: setnull }
+    created_at:  ~
+    updated_at:  ~
+    vocation_id: { type: integer }
+    server_id:   { type: integer, foreignTable: tibia_server, foreignReference: id, onDelete: cascade }
+    
+  tibia_creature:
+    _attributes: { phpName: Creature }
+    id:          ~
+    name:        varchar(100)
+    
+  tibia_guild:
+    _attributes: { phpName: Guild }
+    id:          ~
+    name:        { type: varchar(255), required: true, primaryKey: true}
+    slug:        { type: varchar(255), index: unique }
+    updated_at:  ~
+    members:     { type: integer }
+    server_id:   { type: integer, foreignTable: tibia_server, foreignReference: id, onDelete: cascade }
+    
+  tibia_levelhistory:
+    _attributes: { phpName: LevelHistory }
+    id:           ~
+    character_id: { type: integer, foreignTable: tibia_character, foreignReference: id, onDelete: cascade, primaryKey: true }
+    level:        { type: integer }
+    created_at:   ~
+    reason_id:    { type: integer, foreignTable: tibia_creature, foreignReference: id, onDelete: setnull }
+
+  tibia_cronlog:
+    _attributes: { phpName: CronLog }
+    id:         ~
+    created_at: ~
+    type:       varchar(100)
+    data:       varchar(255)
+
+  tibia_setting:
+    _attributes: { phpName: Setting }
+    key:         { type: varchar(255), required: true, primaryKey: true }
+    value:       { type: varchar(255) }
+
+  tibia_banishment:
+    _attributes:     { phpName: Banishment }
+    id:              ~
+    character_id:    { type: integer, foreignTable: tibia_character, foreignReference: id, onDelete: cascade, index: true }
+    banished_until:  { type: timestamp }
+    banished_for_id: { type: integer } 
+    banished_at:     { type: timestamp }
+    level:           { type: integer } 
+   
+  tibia_house:
+    _attributes:     { phpName: House }
+    id:              { type: integer, index: unique }
+    name:            { type: varchar(255) }
+    slug:            { type: varchar(255), primaryKey: true }
+    
+  tibia_server:
+    _attributes:     { phpName: Server }
+    id:              ~
+    name:            { type: varchar(32) }
+    is_enabled:      { type: boolean }

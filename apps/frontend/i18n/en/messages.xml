@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xliff PUBLIC "-//XLIFF//DTD XLIFF//EN" "http://www.oasis-open.org/committees/xliff/documents/xliff.dtd">
+<xliff version="1.0">
+  <file source-language="hu" target-language="en" datatype="plaintext" original="messages" date="2009-05-01T17:59:28Z" product-name="messages">
+    <header/>
+    <body>
+      <trans-unit id="1">
+        <source>Magyar Tibia rajongói oldal</source>
+        <target>Hungarian Tibia fansite</target>
+      </trans-unit>
+      <trans-unit id="2">
+        <source>Az oldal logoja</source>
+        <target>Logo of the site</target>
+      </trans-unit>
+      <trans-unit id="3">
+        <source>Menü</source>
+        <target>Menu</target>
+      </trans-unit>
+      <trans-unit id="4">
+        <source>Keresés</source>
+        <target>Search</target>
+      </trans-unit>
+      <trans-unit id="5">
+        <source>Guildek</source>
+        <target>Guilds</target>
+      </trans-unit>
+      <trans-unit id="6">
+        <source>Copyright &amp;copy; 2009 Tibia.hu</source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="7">
+        <source>A Tibia egyetlen hivatalos oldala a &lt;a href="http://tibia.com/"&gt;tibia.com&lt;/a&gt;</source>
+        <target>Tibia's only official site is &lt;a href="http://tibia.com/"&gt;tibia.com&lt;/a&gt;</target>
+      </trans-unit>
+      <trans-unit id="8">
+        <source>ez egy rajongói oldal. Tibia &amp;copy; CipSoft GmbH, 2006</source>
+        <target>this is a fansite. Tibia &amp;copy; CipSoft GmbH, 2006</target>
+      </trans-unit>
+      <trans-unit id="9">
+        <source>Szerveridő: </source>
+        <target>Time on server is </target>
+      </trans-unit>
+      <trans-unit id="10">
+        <source>Utolsó frissítés %minutes% perce</source>
+        <target>Last update happened %minutes% minutes ago</target>
+      </trans-unit>
+      <trans-unit id="11">
+        <source>Név</source>
+        <target>Name</target>
+      </trans-unit>
+      <trans-unit id="12">
+        <source>Szint</source>
+        <target>Level</target>
+      </trans-unit>
+      <trans-unit id="13">
+        <source>Kaszt</source>
+        <target>Vocation</target>
+      </trans-unit>
+      <trans-unit id="14">
+        <source>Online volt-e a legutóbbi frissítéskor?</source>
+        <target>Online at the last update?</target>
+      </trans-unit>
+      <trans-unit id="15">
+        <source>igen</source>
+        <target>yes</target>
+      </trans-unit>
+      <trans-unit id="16">
+        <source>nem</source>
+        <target>no</target>
+      </trans-unit>
+      <trans-unit id="17">
+        <source>Keress</source>
+        <target>Search</target>
+      </trans-unit>
+      <trans-unit id="18">
+        <source>%count% karaktert találtam.</source>
+        <target>%count% characters found.</target>
+      </trans-unit>
+      <trans-unit id="19">
+        <source>Név</source>
+        <target>Name</target>
+      </trans-unit>
+      <trans-unit id="20">
+        <source>Karakterprofil a tibia.com-on</source>
+        <target>Character profile on tibia.com</target>
+      </trans-unit>
+      <trans-unit id="21">
+        <source>%vocation%, szintje %level%</source>
+        <target>%vocation% at level %level%</target>
+      </trans-unit>
+      <trans-unit id="22">
+        <source>A %guild% guild tagja</source>
+        <target>Member of the %guild% guild</target>
+      </trans-unit>
+      <trans-unit id="23">
+        <source>Nem guildtag.</source>
+        <target>Not a guildmember.</target>
+      </trans-unit>
+      <trans-unit id="24">
+        <source>Először ekkor láttam: %first_seen%</source>
+        <target>First seen at %first_seen%</target>
+      </trans-unit>
+      <trans-unit id="25">
+        <source>Legutóbb ekkor láttam: %last_seen%</source>
+        <target>Last seen at %last_seen%</target>
+      </trans-unit>
+      <trans-unit id="26">
+        <source>Karakter szintlépéseinek feedje</source>
+        <target>Level changes feed</target>
+      </trans-unit>
+      <trans-unit id="27">
+        <source>Szintváltozásai</source>
+        <target>Level changes</target>
+      </trans-unit>
+      <trans-unit id="28">
+        <source>Új szint</source>
+        <target>New level</target>
+      </trans-unit>
+      <trans-unit id="29">
+        <source>Dátum</source>
+        <target>Date</target>
+      </trans-unit>
+      <trans-unit id="30">
+        <source>Szörny</source>
+        <target>Monster</target>
+      </trans-unit>
+      <trans-unit id="31">
+        <source>Guildek listája</source>
+        <target>List of guilds</target>
+      </trans-unit>
+      <trans-unit id="32">
+        <source>Összesen %count% guild.</source>
+        <target>%count% guilds altogether.</target>
+      </trans-unit>
+      <trans-unit id="33">
+        <source>Nyilvántartott tagok</source>
+        <target>Recorded members</target>
+      </trans-unit>
+      <trans-unit id="34">
+        <source>Guild adatlapja a tibia.com-on</source>
+        <target>Guild details on tibia.com</target>
+      </trans-unit>
+      <trans-unit id="35">
+        <source>Guildtagok szintlépéseinek feedje</source>
+        <target>Feed of guildmembers' level changes</target>
+      </trans-unit>
+      <trans-unit id="36">
+        <source>Összesen %count% tag.</source>
+        <target>%count% recorded members.</target>
+      </trans-unit>
+      <trans-unit id="37">
+        <source>Mentve. Frissítés után látszódni fog.</source>
+        <target>Saved. Reload page to see.</target>
+      </trans-unit>
+      <trans-unit id="38">
+        <source>Nem találom a kódot, próbáld meg mégegyszer.</source>
+        <target>Cannot find verification code, please try again.</target>
+      </trans-unit>
+      <trans-unit id="39">
+        <source>Szóval megmondod nekünk, min lépted meg a %level%-est? Dícséretes.</source>
+        <target>So you want to tell us what you advanced to %level% on? Great.</target>
+      </trans-unit>
+      <trans-unit id="40">
+        <source>Ezt a kódot tedd a karakterlapod komment mezőjébe%info%, majd nyomd meg az ok gombot:</source>
+        <target>Put this code in your character's comment field on tibia.com%info%, then press ok:</target>
+      </trans-unit>
+      <trans-unit id="41">
+        <source>Nem létező lényt adtál meg!</source>
+        <target>You entered a non-existent creature!</target>
+      </trans-unit>
+      <trans-unit id="42">
+        <source>avagy a hírhedt "file nincs meg"</source>
+        <target>or the famous "file not found"</target>
+      </trans-unit>
+      <trans-unit id="43">
+        <source>Ennek elég sok oka lehet, például nem létező - vagy törölt - karakter, illetve guild adatlapját próbáltad elérni.</source>
+        <target>This can have numerous reasons, like you wanted to access the details of an inexistent (or deleted) character.</target>
+      </trans-unit>
+      <trans-unit id="44">
+        <source>Némá, megtaláltad a 404-es oldalunkat :)</source>
+        <target>Wow, you found our 404 page :)</target>
+      </trans-unit>
+      <trans-unit id="45">
+        <source>Üdv a Magyar Tibia rajongói oldalon.</source>
+        <target>Welcome to the Hungarian Tibia fansite</target>
+      </trans-unit>
+      <trans-unit id="46">
+        <source>Főleg naplózunk, a legutóbbi 10 frissítésünk így nézett ki:</source>
+        <target>We mainly do logging, this is what we got at our last 10 updates:</target>
+      </trans-unit>
+      <trans-unit id="47">
+        <source>Már ismert karakterek</source>
+        <target>Characters already met</target>
+      </trans-unit>
+      <trans-unit id="48">
+        <source>Új karakterek</source>
+        <target>Characters newly met</target>
+      </trans-unit>
+      <trans-unit id="49">
+        <source>Gyorskeresés</source>
+        <target>Quicksearch</target>
+      </trans-unit>
+      <trans-unit id="50">
+        <source>Nyelvváltás</source>
+        <target>Language</target>
+      </trans-unit>
+      <trans-unit id="51">
+        <source>Ennek elég sok oka lehet, például nem létező - vagy törölt - karakter, illetve </source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="52">
+        <source>Szintlépések</source>
+        <target>Levelups</target>
+      </trans-unit>
+      <trans-unit id="53">
+        <source>Halálok</source>
+        <target>Deaths</target>
+      </trans-unit>
+      <trans-unit id="54">
+        <source>Üdv</source>
+        <target>Welcome</target>
+      </trans-unit>
+      <trans-unit id="55">
+        <source>Részletes keresés</source>
+        <target>Advanced search</target>
+      </trans-unit>
+      <trans-unit id="56">
+        <source>%count% karaktert találtam.</source>
+        <target>%count% characters found.</target>
+      </trans-unit>
+      <trans-unit id="57">
+        <source>Van-e guildje</source>
+        <target>Has guild</target>
+      </trans-unit>
+      <trans-unit id="58">
+        <source>Túl sok ez a megjelenítéshez, próbáld finomítani a feltételeidet!</source>
+        <target>It's too much to display, refine your criteria!</target>
+      </trans-unit>
+      <trans-unit id="59">
+        <source>Példák: 60 - pontosan hatvan, 60+ - hatvan feletti, 60- - hatvan alatti, 50-70 - ötven és hetven közötti</source>
+        <target>Format: 60 makes exactly 60, 60+ is equal to or over sixty, 60- is equal to or below sixty, 50-70 is between fifty and seventy</target>
+      </trans-unit>
+      <trans-unit id="60">
+        <source>Kapcsolat</source>
+        <target>Contact</target>
+      </trans-unit>
+      <trans-unit id="61">
+        <source>Karakter</source>
+        <target>Character</target>
+      </trans-unit>
+      <trans-unit id="62">
+        <source>szerkesztés</source>
+        <target>szerkesztés</target>
+      </trans-unit>
+      <trans-unit id="63">
+        <source>You can change the language here.</source>
+        <target>Itt tudsz nyelvet váltani.</target>
+      </trans-unit>
+      <trans-unit id="64">
+        <source>Kalkulátorok</source>
+        <target>Calculators</target>
+      </trans-unit>
+      <trans-unit id="65">
+        <source>Szintlépés kalkulátor</source>
+        <target>Levelup calculator</target>
+      </trans-unit>
+      <trans-unit id="66">
+        <source>Számolj!</source>
+        <target>Calculate!</target>
+      </trans-unit>
+      <trans-unit id="67">
+        <source>Guild</source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="68">
+        <source>Adj meg valami xpt!</source>
+        <target>Enter some xp!</target>
+      </trans-unit>
+      <trans-unit id="69">
+        <source>Ez nem egy szám!</source>
+        <target>This is not a number!</target>
+      </trans-unit>
+      <trans-unit id="70">
+        <source>Legalább %min% legyen!</source>
+        <target>It has to be greater than %min%!</target>
+      </trans-unit>
+      <trans-unit id="71">
+        <source>Nem lehet nagyobb, mint %max%!</source>
+        <target>Must be less than %max%!</target>
+      </trans-unit>
+      <trans-unit id="72">
+        <source>Ennyi tapasztalattal az aktuális szinted &lt;b&gt;%level_current%&lt;/b&gt;, </source>
+        <target/>
+      </trans-unit>
+      <trans-unit id="73">
+        <source>Szörnyszerűsítve ez így néz ki:</source>
+        <target>This is how it looks in monster counts:</target>
+      </trans-unit>
+      <trans-unit id="74">
+        <source>Darabszám</source>
+        <target>Count</target>
+      </trans-unit>
+      <trans-unit id="75">
+        <source>Ennyi tapasztalattal az aktuális szinted &lt;b&gt;%level_current%&lt;/b&gt;, a következő szinthez &lt;b&gt;%xp_next%&lt;/b&gt; xp kell, ebből &lt;b&gt;%xp_remaining%&lt;/b&gt; van még hátra.</source>
+        <target>With this amount of experience your current level is &lt;b&gt;%level_current%&lt;/b&gt;, you need &lt;b&gt;%xp_next%&lt;/b&gt; xp for the next level, and you still have to gather &lt;b&gt;%xp_remaining%&lt;/b&gt; xp to get there.</target>
+      </trans-unit>
+      <trans-unit id="76">
+        <source>Szintlépés</source>
+        <target>Levelup</target>
+      </trans-unit>
+      <trans-unit id="77">
+        <source>Jelenlegi XP-d</source>
+        <target>Your current XP</target>
+      </trans-unit>
+      <trans-unit id="78">
+        <source>Nem érvényes stamina!</source>
+        <target>This isn't a valid stamina value!</target>
+      </trans-unit>
+      <trans-unit id="79">
+        <source>A stamina teljes regenerálódásához %hours% órát és %minutes% percet kell kilépve töltened.</source>
+        <target>For the full regeneration of your stamina you'll need to stay offline for %hours% hours and %minutes% minutes.</target>
+      </trans-unit>
+      <trans-unit id="80">
+        <source>Stamina kalkulátor</source>
+        <target>Stamina calculator</target>
+      </trans-unit>
+      <trans-unit id="81">
+        <source>Jelenlegi staminád</source>
+        <target>Your current stamina</target>
+      </trans-unit>
+      <trans-unit id="82">
+        <source>Elfogadott formátumok: 0:00 vagy 00:00</source>
+        <target>Accepted formats: 0:00 or 00:00</target>
+      </trans-unit>
+      <trans-unit id="83">
+        <source>mindegy</source>
+        <target>don't care</target>
+      </trans-unit>
+      <trans-unit id="84">
+        <source>legyen neki</source>
+        <target>should have one</target>
+      </trans-unit>
+      <trans-unit id="85">
+        <source>ne legyen neki</source>
+        <target>should not have one</target>
+      </trans-unit>
+      <trans-unit id="86">
+        <source>Részleges regeneráció:</source>
+        <target>Partial regeneration times:</target>
+      </trans-unit>
+      <trans-unit id="87">
+        <source>Offline idő</source>
+        <target>Offline time</target>
+      </trans-unit>
+      <trans-unit id="88">
+        <source>Jelenlegi szinted</source>
+        <target>Your current level</target>
+      </trans-unit>
+      <trans-unit id="89">
+        <source>Bannolva volt a következőkért</source>
+        <target>Been banned for the following</target>
+      </trans-unit>
+      <trans-unit id="90">
+        <source>Botterek</source>
+        <target>Botters</target>
+      </trans-unit>
+      <trans-unit id="91">
+        <source>Ezek a karakterek legalább egyszer bannolva voltak bot vagy makróhasználat miatt.</source>
+        <target>These characters were banned at least once for using unofficial software to play.</target>
+      </trans-unit>
+      <trans-unit id="92">
+        <source>Összesen %count% botter.</source>
+        <target>Total of %count% botters.</target>
+      </trans-unit>
+      <trans-unit id="93">
+        <source>Házlinkelő</source>
+        <target>Houselinker</target>
+      </trans-unit>
+      <trans-unit id="94">
+        <source>Hamarosan átirányítunk a %server%i %house% oldalára. Ha nem akarsz várni, nyomd meg a gombot.</source>
+        <target>You'll be redirected to the page of %house% on %server% shortly. If you don't want to wait, press the button.</target>
+      </trans-unit>
+      <trans-unit id="95">
+        <source>Megyek!</source>
+        <target>Let's go!</target>
+      </trans-unit>
+      <trans-unit id="96">
+        <source>Szerver</source>
+        <target>Server</target>
+      </trans-unit>
+      <trans-unit id="97">
+        <source>Hackerek</source>
+        <target>Hackers</target>
+      </trans-unit>
+      <trans-unit id="98">
+        <source>Ezek a karakterek legalább egyszer bannolva voltak hackelés miatt.</source>
+        <target>These characters were banned at least once for hacking.</target>
+      </trans-unit>
+      <trans-unit id="99">
+        <source>Tradelt/megosztott karakterek</source>
+        <target>Traded/shared characters</target>
+      </trans-unit>
+      <trans-unit id="100">
+        <source>Ezek a karakterek legalább egyszer bannolva voltak account trading miatt.</source>
+        <target>These characters were banned at least once for account trading or sharing.</target>
+      </trans-unit>
+      <trans-unit id="101">
+        <source>Kezdet</source>
+        <target>Start</target>
+      </trans-unit>
+      <trans-unit id="102">
+        <source>Vég</source>
+        <target>End</target>
+      </trans-unit>
+      <trans-unit id="103">
+        <source>Akkori szint</source>
+        <target>Level then</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xliff PUBLIC "-//XLIFF//DTD XLIFF//EN" "http://www.oasis-open.org/committees/xliff/documents/xliff.dtd">
+<xliff version="1.0">
+  <file source-language="hu" target-language="en" datatype="plaintext" original="calculators" date="2009-05-01T17:59:28Z" product-name="calculators">
+    <header/>
+    <body>
+      <trans-unit id="1">
+        <source>Blessing árkalkulátor</source>
+        <target>Blessing prices calculator</target>
+      </trans-unit>
+      <trans-unit id="2">
+        <source>Jelenlegi szinted</source>
+        <target>Your current level</target>
+      </trans-unit>
+      <trans-unit id="3">
+        <source>Blessingek száma</source>
+        <target>Blessings bought</target>
+      </trans-unit>
+      <trans-unit id="4">
+        <source>Összköltség</source>
+        <target>Total price</target>
+      </trans-unit>
+      <trans-unit id="5">
+        <source>Ha megvan az &lt;a href="%inq_link%"&gt;Inquisition Quest&lt;/a&gt;ed, megveheted őket egyszerre %price%gp-ért.</source>
+        <target>If you made the &lt;a href="%inq_link%"&gt;Inquisition Quest&lt;/a&gt;, you can buy them all for %price%gps.</target>
+      </trans-unit>
+      <trans-unit id="6">
+        <source>Blessing árak</source>
+        <target>Blessing prices</target>
+      </trans-unit>
+      <trans-unit id="7">
+        <source>Érvénytelen szint.</source>
+        <target>Invalid level.</target>
+      </trans-unit>
+      <trans-unit id="8">
+        <source>Ennyibe kerülnek a blessingek, ha a szinted %level%:</source>
+        <target>Blessing prices for level %level%:</target>
+      </trans-unit>
+      <trans-unit id="9">
+        <source>Ha megcsináltad a %paradox%et és nálad van a %phoenixegglink%, a %sparkofphoenixlink% 10%-al olcsóbb, azaz %sotp_price%gp, így az összköltséged %total_price%gp.</source>
+        <target>If you passed the %paradox% and you have the %phoenixegglink% on you, the %sparkofphoenixlink% costs 10% less (%sotp_price%gp), so your total price is %total_price%gp.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -1,0 +1,15 @@
+showSuccess:
+  javascripts:  [jqModal, addlevelup]
+
+bottersSuccess:
+  javascripts:  [tabs]
+
+hackersSuccess:
+  javascripts:  [tabs]
+
+acctradersSuccess:
+  javascripts:  [tabs]
+
+all:
+  javascripts: [datatable]
+  

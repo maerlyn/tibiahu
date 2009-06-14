@@ -1,0 +1,300 @@
+@charset "UTF-8";
+
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    font-family: verdana, arial !important;
+    font-size: 11px; /*3 helyen -> input, h6*/
+    background-color: #121212;
+    color: #BABABA;
+}
+
+/* oldalszerkezet */
+
+#container {
+    margin: 0px auto;
+    width: 800px;
+    background-color: #4A4A4A;
+    border: 1px solid #000000; /* hogy legyen alja */
+}
+#header {
+    width: 800px;
+}
+
+#hmenu {
+    width: 800px;
+}
+#middle {
+    width: 800px;
+}
+#leftbox { /*140*/
+    width: 180px;
+    float: left;
+}
+#rightbox { /*655*/
+    width: 615px;
+    float: left;
+}
+#footer {
+    width: 800px;
+    clear: both;
+}
+/* oldalszerkezet vege */
+
+
+
+/* hmenu */
+#hmenucontainer ul {
+    padding: 5px 0px;
+    list-style-type: none;
+    text-align: center;
+}
+#hmenucontainer ul li {
+    display: inline;
+    padding: 0px 30px;
+}
+/* hmenu vege */
+
+
+
+/* middle */
+.containerbox {
+    background-color: #363636;
+    margin-left: 5px;
+    margin-bottom: 5px;
+    border-top: 1px #242525 solid;
+    border-left: 1px #242525 solid;
+    border-bottom: 1px #737373 solid;
+    border-right: 1px #737373 solid;
+    overflow: hidden;
+    word-wrap: break-word; /*IE only*/
+}
+h3 { /*title*/
+/*.title {*/
+    font-size: 13px;
+    border-bottom: 1px #242525 solid;
+    border-right: 1px #242525 solid;
+    border-top: 1px #737373 solid;
+    border-left: 1px #737373 solid;
+    background-color: #4A4A4A;
+    padding: 5px;
+}
+h4 { /*datum*/
+    color: #A9A9A9;
+    font-weight: normal;
+    font-size: 10px;
+    margin-bottom: 1px;
+    padding-bottom: 1px;
+}
+h5 { /*szerzo*/
+    color: #A9A9A9;
+    font-weight: normal;
+    font-size: 10px;
+    margin-top: 1px;
+    padding-top: 1px;
+    margin-bottom: 15px;
+}
+h6 { /*cim*/
+    color: #DEDEDE;
+    font-weight: bold;
+    font-size: 11px;
+    margin-top: 6px;
+    margin-bottom: 3px;
+}
+
+/* middle vege */
+
+
+
+/* footer */
+#footerbox {
+    margin: 5px;
+    padding: 5px;
+    font-size: 10px;
+    background-color: #363636;
+    border-top: 1px #242525 solid;
+    border-left: 1px #242525 solid;
+    border-bottom: 1px #737373 solid;
+    border-right: 1px #737373 solid;
+}
+/* footer vege */
+
+/* vmenu */
+.containerbox ul {
+    padding: 5px 0px;
+    list-style-type: none;
+}
+.containerbox ul li {
+    background: url(../images/li.gif) no-repeat 0px 2px;
+    padding-left: 15px;
+}
+
+
+
+
+
+/* egyebek */
+
+a {
+    text-decoration: none;
+    color: #DDB255;
+    outline: none;
+}
+a:hover, a:active {
+    color: #FDF8DA;
+}
+
+.center {
+    text-align: center;
+}
+p {
+
+}
+.panel {
+    padding: 5px 5px 10px 5px;
+}
+img {
+    border: none;
+}
+.error {
+    color: #DF3F3F;
+}
+.edit {
+    font-size: 10px;
+    font-weight: normal;
+}
+input {
+    font-size: 11px;
+    font-family: verdana;
+    border: 1px solid #4A4A4A;
+    padding: 2px 1px;
+}
+radio {
+    border: none;
+}
+
+.clear {
+    clear: both;
+}
+
+.formleft {
+    width: 230px;
+    float: left;
+    text-align: right;
+    margin: 7px 10px 0px 0px;
+    /*background-color: red;*/
+}
+.formright {
+    width: 350px;
+    float: left;
+    text-align: left;
+    margin: 4px 0px 0px 0px;
+    /*background-color: green;*/
+}
+
+/* innen Tele */
+
+table thead tr td {
+  border-bottom: 1px solid grey;
+}
+
+table .up {
+  background-color: #004400;
+}
+
+table .down {
+  background-color: #440000;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+table td, th {
+ padding: 2px;
+}
+
+.levelhistory thead td,
+.levelhistory tbody td:first-child,
+.levelhistory tbody td:last-child
+{
+  text-align: center;
+}
+
+.searchresults tbody td {
+  text-align: center;
+}
+.searchresults tbody td:first-child {
+  text-align: left;
+}
+
+.cronlog td {
+  text-align: center;
+}
+
+#leftbox form th {
+  display: none;
+}
+
+.jqmWindow {
+  display: none;
+
+  position: fixed;
+  top: 17%;
+  left: 50%;
+
+  margin-left: -300px;
+  width: 600px;
+
+  background-color: #EEE;
+  color: #333;
+  border: 1px solid black;
+  padding: 12px;
+}
+
+.jqmOverlay { background-color: #000; }
+
+img.ajaxloader {
+  display: none;
+}
+
+input.error {
+  background: #ffcccc;
+  border: 1px solid red;
+}
+
+input.number {
+  text-align: right;
+}
+
+table.botterlist {
+  width: 100% !important;
+}
+
+table.botterlist tbody td {
+  text-align: center;
+}
+
+table.botterlist tbody td:first-child {
+  text-align: left;
+}
+
+table.botterlist a,
+table.searchresults a {
+    text-decoration: none;
+    color: #DDB255;
+    outline: none;
+}
+table.botterlist a:hover, 
+table.botterlist a:active,
+table.searchresults a:hover,
+table.searchresults a:active {
+    color: #FDF8DA;
+}
+
+th.sorting {
+  cursor: pointer;
+}

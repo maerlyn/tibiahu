@@ -1,0 +1,5 @@
+indexSuccess:
+  javascripts: [tabs]
+
+all:
+  javascripts: [datatable]

@@ -1,0 +1,18 @@
+default:
+  http_metas:
+    content-type: text/html
+    vary:         Accept-Language
+
+  metas:
+    title:        Magyar Tibia rajongói oldal
+    description:  Tibia statisztikák | Tibia statistics
+    keywords:     tibia statistics hungary secura guardia
+    language:     hu
+    robots:       index, follow
+
+  stylesheets:    [custom-theme/jquery-ui-1.7.1.custom.css, main.css]
+
+  javascripts:    [jquery-1.3.2.min.js, jquery.dataTables.min.js, jquery-ui-1.7.1.custom.min.js]
+
+  has_layout:     on
+  layout:         layout
