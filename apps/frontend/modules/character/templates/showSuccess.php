@@ -1,24 +1,27 @@
 <?php use_helper("Date") ?>
 <?php slot("title", trim($character->getName())) ?>
 <div class="containerbox">
-  <h3><a href="<?php echo url_for(array("sf_route" => "character_show", "sf_subject" => $character)) ?>"><?php echo $character->getName() ?></a></h3>
+  <h3><?php echo __("Karakter adatlap", array(), "character") ?></h3>
   <div class="panel">
-    <a href="http://www.tibia.com/community/?subtopic=character&amp;name=<?php echo urlencode($character->getName()) ?>">
-      <?php echo __("Karakterprofil a tibia.com-on") ?>
-    </a><br />
+    <h2>
+      <?php echo link_to($character->getName(), "@character_show?slug=" . $character->getSlug()) ?> 
+      <a href="http://www.tibia.com/community/?subtopic=character&amp;name=<?php echo urlencode($character->getSlug()) ?>" title="<?php echo __("Karakterprofil a tibia.com-on", array(), "character") ?>"><img src="<?php echo image_path("tibiaicon.png") ?>" alt="tibia icon" /></a>
+    </h2>
+    <br />
     <?php echo __("Szerver") ?>: <?php echo $character->getServer() ?><br />
-    <?php echo __("%vocation%, szintje %level%", array("%vocation%" => $character->getVocation(), "%level%" => $character->getLevel())) ?><br />
+    <?php echo __("Kaszt") ?>: <?php echo $character->getVocation() ?><br />
+    <?php echo __("Szint") ?>: <?php echo $character->getLevel() ?><br />
     <?php if ($character->getGuild()): ?>
-      <?php echo __("A %guild% guild tagja", array("%guild%" => "<a href=\"".url_for(array("sf_route"=>"guild_show", "sf_subject"=>$character->getGuild()))."\">".$character->getGuild()->getName()."</a>")) ?><br />
+      <?php echo __("A %guild% guild tagja", array("%guild%" => "<a href=\"".url_for(array("sf_route"=>"guild_show", "sf_subject"=>$character->getGuild()), "character")."\">".$character->getGuild()->getName()."</a>"), "character") ?><br />
     <?php else: ?>  
-      <?php echo __("Nem guildtag.") ?><br />
+      <?php echo __("Nem guildtag.", array(), "character") ?><br />
     <?php endif; ?>  
-    <?php echo __("Először ekkor láttam: %first_seen%", array("%first_seen%" => format_datetime($character->getCreatedAt()))) ?><br />
-    <?php echo __("Legutóbb ekkor láttam: %last_seen%", array("%last_seen%" => format_datetime($character->getLastSeen()))) ?><br />
-    <a href="<?php echo url_for(array("sf_route" => "character_feed", "sf_subject" => $character)) ?>"><?php echo __("Karakter szintlépéseinek feedje") ?> <img src="<?php echo image_path("feed.png") ?>" alt="feed icon" /></a><br />
+    <br />
+    <?php echo __("Először ekkor láttam: %first_seen%", array("%first_seen%" => format_datetime($character->getCreatedAt())), "character") ?><br />
+    <?php echo __("Legutóbb ekkor láttam: %last_seen%", array("%last_seen%" => format_datetime($character->getLastSeen())), "character") ?><br />
     <br/><br/>
     <?php if (count($violations = $character->getViolations())): ?>
-    <?php echo __("Bannolva volt a következőkért") ?>:<br />
+    <?php echo __("Bannolva volt a következőkért", array(), "character") ?>:<br />
     <ul class="error">
       <?php foreach ($violations as $violation): ?>
       <li><?php echo $violation->getReason() ?></li>
@@ -26,12 +29,14 @@
     </ul>
     <br /><br />
     <?php endif ?>
+    <?php echo __("Szintváltozásai", array(), "character") ?>:
+    <a href="<?php echo url_for(array("sf_route" => "character_feed", "sf_subject" => $character)) ?>"><img src="<?php echo image_path("feed.png") ?>" alt="<?php echo __("Karakter szintlépéseinek feedje", array(), "character") ?>" /></a><br />
     <table class="levelhistory">
       <thead>
         <tr>
-          <th><?php echo __("Új szint") ?></th>
-          <th><?php echo __("Dátum") ?></th>
-          <th><?php echo __("Szörny") ?></th>
+          <th class="col1"><?php echo __("Új szint", array(), "character") ?></th>
+          <th class="col2"><?php echo __("Dátum", array(), "character") ?></th>
+          <th class="col3"><?php echo __("Szörny", array(), "character") ?></th>
         </tr>
       </thead>
       <tbody>

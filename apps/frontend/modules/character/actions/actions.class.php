@@ -28,8 +28,8 @@ class characterActions extends sfActions
   
   public function executeShow(sfWebRequest $request) 
   {
-    $this->character = $this->getRoute()->getObject();
-    $this->forward404Unless($this->character);
+    $this->forward404Unless($this->character = $this->getRoute()->getObject());
+    $this->character = CharacterPeer::getForShow($this->character->getId());
     
     $this->levelhistory = LevelHistoryPeer::getForCharacter($this->character);
   }

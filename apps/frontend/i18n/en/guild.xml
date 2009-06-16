@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xliff PUBLIC "-//XLIFF//DTD XLIFF//EN" "http://www.oasis-open.org/committees/xliff/documents/xliff.dtd">
+<xliff version="1.0">
+  <file source-language="hu" target-language="en" datatype="plaintext" original="guild" date="2009-05-01T17:59:28Z" product-name="guild">
+    <header/>
+    <body>
+      <trans-unit id="1">
+        <source>Guild adatlap</source>
+        <target>Guild details</target>
+      </trans-unit>
+      <trans-unit id="2">
+        <source>Guild adatlapja a tibia.com-on</source>
+        <target>Guild details on tibia.com</target>
+      </trans-unit>
+      <trans-unit id="3">
+        <source>Guildtagok szintlépéseinek feedje</source>
+        <target>Feed of guildmembers' level changes</target>
+      </trans-unit>
+      <trans-unit id="4">
+        <source>Összesen %count% tag.</source>
+        <target>%count% recorded members.</target>
+      </trans-unit>      
+    </body>
+  </file>
+</xliff>

@@ -224,6 +224,16 @@ table td, th {
   text-align: center;
 }
 
+.levelhistory th.col1 {
+  width: 60px;
+}
+.levelhistory th.col2 {
+  width: 230px;
+}
+.levelhistory th.col3 {
+  width: 190px;
+}
+
 .searchresults tbody td {
   text-align: center;
 }

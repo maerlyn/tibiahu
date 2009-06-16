@@ -167,6 +167,12 @@ class CharacterPeer extends BaseCharacterPeer
     return self::getBanishedCharacters($server_id, BanishmentPeer::REASON_ACCTRADE);
   }
   
-
+  public static function getForShow($character_id)
+  {
+    $c = new Criteria();
+    $c->add(CharacterPeer::ID, $character_id);
+    $a = parent::doSelectJoinAll($c);
+    return isset($a[0]) ? $a[0] : null;
+  }
   
 }

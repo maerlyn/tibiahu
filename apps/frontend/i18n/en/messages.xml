@@ -80,50 +80,6 @@
         <source>Név</source>
         <target>Name</target>
       </trans-unit>
-      <trans-unit id="20">
-        <source>Karakterprofil a tibia.com-on</source>
-        <target>Character profile on tibia.com</target>
-      </trans-unit>
-      <trans-unit id="21">
-        <source>%vocation%, szintje %level%</source>
-        <target>%vocation% at level %level%</target>
-      </trans-unit>
-      <trans-unit id="22">
-        <source>A %guild% guild tagja</source>
-        <target>Member of the %guild% guild</target>
-      </trans-unit>
-      <trans-unit id="23">
-        <source>Nem guildtag.</source>
-        <target>Not a guildmember.</target>
-      </trans-unit>
-      <trans-unit id="24">
-        <source>Először ekkor láttam: %first_seen%</source>
-        <target>First seen at %first_seen%</target>
-      </trans-unit>
-      <trans-unit id="25">
-        <source>Legutóbb ekkor láttam: %last_seen%</source>
-        <target>Last seen at %last_seen%</target>
-      </trans-unit>
-      <trans-unit id="26">
-        <source>Karakter szintlépéseinek feedje</source>
-        <target>Level changes feed</target>
-      </trans-unit>
-      <trans-unit id="27">
-        <source>Szintváltozásai</source>
-        <target>Level changes</target>
-      </trans-unit>
-      <trans-unit id="28">
-        <source>Új szint</source>
-        <target>New level</target>
-      </trans-unit>
-      <trans-unit id="29">
-        <source>Dátum</source>
-        <target>Date</target>
-      </trans-unit>
-      <trans-unit id="30">
-        <source>Szörny</source>
-        <target>Monster</target>
-      </trans-unit>
       <trans-unit id="31">
         <source>Guildek listája</source>
         <target>List of guilds</target>
@@ -135,18 +91,6 @@
       <trans-unit id="33">
         <source>Nyilvántartott tagok</source>
         <target>Recorded members</target>
-      </trans-unit>
-      <trans-unit id="34">
-        <source>Guild adatlapja a tibia.com-on</source>
-        <target>Guild details on tibia.com</target>
-      </trans-unit>
-      <trans-unit id="35">
-        <source>Guildtagok szintlépéseinek feedje</source>
-        <target>Feed of guildmembers' level changes</target>
-      </trans-unit>
-      <trans-unit id="36">
-        <source>Összesen %count% tag.</source>
-        <target>%count% recorded members.</target>
       </trans-unit>
       <trans-unit id="37">
         <source>Mentve. Frissítés után látszódni fog.</source>
@@ -355,10 +299,6 @@
       <trans-unit id="88">
         <source>Jelenlegi szinted</source>
         <target>Your current level</target>
-      </trans-unit>
-      <trans-unit id="89">
-        <source>Bannolva volt a következőkért</source>
-        <target>Been banned for the following</target>
       </trans-unit>
       <trans-unit id="90">
         <source>Botterek</source>
