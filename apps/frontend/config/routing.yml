@@ -56,6 +56,12 @@ character_feed:
   class:   sfPropelRoute
   options: { model: Character, type: object }
   param:   { module: feed, action: character }    
+  
+character_banfeed:
+  url:   /feed/banishment/:reason/:server
+  param:  { module: feed, action: banishment }
+  requirements:
+    reason: (?:botters|acctraders|hackers)
 
 ### guild rules ###  
   

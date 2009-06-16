@@ -121,7 +121,7 @@ class CharacterPeer extends BaseCharacterPeer
     return parent::doSelect($c);
   }
 
-  private static function getBanishedCharacters($server_id, $reason)
+  private static function getBanishedCharacters($server_id, $reason, $for = "list")
   {
     $c = new Criteria();
     CharacterPeer::addSelectColumns($c);
@@ -134,15 +134,25 @@ class CharacterPeer extends BaseCharacterPeer
     $c->add(BanishmentPeer::BANISHED_FOR_ID, BanishmentPeer::getReasonFromValue($reason));
     $c->addJoin(CharacterPeer::ID, BanishmentPeer::CHARACTER_ID, Criteria::INNER_JOIN);
     $c->addJoin(CharacterPeer::GUILD_ID, GuildPeer::ID, Criteria::LEFT_JOIN);
-    $c->addAScendingOrderByColumn(CharacterPeer::NAME);
+    switch ($for) {
+      case "feed":
+        $c->add(BanishmentPeer::LEVEL, 0, Criteria::NOT_EQUAL);
+        $c->add(BanishmentPeer::BANISHED_AT, 0, Criteria::NOT_EQUAL);
+        $c->addDescendingOrderByColumn(BanishmentPeer::BANISHED_AT);
+        $c->setLimit(35);
+        break;
+      case "list":
+      default:
+        $c->addAScendingOrderByColumn(CharacterPeer::NAME);
+    }
     $stmt = parent::doSelectStmt($c);
     $ret = array();
     while ($row = $stmt->fetch()) {
       $char = new Character();
       $offset = $char->hydrate($row);
       $char->setBanishment(array(
-        "at"    =>  $row[$offset + 0],
-        "until" =>  $row[$offset + 1],
+        "at"    =>  strtotime($row[$offset + 0]),
+        "until" =>  strtotime($row[$offset + 1]),
         "level" =>  $row[$offset + 2],
         "guild" =>  $row[$offset + 3],
         "slug"  =>  $row[$offset + 4],
@@ -152,19 +162,19 @@ class CharacterPeer extends BaseCharacterPeer
     return $ret;
   }
   
-  public static function getBotters($server_id)
+  public static function getBotters($server_id, $for = "list")
   {
-    return self::getBanishedCharacters($server_id, BanishmentPeer::REASON_UNOFFICIAL);
+    return self::getBanishedCharacters($server_id, BanishmentPeer::REASON_UNOFFICIAL, $for);
   }
   
-  public static function getHackers($server_id)
+  public static function getHackers($server_id, $for = "list")
   {
-    return self::getBanishedCharacters($server_id, BanishmentPeer::REASON_HACKING);
+    return self::getBanishedCharacters($server_id, BanishmentPeer::REASON_HACKING, $for);
   }
   
-  public static function getAcctraders($server_id)
+  public static function getAcctraders($server_id, $for = "list")
   {
-    return self::getBanishedCharacters($server_id, BanishmentPeer::REASON_ACCTRADE);
+    return self::getBanishedCharacters($server_id, BanishmentPeer::REASON_ACCTRADE, $for);
   }
   
   public static function getForShow($character_id)

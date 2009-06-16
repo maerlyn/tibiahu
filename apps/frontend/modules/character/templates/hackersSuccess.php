@@ -15,5 +15,8 @@
   </div>
 </div>
 <?php else: ?>
-  <?php include_partial("botterlist", array("botters" => $hackers)); ?>
+  <?php include_partial("botterlist", array(
+    "botters" => $hackers,
+    "feedurl" => url_for("@character_banfeed?reason=hackers&server=" . $sf_request->getParameter("server"))
+  )); ?>
 <?php endif; ?>
