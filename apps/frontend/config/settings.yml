@@ -42,7 +42,7 @@ all:
     i18n: on
     standard_helpers: [Partial, I18N]
 
-    enabled_modules:  [default, sfGuardGroup, sfGuardUser, sfGuardPermission, sfGuardAuth]
+    enabled_modules:  [default, sfGuardAuth]
     
 #all:
 #  .actions:

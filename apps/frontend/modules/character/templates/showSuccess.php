@@ -17,9 +17,15 @@
       <?php echo __("Nem guildtag.", array(), "character") ?><br />
     <?php endif; ?>  
     <br />
-    <?php echo __("Először ekkor láttam: %first_seen%", array("%first_seen%" => format_datetime($character->getCreatedAt())), "character") ?><br />
-    <?php echo __("Legutóbb ekkor láttam: %last_seen%", array("%last_seen%" => format_datetime($character->getLastSeen())), "character") ?><br />
-    <br/><br/>
+    <p>
+      <?php echo __("Először ekkor láttam: %first_seen%", array("%first_seen%" => format_datetime($character->getCreatedAt())), "character") ?><br />
+      <?php echo __("Legutóbb ekkor láttam: %last_seen%", array("%last_seen%" => format_datetime($character->getLastSeen())), "character") ?><br />
+    </p><br />
+    <p>
+      <?php $sharelevels = Tibiahu::getXpShareLevels($character->getLevel()); ?>
+      <?php echo __("Experience share minimum szint", array(), "character") ?>: <?php echo $sharelevels["min"] ?><br />
+      <?php echo __("Experience share maximum szint", array(), "character") ?>: <?php echo $sharelevels["max"] ?><br />
+    </p><br />
     <?php if (count($violations = $character->getViolations())): ?>
     <?php echo __("Bannolva volt a következőkért", array(), "character") ?>:<br />
     <ul class="error">

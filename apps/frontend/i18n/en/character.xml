@@ -52,6 +52,14 @@
         <source>Szörny</source>
         <target>Monster</target>
       </trans-unit>
+      <trans-unit id="13">
+        <source>Experience share minimum szint</source>
+        <target>Lowest level to share xp with</target>
+      </trans-unit>
+      <trans-unit id="14">
+        <source>Experience share maximum szint</source>
+        <target>Highest level to share xp with</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -89,4 +89,12 @@ class Tibiahu
     }
   }
   
+  static public function getXpShareLevels($level)
+  {
+    return array(
+      "min" =>  ceil($level * 2 / 3),
+      "max" => floor($level * 3 / 2)
+    );
+  }
+  
 }
