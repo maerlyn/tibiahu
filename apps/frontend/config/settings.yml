@@ -21,10 +21,19 @@ test:
     etag:                   off
 
 all:
+  .actions:
+    error_404_module: general
+    error_404_action: error404
+    
+    login_module:     sfGuardAuth
+    login_action:     signin
+    
+    secure_module:    sfGuardAuth
+    secure_action:    secure
+
   .settings:
     # Form security secret (CSRF protection)
     csrf_secret:       csrfmittudomenmiafaszom     # Unique secret to enable CSRF protection or false to disable
-    #csrf_secret: false
 
     # Output escaping settings
     escaping_strategy:      true            # Determines how variables are made available to templates. Accepted values: on, off.
@@ -33,9 +42,8 @@ all:
     i18n: on
     standard_helpers: [Partial, I18N]
 
-  .actions:
-    error_404_module: general
-    error_404_action: error404
+    enabled_modules:  [default, sfGuardGroup, sfGuardUser, sfGuardPermission, sfGuardAuth]
+    
 #all:
 #  .actions:
 #    error_404_module:       default   # To be called when a 404 error is raised

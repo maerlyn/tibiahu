@@ -21,6 +21,7 @@ CREATE TABLE `tibia_character`
 	`created_at` DATETIME,
 	`updated_at` DATETIME,
 	`vocation_id` INTEGER,
+	`server_id` INTEGER,
 	PRIMARY KEY (`id`,`slug`),
 	UNIQUE KEY `tibia_character_U_1` (`slug`),
 	KEY `tibia_character_I_1`(`name`),
@@ -28,7 +29,12 @@ CREATE TABLE `tibia_character`
 	CONSTRAINT `tibia_character_FK_1`
 		FOREIGN KEY (`guild_id`)
 		REFERENCES `tibia_guild` (`id`)
-		ON DELETE SET NULL
+		ON DELETE SET NULL,
+	INDEX `tibia_character_FI_2` (`server_id`),
+	CONSTRAINT `tibia_character_FK_2`
+		FOREIGN KEY (`server_id`)
+		REFERENCES `tibia_server` (`id`)
+		ON DELETE CASCADE
 )Type=InnoDB;
 
 #-----------------------------------------------------------------------------
@@ -59,8 +65,14 @@ CREATE TABLE `tibia_guild`
 	`slug` VARCHAR(255),
 	`updated_at` DATETIME,
 	`members` INTEGER,
+	`server_id` INTEGER,
 	PRIMARY KEY (`id`,`name`),
-	UNIQUE KEY `tibia_guild_U_1` (`slug`)
+	UNIQUE KEY `tibia_guild_U_1` (`slug`),
+	INDEX `tibia_guild_FI_1` (`server_id`),
+	CONSTRAINT `tibia_guild_FK_1`
+		FOREIGN KEY (`server_id`)
+		REFERENCES `tibia_server` (`id`)
+		ON DELETE CASCADE
 )Type=InnoDB;
 
 #-----------------------------------------------------------------------------
@@ -76,13 +88,18 @@ CREATE TABLE `tibia_levelhistory`
 	`character_id` INTEGER  NOT NULL,
 	`level` INTEGER,
 	`created_at` DATETIME,
-	`reason` VARCHAR(100),
+	`reason_id` INTEGER,
 	PRIMARY KEY (`id`,`character_id`),
 	INDEX `tibia_levelhistory_FI_1` (`character_id`),
 	CONSTRAINT `tibia_levelhistory_FK_1`
 		FOREIGN KEY (`character_id`)
 		REFERENCES `tibia_character` (`id`)
-		ON DELETE CASCADE
+		ON DELETE CASCADE,
+	INDEX `tibia_levelhistory_FI_2` (`reason_id`),
+	CONSTRAINT `tibia_levelhistory_FK_2`
+		FOREIGN KEY (`reason_id`)
+		REFERENCES `tibia_creature` (`id`)
+		ON DELETE SET NULL
 )Type=InnoDB;
 
 #-----------------------------------------------------------------------------
@@ -112,8 +129,61 @@ CREATE TABLE `tibia_setting`
 (
 	`key` VARCHAR(255)  NOT NULL,
 	`value` VARCHAR(255),
-	PRIMARY KEY (`key`),
-	UNIQUE KEY `tibia_setting_U_1` (`key`)
+	PRIMARY KEY (`key`)
+)Type=InnoDB;
+
+#-----------------------------------------------------------------------------
+#-- tibia_banishment
+#-----------------------------------------------------------------------------
+
+DROP TABLE IF EXISTS `tibia_banishment`;
+
+
+CREATE TABLE `tibia_banishment`
+(
+	`id` INTEGER  NOT NULL AUTO_INCREMENT,
+	`character_id` INTEGER,
+	`banished_until` DATETIME,
+	`banished_for_id` INTEGER,
+	`banished_at` DATETIME,
+	`level` INTEGER,
+	PRIMARY KEY (`id`),
+	KEY `tibia_banishment_I_1`(`character_id`),
+	CONSTRAINT `tibia_banishment_FK_1`
+		FOREIGN KEY (`character_id`)
+		REFERENCES `tibia_character` (`id`)
+		ON DELETE CASCADE
+)Type=InnoDB;
+
+#-----------------------------------------------------------------------------
+#-- tibia_house
+#-----------------------------------------------------------------------------
+
+DROP TABLE IF EXISTS `tibia_house`;
+
+
+CREATE TABLE `tibia_house`
+(
+	`id` INTEGER,
+	`name` VARCHAR(255),
+	`slug` VARCHAR(255)  NOT NULL,
+	PRIMARY KEY (`slug`),
+	UNIQUE KEY `tibia_house_U_1` (`id`)
+)Type=InnoDB;
+
+#-----------------------------------------------------------------------------
+#-- tibia_server
+#-----------------------------------------------------------------------------
+
+DROP TABLE IF EXISTS `tibia_server`;
+
+
+CREATE TABLE `tibia_server`
+(
+	`id` INTEGER  NOT NULL AUTO_INCREMENT,
+	`name` VARCHAR(32),
+	`is_enabled` TINYINT,
+	PRIMARY KEY (`id`)
 )Type=InnoDB;
 
 # This restores the fkey checks, after having unset them earlier

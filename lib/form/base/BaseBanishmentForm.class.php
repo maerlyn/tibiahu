@@ -17,6 +17,8 @@ class BaseBanishmentForm extends BaseFormPropel
       'character_id'    => new sfWidgetFormPropelChoice(array('model' => 'Character', 'add_empty' => true)),
       'banished_until'  => new sfWidgetFormDateTime(),
       'banished_for_id' => new sfWidgetFormInput(),
+      'banished_at'     => new sfWidgetFormDateTime(),
+      'level'           => new sfWidgetFormInput(),
     ));
 
     $this->setValidators(array(
@@ -24,6 +26,8 @@ class BaseBanishmentForm extends BaseFormPropel
       'character_id'    => new sfValidatorPropelChoice(array('model' => 'Character', 'column' => 'id', 'required' => false)),
       'banished_until'  => new sfValidatorDateTime(array('required' => false)),
       'banished_for_id' => new sfValidatorInteger(array('required' => false)),
+      'banished_at'     => new sfValidatorDateTime(array('required' => false)),
+      'level'           => new sfValidatorInteger(array('required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('banishment[%s]');
