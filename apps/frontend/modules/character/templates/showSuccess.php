@@ -5,7 +5,7 @@
   <div class="panel">
     <h2>
       <?php echo link_to($character->getName(), "@character_show?slug=" . $character->getSlug()) ?> 
-      <a href="http://www.tibia.com/community/?subtopic=character&amp;name=<?php echo urlencode($character->getSlug()) ?>" title="<?php echo __("Karakterprofil a tibia.com-on", array(), "character") ?>"><img src="<?php echo image_path("tibiaicon.png") ?>" alt="tibia icon" /></a>
+      <a href="http://www.tibia.com/community/?subtopic=character&amp;name=<?php echo urlencode($character->getName()) ?>" title="<?php echo __("Karakterprofil a tibia.com-on", array(), "character") ?>"><img src="<?php echo image_path("tibiaicon.png") ?>" alt="tibia icon" /></a>
     </h2>
     <br />
     <?php echo __("Szerver") ?>: <?php echo $character->getServer() ?><br />
