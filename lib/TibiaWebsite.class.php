@@ -359,10 +359,11 @@ abstract class TibiaWebsite
    return 
     str_replace("<br>", "", //unneccesary breaks
     str_replace(array("<center>", "</center>"), "",
-    preg_replace("#<img src=\"(.+?)\" .+?>#is", "<img src=\"\\1\">", //remove unneccessary image attributes
+    #preg_replace("#<img src=\"(.+?)\" .+? >#is", "<img src=\"\\1\">", //remove unneccessary image attributes
     preg_replace("#<IMG SRC=\"http://static\\.tibia\\.com/images/global/letters/letter_martel_(.)\\.gif\" BORDER=0 ALIGN=bottom>#is", "\\1", //first letters
       $input
-    ))));
+    )));
+    # );
  }
  
   /**

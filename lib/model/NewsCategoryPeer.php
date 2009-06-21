@@ -11,4 +11,11 @@ class NewsCategoryPeer extends BaseNewsCategoryPeer
     return $categ->getId();
   }
   
+  public static function getNewsCategoryId()
+  {
+    $c = new Criteria();
+    $c->add(NewsCategoryI18NPeer::SLUG, "news");
+    $categ = NewsCategoryI18NPeer::doSelectOne($c);
+    return $categ->getId();
+  }
 }
