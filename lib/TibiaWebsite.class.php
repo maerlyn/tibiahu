@@ -470,4 +470,42 @@ abstract class TibiaWebsite
     
     return $polls;
   }
+  
+  /**
+  * Fetches the killstats for the given world, returns them in a nice array
+  * 
+  * @param string worlds name
+  * @return array the killstats
+  */
+  public static function getKillStatistics($world = "Secura")
+  {
+    $website = RemoteFile::get("http://www.tibia.com/community/?subtopic=killstatistics&world=" . ucfirst($world));
+    
+    preg_match("#<table.+?width=100%>.+?<b>Last Day</b>.+?<b>Last Week</b>(.+?)</table>#is", $website, $matches);
+    preg_match_all("#<tr.+?>(.+?)</tr>#is", $matches[1], $matches);
+    $matches[0] = str_replace("&#160;", "", $matches[0]);
+    
+    $killstats = array();
+    foreach($matches[0] as $v) {
+      if (false !== stripos($v, "#505050")) {
+        continue; // skip if it's a header tr
+      }
+      
+      preg_match_all("#<td.*?>(.+?)</td>#is", $v, $killstatmatches);
+      $item = array(
+        "last_day"  =>  array(
+          "killed_players"    =>  $killstatmatches[1][1],
+          "killed_by_players" =>  $killstatmatches[1][2]
+        ),
+        "last_week" =>  array(
+          "killed_players"    =>  $killstatmatches[1][3],
+          "killed_by_players" =>  $killstatmatches[1][4]
+        )
+      );
+      $killstats[$killstatmatches[1][0]] = $item;
+    }
+    
+    return $killstats;
+  }
+  
 }
