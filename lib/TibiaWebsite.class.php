@@ -347,5 +347,31 @@ abstract class TibiaWebsite
                  "Titania", "Trimera", "Unitera", "Valoria", "Vinera", "Xantera",
                  "Xerena", "Zanera");
   }
+ 
+  /**
+  * Returns the current newsticker elements
+  * 
+  * @return array newsticker
+  */
+  public static function getNewsticker()
+  {
+    $website = RemoteFile::get("http://www.tibia.com/news/?subtopic=latestnews");
+    
+    preg_match("#<div id=\"newsticker\"(.+?)<div id=\"featuredarticle\"#is", $website, $matches);
+    $newsticker = $matches[1];
+    
+    preg_match_all("#<div id='TickerEntry-\\d(.+?)</div>[\n ]+?</div>#is", $newsticker, $matches);
+    
+    $items = array();
+    foreach ($matches[0] as $v) {
+      $item = array(
+        "date"  =>  str_replace("&#160;", " ", preg_replace("@.+?<span class='NewsTickerDate'>(.+?)&#160;-.*@is", "\\1", $v)),
+        "body"  =>  str_replace(array("\n", "\r"), array("", " "), preg_replace("#.+?class='NewsTickerFullText'>(.+?)<.div>.*#is", '\1', $v))
+      );
+      $items[] = $item;
+    }
+    
+    return $items;
+  }
   
 }

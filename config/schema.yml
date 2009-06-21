@@ -67,3 +67,12 @@ propel:
     id:              ~
     name:            { type: varchar(32) }
     is_enabled:      { type: boolean }
+
+  tibia_news:
+    _attributes:     { phpName: News }
+    id:              ~
+    user_id:         { type: integer, foreignTable: sf_guard_user, foreignReference: id, onDelete: setnull }
+    created_at:      ~
+    title:           { type: varchar(255) }
+    slug:            { type: varchar(255) }
+    body:            { type: longvarchar }
