@@ -365,7 +365,7 @@ abstract class TibiaWebsite
     $items = array();
     foreach ($matches[0] as $v) {
       $item = array(
-        "date"  =>  str_replace("&#160;", " ", preg_replace("@.+?<span class='NewsTickerDate'>(.+?)&#160;-.*@is", "\\1", $v)),
+        "date"  =>  strtotime(str_replace("&#160;", " ", preg_replace("@.+?<span class='NewsTickerDate'>(.+?)&#160;-.*@is", "\\1", $v))),
         "body"  =>  str_replace(array("\n", "\r"), array("", " "), preg_replace("#.+?class='NewsTickerFullText'>(.+?)<.div>.*#is", '\1', $v))
       );
       $items[] = $item;
@@ -374,4 +374,36 @@ abstract class TibiaWebsite
     return $items;
   }
   
+  /**
+  * Returns the current latest news
+  * 
+  * @return array news
+  */
+  public static function getLatestNews()
+  {
+    $website = RemoteFile::get("http://www.tibia.com/news/?subtopic=latestnews");
+    preg_match_all(
+      "#<div class='NewsHeadline'>(.+?)</tr></table><br/>#is",
+      $website,
+      $matches
+    );
+    
+    $items = array();
+    foreach ($matches[0] as $v) {
+      //echo $v;break;
+      $item = array(
+        "date"  =>  strtotime(str_replace("&#160;", " ", preg_replace("#.+?<div class='NewsHeadlineDate'>(.+?) - .*#is", "\\1", $v))),
+        "title" =>  preg_replace("#.+?<div class='NewsHeadlineText'>(.+?)</div>.*#is", "\\1", $v),
+        "body"  =>  
+          str_replace("<br>", "", //unneccesary breaks
+          str_replace(array("<center>", "</center>"), "",
+          preg_replace("#<img src=\"(.+?)\" .+?>#is", "<img src=\"\\1\">", //remove unneccessary image attributes
+          preg_replace("#<IMG SRC=\"http://static\\.tibia\\.com/images/global/letters/letter_martel_(.)\\.gif\" BORDER=0 ALIGN=bottom>#is", "\\1", //first letters
+            preg_replace("#.+?<tr>[\n ]+?<td.+?>(.+?)</td>[\n ]+?<tr><td><div.*#is", "\\1", $v)
+          ))))
+      );
+      $items[] = $item;
+    }
+    return $items;
+  }
 }
