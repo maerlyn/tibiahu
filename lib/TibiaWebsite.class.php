@@ -443,4 +443,31 @@ abstract class TibiaWebsite
     
     return $article;
   }
+  
+  /**
+  * Returns the active polls
+  * 
+  * @return array
+  */
+  public static function getActivePolls()
+  {
+    $website = RemoteFile::get("http://www.tibia.com/community/?subtopic=polls");
+    preg_match("#<b>Active Polls</b>(.+?)</table>#is", $website, $matches);
+    
+    preg_match_all("#<tr.+?>(.+?)</tr>#is", $matches[1], $matches);
+    unset($matches[1][0]);
+    
+    $polls = array();
+    foreach ($matches[1] as $v) {
+      preg_match("#<td><a href='(.+?)'>(.+?)</a></td><td>(.+?)</td>#is", $v, $pollmatches);
+      $poll = array(
+        "url"   =>  $pollmatches[1],
+        "title" =>  $pollmatches[2],
+        "end"   =>  strtotime(str_replace("&#160;", " ", $pollmatches[3]))
+      );
+      $polls[] = $poll;
+    }
+    
+    return $polls;
+  }
 }
