@@ -18,4 +18,13 @@ class NewsCategoryPeer extends BaseNewsCategoryPeer
     $categ = NewsCategoryI18NPeer::doSelectOne($c);
     return $categ->getId();
   }
+  
+  public static function getFeaturedArticlesCategoryId()
+  {
+    $c = new Criteria();
+    $c->add(NewsCategoryI18NPeer::SLUG, "featured_articles");
+    $categ = NewsCategoryI18NPeer::doSelectOne($c);
+    return $categ->getId();
+  }
+  
 }

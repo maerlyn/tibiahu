@@ -10,7 +10,8 @@ class TibiahuUpdateNewsTask extends sfBaseTask
     $this->briefDescription = "Fetches every type of news from tibia.com";
     
     $this->detailedDescription = <<<EOF
-Tibia.com-rol leszed mindenfele hirt, ami meg nincs helyben tarolva, beilleszti az adatbazisba.
+Fetches the newsticker, the latest news and the featured article from tibia.com,
+and stores it locally if it aint stored already.
 EOF;
   }
   
@@ -72,6 +73,30 @@ EOF;
     $last_news_item->set($news_items[0]["title"]);
     $last_news_item->save();
     $this->logSection("news", $new_news_items . " new items");
+    
+    $item = TibiaWebsite::getFeaturedArticle();
+    $last_featured_article = SettingPeer::get("last.featured_article");
+    if ($last_featured_article->get() != $item["title"]) {
+      $database_item = new News();
+      $database_item->setCreatedAt($item["date"]);
+      $database_item->setUserId(NewsPeer::getUseridForTibiaCom());
+      $database_item->setCategoryId(NewsCategoryPeer::getFeaturedArticlesCategoryId());
+      
+      $database_item->setTitle($item["title"], "hu");
+      $database_item->setTitle($item["title"], "en");
+      
+      $database_item->setBody($item["body"], "hu");
+      $database_item->setBody($item["body"], "en");
+      
+      $database_item->save();
+      $last_featured_article->set($item["title"]);
+      $last_featured_article->save();
+      
+      $this->logSection("featured", "New featured article: " . $item["title"]);
+    } else {
+      $this->logSection("featured", "No new featured article");
+    }
+    
   }
   
 }
