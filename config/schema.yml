@@ -69,10 +69,27 @@ propel:
     is_enabled:      { type: boolean }
 
   tibia_news:
-    _attributes:     { phpName: News }
+    _attributes:     { phpName: News, isI18N: true, i18nTable: tibia_news_i18n }
     id:              ~
     user_id:         { type: integer, foreignTable: sf_guard_user, foreignReference: id, onDelete: setnull }
     created_at:      ~
-    title:           { type: varchar(255) }
-    slug:            { type: varchar(255) }
-    body:            { type: longvarchar }
+    category_id:     { type: integer, foreignTable: tibia_newscategory, foreignReference: id, onDelete: setnull }
+
+  tibia_news_i18n:
+    _attributes:     { phpName: NewsI18N }
+    id:              { type: integer, required: true, primaryKey: true, foreignTable: tibia_news, foreignReference: id, onDelete: cascade }
+    culture:         { isCulture: true, type: varchar, size: 7, required: true, primaryKey: true }
+    title:           { type: varchar, size: 255, required: true }
+    slug:            { type: varchar, size: 255, required: true }
+    body:            { type: longvarchar, required: true }
+    
+  tibia_newscategory:
+    _attributes:     { phpName: NewsCategory, isI18N: true, i18nTable: tibia_newscategory_i18n }
+    id:              ~
+  
+  tibia_newscategory_i18n:
+    _attributes:     { phpName: NewsCategoryI18N }
+    id:              { type: integer, required: true, primaryKey: true, foreignTable: tibia_newscategory, foreignReference: id, onDelete: cascade }
+    culture:         { isCulture: true, type: varchar, size: 7, required: true, primaryKey: true }
+    name:            { type: varchar, size: 64 }
+    slug:            { type: varchar, size: 64 }

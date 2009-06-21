@@ -186,5 +186,85 @@ CREATE TABLE `tibia_server`
 	PRIMARY KEY (`id`)
 )Type=InnoDB;
 
+#-----------------------------------------------------------------------------
+#-- tibia_news
+#-----------------------------------------------------------------------------
+
+DROP TABLE IF EXISTS `tibia_news`;
+
+
+CREATE TABLE `tibia_news`
+(
+	`id` INTEGER  NOT NULL AUTO_INCREMENT,
+	`user_id` INTEGER,
+	`created_at` DATETIME,
+	`category_id` INTEGER,
+	PRIMARY KEY (`id`),
+	INDEX `tibia_news_FI_1` (`user_id`),
+	CONSTRAINT `tibia_news_FK_1`
+		FOREIGN KEY (`user_id`)
+		REFERENCES `sf_guard_user` (`id`)
+		ON DELETE SET NULL,
+	INDEX `tibia_news_FI_2` (`category_id`),
+	CONSTRAINT `tibia_news_FK_2`
+		FOREIGN KEY (`category_id`)
+		REFERENCES `tibia_newscategory` (`id`)
+		ON DELETE SET NULL
+)Type=InnoDB;
+
+#-----------------------------------------------------------------------------
+#-- tibia_news_i18n
+#-----------------------------------------------------------------------------
+
+DROP TABLE IF EXISTS `tibia_news_i18n`;
+
+
+CREATE TABLE `tibia_news_i18n`
+(
+	`id` INTEGER  NOT NULL,
+	`culture` VARCHAR(7)  NOT NULL,
+	`title` VARCHAR(255)  NOT NULL,
+	`slug` VARCHAR(255)  NOT NULL,
+	`body` TEXT  NOT NULL,
+	PRIMARY KEY (`id`,`culture`),
+	CONSTRAINT `tibia_news_i18n_FK_1`
+		FOREIGN KEY (`id`)
+		REFERENCES `tibia_news` (`id`)
+		ON DELETE CASCADE
+)Type=InnoDB;
+
+#-----------------------------------------------------------------------------
+#-- tibia_newscategory
+#-----------------------------------------------------------------------------
+
+DROP TABLE IF EXISTS `tibia_newscategory`;
+
+
+CREATE TABLE `tibia_newscategory`
+(
+	`id` INTEGER  NOT NULL AUTO_INCREMENT,
+	PRIMARY KEY (`id`)
+)Type=InnoDB;
+
+#-----------------------------------------------------------------------------
+#-- tibia_newscategory_i18n
+#-----------------------------------------------------------------------------
+
+DROP TABLE IF EXISTS `tibia_newscategory_i18n`;
+
+
+CREATE TABLE `tibia_newscategory_i18n`
+(
+	`id` INTEGER  NOT NULL,
+	`culture` VARCHAR(7)  NOT NULL,
+	`name` VARCHAR(64),
+	`slug` VARCHAR(64),
+	PRIMARY KEY (`id`,`culture`),
+	CONSTRAINT `tibia_newscategory_i18n_FK_1`
+		FOREIGN KEY (`id`)
+		REFERENCES `tibia_newscategory` (`id`)
+		ON DELETE CASCADE
+)Type=InnoDB;
+
 # This restores the fkey checks, after having unset them earlier
 SET FOREIGN_KEY_CHECKS = 1;
