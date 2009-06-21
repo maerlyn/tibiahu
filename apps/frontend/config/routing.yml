@@ -109,6 +109,10 @@ sf_guard_password:
   
 ### rules that don't fit any other category :) ###  
   
+last_update:
+  url:    /lastupdate
+  param:  { module: general, action: lastUpdate }  
+  
 house_show:
   url:    /house/:server/:slug
   param:  { module: house, action: show }

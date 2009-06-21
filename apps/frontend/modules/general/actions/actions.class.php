@@ -20,5 +20,10 @@ class generalActions extends sfActions
   {
     $this->cronlog = CronLogPeer::getLast(10, "whoisonline");
   }
+  
+  public function executeLastUpdate(sfWebRequest $request)
+  {
+    $this->cronlog = CronLogPeer::getLast(10, "whoisonline");
+  }
       
 }

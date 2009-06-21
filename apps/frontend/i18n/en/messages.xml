@@ -129,8 +129,8 @@
         <target>Welcome to the Hungarian Tibia fansite</target>
       </trans-unit>
       <trans-unit id="46">
-        <source>Főleg naplózunk, a legutóbbi 10 frissítésünk így nézett ki:</source>
-        <target>We mainly do logging, this is what we got at our last 10 updates:</target>
+        <source>A legutóbbi 10 frissítésünk így nézett ki:</source>
+        <target>This is what we got at our last 10 updates:</target>
       </trans-unit>
       <trans-unit id="47">
         <source>Már ismert karakterek</source>
@@ -355,6 +355,10 @@
       <trans-unit id="103">
         <source>Akkori szint</source>
         <target>Level then</target>
+      </trans-unit>
+      <trans-unit id="104">
+        <source>Utolsó frissítések</source>
+        <target>Last updates</target>
       </trans-unit>
     </body>
   </file>

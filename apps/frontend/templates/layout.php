@@ -78,7 +78,7 @@
       :: <?php echo __("A Tibia egyetlen hivatalos oldala a <a href=\"http://tibia.com/\">tibia.com</a>") ?>,
       <?php echo __("ez egy rajongói oldal. Tibia &copy; CipSoft GmbH, 2006") ?> ::<br />
       :: <?php echo __("Szerveridő: ");use_helper("Date");echo format_datetime(time()) ?> :: 
-      <?php echo __("Utolsó frissítés %minutes% perce", array("%minutes%" => floor((time()-CronLogPeer::getTimeOfLastUpdate())/60))) ?>  ::
+      <a href="<?php echo url_for("@last_update") ?>"><?php echo __("Utolsó frissítés %minutes% perce", array("%minutes%" => floor((time()-CronLogPeer::getTimeOfLastUpdate())/60))) ?></a> ::
     </div>
   </div> <!-- /footer -->
 
