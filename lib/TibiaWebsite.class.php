@@ -348,6 +348,23 @@ abstract class TibiaWebsite
                  "Xerena", "Zanera");
   }
  
+ /**
+ * Returns a cleaned version of a given article
+ * 
+ * @param string
+ * @return string
+ */
+ private static function articleCleanup($input)
+ {
+   return 
+    str_replace("<br>", "", //unneccesary breaks
+    str_replace(array("<center>", "</center>"), "",
+    preg_replace("#<img src=\"(.+?)\" .+?>#is", "<img src=\"\\1\">", //remove unneccessary image attributes
+    preg_replace("#<IMG SRC=\"http://static\\.tibia\\.com/images/global/letters/letter_martel_(.)\\.gif\" BORDER=0 ALIGN=bottom>#is", "\\1", //first letters
+      $input
+    ))));
+ }
+ 
   /**
   * Returns the current newsticker elements
   * 
@@ -394,16 +411,36 @@ abstract class TibiaWebsite
       $item = array(
         "date"  =>  strtotime(str_replace("&#160;", " ", preg_replace("#.+?<div class='NewsHeadlineDate'>(.+?) - .*#is", "\\1", $v))),
         "title" =>  preg_replace("#.+?<div class='NewsHeadlineText'>(.+?)</div>.*#is", "\\1", $v),
-        "body"  =>  
-          str_replace("<br>", "", //unneccesary breaks
-          str_replace(array("<center>", "</center>"), "",
-          preg_replace("#<img src=\"(.+?)\" .+?>#is", "<img src=\"\\1\">", //remove unneccessary image attributes
-          preg_replace("#<IMG SRC=\"http://static\\.tibia\\.com/images/global/letters/letter_martel_(.)\\.gif\" BORDER=0 ALIGN=bottom>#is", "\\1", //first letters
-            preg_replace("#.+?<tr>[\n ]+?<td.+?>(.+?)</td>[\n ]+?<tr><td><div.*#is", "\\1", $v)
-          ))))
+        "body"  =>  self::articleCleanup(preg_replace("#.+?<tr>[\n ]+?<td.+?>(.+?)</td>[\n ]+?<tr><td><div.*#is", "\\1", $v))
       );
       $items[] = $item;
     }
     return $items;
+  }
+  
+  /**
+  * Returns the current featured article
+  * 
+  * @return array
+  */
+  public static function getFeaturedArticle()
+  {
+    $website = RemoteFile::get("http://www.tibia.com/news/?subtopic=latestnews");
+    preg_match(
+      "#<div id='TeaserThumbnail'><a href='http://www.tibia.com/news/.subtopic=latestnews&amp;id=(\d+)'><img#is",
+      $website,
+      $matches
+    );
+    
+    $website = RemoteFile::get("http://www.tibia.com/news/?subtopic=latestnews&id=" . $matches[1]);
+    preg_match("#<div id=\"featuredarticle\".+?<script#is", $website, $matches);
+    
+    $article = array(
+      "date"  =>  strtotime(str_replace("&#160;", " ", preg_replace("#.+?<div class='NewsHeadlineDate'>(.+?) - </div>.*#is", "\\1", $matches[0]))),
+      "title" =>  preg_replace("#.+?<div class='NewsHeadlineText'>(.+?)</div>.*#is", "\\1", $matches[0]),
+      "body"  =>  self::articleCleanup(preg_replace("#.+?<table.+?<tr>[\n ]+?<td.+?>(.+?)</td>[\n ]+?</tr><tr><td><div.*#is", "\\1", $matches[0]))
+    );
+    
+    return $article;
   }
 }

@@ -4,6 +4,7 @@ require("TibiaWebsite.class.php");
 require("RemoteFile.class.php");
 require("Tibiahu.class.php");
 
-echo("<pre>");
-print_r(TibiaWebsite::getLatestNews());
+echo("<pre>");print_r(
+//var_dump(
+TibiaWebsite::getFeaturedArticle());
 
