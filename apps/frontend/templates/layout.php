@@ -19,7 +19,7 @@
 <div id="container">
 
   <div id="header">
-    <div class="center"><a href="<?php echo url_for("@localized_homepage") ?>"><img src="<?php echo image_path("tibia_logo.jpg") ?>" alt="<?php echo __("Az oldal logoja") ?>" /></a></div>
+    <div class="center"><a href="<?php echo url_for("@homepage") ?>"><img src="<?php echo image_path("tibia_logo.jpg") ?>" alt="<?php echo __("Az oldal logoja") ?>" /></a></div>
   </div>
 
   <div id="middle">

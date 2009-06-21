@@ -1,55 +1,48 @@
 ### character rules ###
 
 character_search:
-  url:    /:sf_culture/search
+  url:    /search
   param:  { module: character, action: index }
-  requirements:
-    sf_culture: (?:hu|en)
                   
 character_show:
-  url:      /:sf_culture/character/:slug
+  url:      /character/:slug
   class:    sfPropelRoute
   options:  { model: Character, type: object }
   param:    { module: character, action: show } 
-  requirements:
-    sf_culture: (?:hu|en)
     
 character_addlvlup:
-  url:      /:sf_culture/character/:slug/addlevelup/:lvlupid
+  url:      /character/:slug/addlevelup/:lvlupid
   param:    { module: character, action addLvlUp }
   requirements:
-    sf_culture: (?:hu|en)
     lvlupid:  \d+
     
 character_botters:
-  url:      /:sf_culture/botters
+  url:      /botters
   param:    { module: character, action: botters }    
 
 character_botters_for_server:
-  url:      /:sf_culture/botters/:server
+  url:      /botters/:server
   param:    { module: character, action: botters }
 
 character_hackers:
-  url:      /:sf_culture/hackers
+  url:      /hackers
   param:    { module: character, action: hackers }
 
 character_hackers_for_server:
-  url:      /:sf_culture/hackers/:server
+  url:      /hackers/:server
   param:    { module: character, action: hackers }
 
 character_acctraders:
-  url:      /:sf_culture/acctraders
+  url:      /acctraders
   param:    { module: character, action: acctraders }
 
 character_acctraders_for_server:
-  url:      /:sf_culture/acctraders/:server
+  url:      /acctraders/:server
   param:    { module: character, action: acctraders }
     
 character_advancedsearch:
-  url:    /:sf_culture/search/character/advanced
-  param:  { module: character, action: advancedSearch }
-  requirements:
-    sf_culture: (?:hu|en)
+  url:      /search/character/advanced
+  param:    { module: character, action: advancedSearch }
     
 character_feed:
   url:     /feed/character/:slug
@@ -66,24 +59,18 @@ character_banfeed:
 ### guild rules ###  
   
 guild_index:
-  url:   /:sf_culture/guilds
+  url:   /guilds
   param: { module: guild, action: index }
-  requirements:
-    sf_culture: (?:hu|en)
 
 guild_index_for_server:
-  url:   /:sf_culture/guilds/:server
+  url:   /guilds/:server
   param: { module: guild, action: index }
-  requirements:
-    sf_culture: (?:hu|en)
 
 guild_show:
-  url:     /:sf_culture/guild/:slug
+  url:     /guild/:slug
   class:   sfPropelRoute
   options: { model: Guild, type: object }
   param:   { module: guild, action: show }
-  requirements:
-    sf_culture: (?:hu|en)
 
 guild_feed:
   url:     /feed/guild/:slug
@@ -95,22 +82,16 @@ guild_feed:
 ### calculator rules ###
 
 calculator_level:
-  url:    /:sf_culture/calculator/level
+  url:    /calculator/level
   param:  { module: calculator, action: level }
-  requirements:
-    sf_culture: (?:hu|en)
   
 calculator_stamina:
-  url:    /:sf_culture/calculator/stamina
+  url:    /calculator/stamina
   param:  { module: calculator, action: stamina }
-  requirements:
-    sf_culture: (?:hu|en)
     
 calculator_blessing:
-  url:    /:sf_culture/calculator/blessing
+  url:    /calculator/blessing
   param:  { module: calculator, action: blessing }
-  requirements:
-    sf_culture: (?:hu|en)
   
 ### sfguard routes ###
 
@@ -135,24 +116,135 @@ house_show:
     server: \w+
     slug:   \w+  
   
-localized_homepage:
-  url:  /:sf_culture/
-  param:  { module: general, action: homepage }
-  requirements:
-    sf_culture: (?:hu|en)
-
-change_language:
-  url:   /change_language
-  param: { module: general, action: changeLanguage }
-    
 # default rules
 homepage:
   url:   /
   param: { module: general, action: homepage }
 
-default_index:
-  url:   /:module
-  param: { action: index }
+### OLD RULES BELOW, DO NOT MODIFY ###
 
-default:
-  url:   /:module/:action/*
+### character rules ###
+
+character_search_old:
+  url:    /:sf_culture/search
+  param:  { module: character, action: index }
+  requirements:
+    sf_culture: (?:hu|en)
+                  
+character_show_old:
+  url:      /:sf_culture/character/:slug
+  class:    sfPropelRoute
+  options:  { model: Character, type: object }
+  param:    { module: character, action: show } 
+  requirements:
+    sf_culture: (?:hu|en)
+    
+character_addlvlup_old:
+  url:      /:sf_culture/character/:slug/addlevelup/:lvlupid
+  param:    { module: character, action addLvlUp }
+  requirements:
+    sf_culture: (?:hu|en)
+    lvlupid:  \d+
+    
+character_botters_old:
+  url:      /:sf_culture/botters
+  param:    { module: character, action: botters }    
+
+character_botters_for_server_old:
+  url:      /:sf_culture/botters/:server
+  param:    { module: character, action: botters }
+
+character_hackers_old:
+  url:      /:sf_culture/hackers
+  param:    { module: character, action: hackers }
+
+character_hackers_for_server_old:
+  url:      /:sf_culture/hackers/:server
+  param:    { module: character, action: hackers }
+
+character_acctraders_old:
+  url:      /:sf_culture/acctraders
+  param:    { module: character, action: acctraders }
+
+character_acctraders_for_server_old:
+  url:      /:sf_culture/acctraders/:server
+  param:    { module: character, action: acctraders }
+    
+character_advancedsearch_old:
+  url:    /:sf_culture/search/character/advanced
+  param:  { module: character, action: advancedSearch }
+  requirements:
+    sf_culture: (?:hu|en)
+    
+character_feed_old:
+  url:     /feed/character/:slug
+  class:   sfPropelRoute
+  options: { model: Character, type: object }
+  param:   { module: feed, action: character }    
+  
+character_banfeed_old:
+  url:   /feed/banishment/:reason/:server
+  param:  { module: feed, action: banishment }
+  requirements:
+    reason: (?:botters|acctraders|hackers)
+
+### guild rules ###  
+  
+guild_index_old:
+  url:   /:sf_culture/guilds
+  param: { module: guild, action: index }
+  requirements:
+    sf_culture: (?:hu|en)
+
+guild_index_for_server_old:
+  url:   /:sf_culture/guilds/:server
+  param: { module: guild, action: index }
+  requirements:
+    sf_culture: (?:hu|en)
+
+guild_show_old:
+  url:     /:sf_culture/guild/:slug
+  class:   sfPropelRoute
+  options: { model: Guild, type: object }
+  param:   { module: guild, action: show }
+  requirements:
+    sf_culture: (?:hu|en)
+
+guild_feed_old:
+  url:     /feed/guild/:slug
+  class:   sfPropelRoute
+  options: { model: Guild, type: object }
+  param:   { module: feed, action: guild }
+
+  
+### calculator rules ###
+
+calculator_level_old:
+  url:    /:sf_culture/calculator/level
+  param:  { module: calculator, action: level }
+  requirements:
+    sf_culture: (?:hu|en)
+  
+calculator_stamina_old:
+  url:    /:sf_culture/calculator/stamina
+  param:  { module: calculator, action: stamina }
+  requirements:
+    sf_culture: (?:hu|en)
+    
+calculator_blessing_old:
+  url:    /:sf_culture/calculator/blessing
+  param:  { module: calculator, action: blessing }
+  requirements:
+    sf_culture: (?:hu|en)
+  
+localized_homepage_old:
+  url:  /:sf_culture/
+  param:  { module: general, action: homepage }
+  requirements:
+    sf_culture: (?:hu|en)
+
+# default rules
+
+homepage:
+  url:   /
+  param: { module: general, action: homepage }
