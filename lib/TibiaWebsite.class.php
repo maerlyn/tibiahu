@@ -356,14 +356,22 @@ abstract class TibiaWebsite
  */
  private static function articleCleanup($input)
  {
+   $replace = array(
+    "<br>"      =>  "<br />",
+    "<center>"  =>  "",
+    "</center>" =>  "",
+    "<u>"       =>  "<span class=\"underline\">",
+    "</u>"      =>  "</span>"
+   );
    return 
-    str_replace("<br>", "", //unneccesary breaks
-    str_replace(array("<center>", "</center>"), "",
+    str_replace(array_keys($replace), array_values($replace), 
+    preg_replace("#<img src=\"(.+?)\".+?>#is", "<img src=\"\\1\" alt=\"\" class=\"center\" /><br />", 
     #preg_replace("#<img src=\"(.+?)\" .+? >#is", "<img src=\"\\1\">", //remove unneccessary image attributes
     preg_replace("#<IMG SRC=\"http://static\\.tibia\\.com/images/global/letters/letter_martel_(.)\\.gif\" BORDER=0 ALIGN=bottom>#is", "\\1", //first letters
-      $input
-    )));
-    # );
+      $input                                       
+    )))
+    #)
+    ;
  }
  
   /**

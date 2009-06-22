@@ -271,7 +271,7 @@ img.ajaxloader {
   display: none;
 }
 
-input.error {
+input.error {           
   background: #ffcccc;
   border: 1px solid red;
 }
@@ -307,4 +307,16 @@ table.searchresults a:active {
 
 th.sorting {
   cursor: pointer;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.panel img {
+  margin: 10px;
+}
+
+img.center {
+  margin: 10px auto;
 }
