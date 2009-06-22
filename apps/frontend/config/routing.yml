@@ -123,7 +123,7 @@ house_show:
 # default rules
 homepage:
   url:   /
-  param: { module: general, action: homepage }
+  param: { module: news, action: index }
 
 ### OLD RULES BELOW, DO NOT MODIFY ###
 
@@ -249,6 +249,6 @@ localized_homepage_old:
 
 # default rules
 
-homepage:
+homepage_old:
   url:   /
   param: { module: general, action: homepage }
