@@ -78,6 +78,21 @@ guild_feed:
   options: { model: Guild, type: object }
   param:   { module: feed, action: guild }
 
+### news rules ###
+
+news_index:
+  url:    /news/:page
+  param:  { module: news, action: index, page: 1 }
+  requirements:
+    page: \d+
+  
+news_show:
+  url:    /news/:id/:slug
+  class:  sfPropelRoute
+  param:  { module: news, action: show }
+  options:  { model: News, type: object, method: doSelectOneForRoute }
+  requirements:
+    id: \d+
   
 ### calculator rules ###
 

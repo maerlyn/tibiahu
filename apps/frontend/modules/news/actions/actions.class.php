@@ -17,6 +17,23 @@ class newsActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
-    $this->news = NewsPeer::getLast(10);
+    //$this->news = NewsPeer::getLast(10);
+    $this->pager = new sfPropelPager(
+      "News",
+      sfConfig::get("app_max_news_on_index")
+    );
+    $this->pager->setCriteria(NewsPeer::getIndexCriteria());
+    $this->pager->setPeerMethod("doSelectJoinAllWithI18n");
+    $this->pager->setPage($request->getParameter("page", 1));
+    $this->pager->init();
+  }
+  
+  public function executeShow(sfWebRequest $request)
+  {
+    #$this->forward404Unless($this->news = NewsPeer::retrieveForShow(
+    #  $request->getParameter("id"),
+    #  $request->getParameter("slug")
+    #));
+    $this->forward404Unless($this->news = $this->getRoute()->getObject());
   }
 }

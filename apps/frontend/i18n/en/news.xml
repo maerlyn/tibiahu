@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xliff PUBLIC "-//XLIFF//DTD XLIFF//EN" "http://www.oasis-open.org/committees/xliff/documents/xliff.dtd">
+<xliff version="1.0">
+  <file source-language="hu" target-language="en" datatype="plaintext" original="news" date="2009-05-01T17:59:28Z" product-name="news">
+    <header/>
+    <body>
+      <trans-unit id="1">
+        <source>Hírek</source>
+        <target>News</target>
+      </trans-unit>
+      <trans-unit id="2">
+        <source>Dátum</source>
+        <target>Date</target>
+      </trans-unit>
+      <trans-unit id="3">
+        <source>Kategória</source>
+        <target>Category</target>
+      </trans-unit>
+      <trans-unit id="4">
+        <source>Írta</source>
+        <target>By</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

@@ -80,7 +80,7 @@ propel:
     id:              { type: integer, required: true, primaryKey: true, foreignTable: tibia_news, foreignReference: id, onDelete: cascade }
     culture:         { isCulture: true, type: varchar, size: 7, required: true, primaryKey: true }
     title:           { type: varchar, size: 255, required: true }
-    slug:            { type: varchar, size: 255, required: true }
+    slug:            { type: varchar, size: 255, required: true, index: true }
     body:            { type: longvarchar, required: true }
     
   tibia_newscategory:
@@ -92,4 +92,4 @@ propel:
     id:              { type: integer, required: true, primaryKey: true, foreignTable: tibia_newscategory, foreignReference: id, onDelete: cascade }
     culture:         { isCulture: true, type: varchar, size: 7, required: true, primaryKey: true }
     name:            { type: varchar, size: 64 }
-    slug:            { type: varchar, size: 64 }
+    slug:            { type: varchar, size: 64, index: unique }

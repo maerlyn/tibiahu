@@ -10,11 +10,17 @@ class NewsPeer extends BaseNewsPeer
     $user = sfGuardUserPeer::doSelectOne($c);
     return $user->getId();
   }
-
-  public static function getLast($max = 10)
+  
+  public static function getIndexCriteria()
   {
     $c = new Criteria();
     $c->addDescendingOrderByColumn(NewsPeer::CREATED_AT);
+    return $c;
+  }
+
+  public static function getLast($max = 10)
+  {
+    $c = self::getIndexCriteria();
     $c->setLimit($max);
     return self::doSelectJoinAllWithI18n($c);
   }
@@ -140,6 +146,19 @@ class NewsPeer extends BaseNewsPeer
     }
     $stmt->closeCursor();
     return $results;
+  }
+
+  public static function retrieveForShow($id, $slug)
+  {
+    $c = new Criteria();
+    $c->add(NewsPeer::ID, $id);
+    $c->add(NewsI18NPeer::SLUG, $slug);
+    return self::doSelectJoinAllWithI18n($c);
+  }
+  
+  public static function doSelectOneForRoute(array $params)
+  {
+    return self::retrieveForShow($params["id"], $params["slug"]);
   }
     
 }
