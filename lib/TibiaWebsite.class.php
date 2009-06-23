@@ -361,16 +361,48 @@ abstract class TibiaWebsite
     "<center>"  =>  "",
     "</center>" =>  "",
     "<u>"       =>  "<span class=\"underline\">",
-    "</u>"      =>  "</span>"
+    "</u>"      =>  "</span>",
+    "<href"     =>  "<a href",
+    "<p>"       =>  ""
    );
+   
+   $ret = preg_replace("#<img src=\"http://static\\.tibia\\.com/images/global/letters/letter_martel_(.)\\.gif\" BORDER=0 ALIGN=bottom>#is", 
+      "\\1", $input); //first letters
+
+   /*$ret = preg_replace("#<img src=\"(.+?)\".+?(?:align=([\"']?)(left|right)\\2).+?>(?:</a>|)#is", 
+      "<img src=\"\\1\" alt=\"\" class=\"\\3\" /><br />", $ret); //images*/
+      
+   preg_match_all("#<img.+?>(</a>|)#is", $ret, $matches);
+   foreach ($matches[0] as $k => $v) {
+     $src = preg_replace("#.+?src=\"(.+?)\".*#is", "\\1", $v);
+     
+     if (false !== strpos($v, "align=")) { //has an align
+       $class = preg_replace("#.+?align=(([\"']?)(left|right)([\"']?)).*#is", "\\3", $v);
+     } else {
+       $class = "center";
+     }
+     
+     if (false !== stripos($v, "onclick")) {
+       $link = preg_replace("#.+?onclick=.window\\.open\\('(.+?)'\\,.*#is", "\\1", $v);
+     } else {
+       $link = false;
+     }
+     
+     $repl = "<img src=\"" . $src . "\" class=\"" . $class . "\" alt=\"\" />";
+     if ($link) {
+       $repl = sprintf("<a href=\"%s\">%s</a>", $link, $repl);
+     }
+     if ($class == "center") {
+       $repl .= "<br />";
+     }
+     $ret = str_replace($v, $repl, $ret);
+   }      
+      
    return 
     str_replace(array_keys($replace), array_values($replace), 
-    preg_replace("#<img src=\"(.+?)\".+?>#is", "<img src=\"\\1\" alt=\"\" class=\"center\" /><br />", 
-    #preg_replace("#<img src=\"(.+?)\" .+? >#is", "<img src=\"\\1\">", //remove unneccessary image attributes
-    preg_replace("#<IMG SRC=\"http://static\\.tibia\\.com/images/global/letters/letter_martel_(.)\\.gif\" BORDER=0 ALIGN=bottom>#is", "\\1", //first letters
-      $input                                       
-    )))
-    #)
+    preg_replace("#&(?!amp;)#is", "&amp;",
+      $ret
+    ))
     ;
  }
  

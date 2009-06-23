@@ -318,5 +318,15 @@ th.sorting {
 }
 
 img.center {
-  margin: 10px auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+img.left {
+  float: left;
+}
+
+img.right {
+  float: right;
 }
