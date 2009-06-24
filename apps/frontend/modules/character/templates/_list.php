@@ -1,3 +1,4 @@
+<?php if (isset($searchvalue)) { $searchvalue = $sf_data->getRaw("searchvalue"); } ?>
       <table class="searchresults">
         <thead>
           <tr>
