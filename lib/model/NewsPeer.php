@@ -152,7 +152,7 @@ class NewsPeer extends BaseNewsPeer
   {
     $c = new Criteria();
     $c->add(NewsPeer::ID, $id);
-    $c->add(NewsI18NPeer::SLUG, $slug);
+//    $c->add(NewsI18NPeer::SLUG, $slug);
     return self::doSelectJoinAllWithI18n($c);
   }
   
