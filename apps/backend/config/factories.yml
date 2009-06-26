@@ -31,6 +31,11 @@ all:
       generate_shortest_url:            true
       extra_parameters_as_query_string: true
 
+  storage:
+    param:
+      session_name: tibiahu
+      
+      
 #all:
 #  controller:
 #    class: sfFrontWebController

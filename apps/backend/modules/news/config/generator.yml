@@ -12,8 +12,17 @@ generator:
 
     config:
       actions: ~
-      fields:  ~
-      list:    ~
+      fields:  
+        category_id:  { label: Category }
+        newscategory: { label: Category }
+        sfGuardUser:  { label: Author }
+        user_id:      { label: Author }
+      list:    
+        batch_actions:  {}
+        display:      [=title, sfGuardUser, created_at, newscategory]
+        max_per_page: 20
+        peer_method:  doSelectJoinAllWithI18N
+        sort:         [created_at, desc]
       filter:  ~
       form:    ~
       edit:    ~

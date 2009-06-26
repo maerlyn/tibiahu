@@ -1,2 +1,6 @@
 # default values
-#all:
+all:
+  sf_guard_plugin:
+     remember_cookie_name:  tibahu_remember
+     success_signin_url:    @news
+     success_signout_url:   @news

@@ -13,7 +13,9 @@ generator:
     config:
       actions: ~
       fields:  ~
-      list:    ~
+      list:    
+        display:      [=name, slug]
+        peer_method:  doSelectWithI18n
       filter:  ~
       form:    ~
       edit:    ~

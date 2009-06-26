@@ -2,6 +2,8 @@ rendering: ~
 security:  ~
 
 # insert your own filters here
+myLanguageFilter:
+  class: myLanguageFilter
 
 cache:     ~
 common:    ~
