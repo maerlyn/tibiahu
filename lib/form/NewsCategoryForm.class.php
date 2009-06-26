@@ -12,5 +12,8 @@ class NewsCategoryForm extends BaseNewsCategoryForm
 {
   public function configure()
   {
+    $this->embedI18n(array('en', 'hu'));
+    $this->widgetSchema->setLabel('en', 'English');
+    $this->widgetSchema->setLabel('hu', 'Hungarian');
   }
 }

@@ -227,6 +227,7 @@ CREATE TABLE `tibia_news_i18n`
 	`slug` VARCHAR(255)  NOT NULL,
 	`body` TEXT  NOT NULL,
 	PRIMARY KEY (`id`,`culture`),
+	KEY `tibia_news_i18n_I_1`(`slug`),
 	CONSTRAINT `tibia_news_i18n_FK_1`
 		FOREIGN KEY (`id`)
 		REFERENCES `tibia_news` (`id`)
@@ -260,6 +261,7 @@ CREATE TABLE `tibia_newscategory_i18n`
 	`name` VARCHAR(64),
 	`slug` VARCHAR(64),
 	PRIMARY KEY (`id`,`culture`),
+	UNIQUE KEY `tibia_newscategory_i18n_U_1` (`slug`),
 	CONSTRAINT `tibia_newscategory_i18n_FK_1`
 		FOREIGN KEY (`id`)
 		REFERENCES `tibia_newscategory` (`id`)
