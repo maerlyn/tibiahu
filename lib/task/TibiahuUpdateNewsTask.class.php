@@ -76,7 +76,7 @@ EOF;
     
     $item = TibiaWebsite::getFeaturedArticle();
     $last_featured_article = SettingPeer::get("last.featured_article");
-    if ($last_featured_article->get() != $item["title"]) {
+    if ($item && $last_featured_article->get() != $item["title"]) {
       $database_item = new News();
       $database_item->setCreatedAt($item["date"]);
       $database_item->setUserId(NewsPeer::getUseridForTibiaCom());

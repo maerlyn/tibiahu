@@ -467,11 +467,14 @@ abstract class TibiaWebsite
   public static function getFeaturedArticle()
   {
     $website = RemoteFile::get("http://www.tibia.com/news/?subtopic=latestnews");
-    preg_match(
+    if (!preg_match(
       "#<div id='TeaserThumbnail'><a href='http://www.tibia.com/news/.subtopic=latestnews&amp;id=(\d+)'><img#is",
       $website,
       $matches
-    );
+    )) {
+      //error
+      return null;
+    }
     
     $website = RemoteFile::get("http://www.tibia.com/news/?subtopic=latestnews&id=" . $matches[1]);
     preg_match("#<div id=\"featuredarticle\".+?<script#is", $website, $matches);
