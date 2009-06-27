@@ -415,7 +415,9 @@ abstract class TibiaWebsite
   {
     $website = RemoteFile::get("http://www.tibia.com/news/?subtopic=latestnews");
     
-    preg_match("#<div id=\"newsticker\"(.+?)<div id=\"featuredarticle\"#is", $website, $matches);
+    if (!preg_match("#<div id=\"newsticker\"(.+?)<div id=\"featuredarticle\"#is", $website, $matches)) {
+      return null;
+    }
     $newsticker = $matches[1];
     
     preg_match_all("#<div id='TickerEntry-\\d(.+?)</div>[\n ]+?</div>#is", $newsticker, $matches);
@@ -440,11 +442,13 @@ abstract class TibiaWebsite
   public static function getLatestNews()
   {
     $website = RemoteFile::get("http://www.tibia.com/news/?subtopic=latestnews");
-    preg_match_all(
+    if (!preg_match_all(
       "#<div class='NewsHeadline'>(.+?)</tr></table><br/>#is",
       $website,
       $matches
-    );
+    )) {
+      return null;
+    }
     
     $items = array();
     foreach ($matches[0] as $v) {
