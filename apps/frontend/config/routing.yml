@@ -93,6 +93,10 @@ news_show:
   options:  { model: News, type: object, method: doSelectOneForRoute }
   requirements:
     id: \d+
+    
+news_feed:
+  url:    /feed/news
+  param:  { module: feed, action: news }
   
 ### calculator rules ###
 
@@ -125,7 +129,7 @@ sf_guard_password:
 ### rules that don't fit any other category :) ###  
   
 last_update:
-  url:    /lastupdate
+  url:    /lastupdates
   param:  { module: general, action: lastUpdate }  
   
 house_show:

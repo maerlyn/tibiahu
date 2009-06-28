@@ -137,4 +137,36 @@ class feedActions extends sfActions
     return sfView::NONE;
   }
   
+  public function executeNews(sfWebRequest $request)
+  {
+    sfLoader::loadHelpers(array("Url", "I18N"));
+  
+    $feed = new sfAtom1Feed();
+    $feed->initialize(array(
+      "title"      => __("Hírek feed", null, "feed") . " # " . __("Magyar Tibia rajongói oldal"),
+      "link"       => url_for("@news_feed", true),
+      "authorName" => __("Magyar Tibia rajongói oldal")
+    ));
+    
+    $news = NewsPeer::getLast(sfConfig::get("app_max_news_on_index", 10));
+    foreach ($news as $news_item) {
+      $item = new sfFeedItem();
+    
+      $item->initialize(array(
+        "title"       => $news_item->getTitle(),
+        "link"        => url_for(sprintf("@news_show?id=%s&slug=%s", $news_item->getId(), $news_item->getSlug())),
+        "pubDate"     => $news_item->getCreatedAt("U"),
+        "author"      => $news_item->getsfGuardUser(),
+        "uniqueId"    => $news_item->getId(),
+        "content"     => $news_item->getBody()
+      ));
+      
+      $feed->addItem($item);
+    }
+
+    $this->renderText($feed->asXml());   
+    return sfView::NONE;    
+  }
+  
+  
 }

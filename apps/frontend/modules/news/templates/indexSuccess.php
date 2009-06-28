@@ -1,4 +1,4 @@
-<?php slot("title", __("Hírek")) ?>
+<?php slot("title", __("Hírek", null, "news")) ?>
 <?php use_helper("Date") ?>
 <?php include_partial("list", array("news" => $pager->getResults())) ?>
 

@@ -12,6 +12,7 @@
   <?php include_metas() ?>
   <?php include_stylesheets() ?>
   <link rel="shortcut icon" href="<?php echo image_path("favicon.ico") ?>" />
+  <link rel="alternate" type="application/atom+xml" title="<?php echo __("Hírek feed", null, "feed") ?>" href="<?php echo url_for("@news_feed") ?>">
 </head>
 
 <body>
