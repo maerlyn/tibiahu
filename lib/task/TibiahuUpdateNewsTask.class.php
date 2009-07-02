@@ -35,7 +35,7 @@ EOF;
         $database_item->setUserId(NewsPeer::getUseridForTibiaCom());
         
         $database_item->setTitle("New newsticker item", "en");
-        $database_item->setTitle("Új rövidír", "hu");
+        $database_item->setTitle("Új rövidhír", "hu");
         
         $database_item->setBody($item["body"], "en");
         $database_item->setBody($item["body"], "hu");

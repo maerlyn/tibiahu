@@ -113,6 +113,11 @@ abstract class TibiaWebsite
     preg_match("@<TD>Residence:</TD><TD>(.+?)</TD>@is", $characterinfo, $matches);
     $character["residence"] = $matches[1];
     
+    //<TR BGCOLOR=#F1E0C6><TD>Married to:</TD><TD><A HREF="http://www.tibia.com/community/?subtopic=characters&name=Maci+Laci+The+Druid">Maci&#160;Laci&#160;The&#160;Druid</A></TD></TR>
+    if (preg_match("@<td>Married to:</td><td><a href=.+?>(.+?)</a></td>@is", $characterinfo, $matches)) {
+      $character["married_to"] = str_replace("&#160;", " ", $matches[1]);
+    }
+    
     //<TD>Guild&#160;membership:</TD><TD>Friend of the nature of the <A HREF="<url>">Pannon&#160;Guardians</A></TD></TR>
     if (preg_match("@<TD>Guild&#160;membership:</TD><TD>(.+?) of the <A HREF.+?>(.+?)</A></TD></TR>@is", $characterinfo, $matches)) 
     {
