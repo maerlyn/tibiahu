@@ -190,12 +190,11 @@ abstract class TibiaWebsite
     
     $death = array();
     
-    if (preg_match("@<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=4 WIDTH=100%><TR BGCOLOR=#505050><TD COLSPAN=2 CLASS=white><B>Character Deaths</B></TD>.+?</TABLE>@is", $website, $matches)) 
-    {
+    if (preg_match("@<td colspan=\"2\" class=\"white\" ><b>Character Deaths</b></td>.+?</table>@is", $website, $matches)) {
       $deathlist = $matches[0];
       
       //<TR BGCOLOR=#F1E0C6><TD WIDTH=25%>Feb&#160;25&#160;2009,&#160;08:09:29&#160;CET</TD><TD>Died at Level 44 by an orc berserker</TD></TR>
-      preg_match("@<TR BGCOLOR=#.{6}><TD W.+?>(.+?)</TD><TD>Died at Level (\\d+) by (.+?)</TD></TR>@is", $deathlist, $matches);
+      preg_match("@<tr bgcolor=\"#.{6}\" ><td w.+?>(.+?)</td><td>Died at Level (\\d+) by (.+?).</td></tr>@is", $deathlist, $matches);
       $death = array(                                                               
         "time"    =>  strtotime(str_replace("&#160;", " ", $matches[1])),
         "level"   =>  $matches[2],
@@ -224,13 +223,11 @@ abstract class TibiaWebsite
     
     $deaths = array();
     
-    if (preg_match("@<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=4 WIDTH=100%><TR BGCOLOR=#505050><TD COLSPAN=2 CLASS=white><B>Character Deaths</B></TD>.+?</TABLE>@is", $website, $matches)) 
-    {
+    if (preg_match("@<td colspan=\"2\" class=\"white\" ><b>Character Deaths</b></td>.+?</table>@is", $website, $matches)) {
       $deathlist = $matches[0];
       
-      //<TR BGCOLOR=#F1E0C6><TD WIDTH=25%>Feb&#160;25&#160;2009,&#160;08:09:29&#160;CET</TD><TD>Died at Level 44 by an orc berserker</TD></TR>
-      preg_match_all("@<TR BGCOLOR=#.{6}><TD W.+?>(.+?)</TD><TD>Died at Level (\\d+) by (.+?)</TD></TR>@is", $deathlist, $matches);
-        foreach($matches[0] as $k => $v) {
+      preg_match_all("@<tr bgcolor=\"#.{6}\" ><td w.+?>(.+?)</td><td>Died at Level (\\d+) by (.+?).</td></tr>@is", $deathlist, $matches);
+      foreach($matches[0] as $k => $v) {
         $deaths[] = array(
           "time"    =>  strtotime(str_replace("&#160;", " ", $matches[1][$k])),
           "level"   =>  $matches[2][$k],

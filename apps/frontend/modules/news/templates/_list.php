@@ -1,5 +1,5 @@
 <?php foreach($news as $item): ?>
-<div class="containerbox">
+<div class="containerbox news">
   <h3><a href="<?php echo url_for(array("sf_route" => "news_show", "sf_subject" => $item)) ?>"><?php echo $item->getTitle() ?></a></h3>
   <div class="panel">
     <ul class="prop">

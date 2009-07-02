@@ -313,8 +313,13 @@ th.sorting {
   text-decoration: underline;
 }
 
-.panel img {
+.news img {
   margin: 10px;
+}
+
+.levelhistory img {
+  margin: 0px;
+  vertical-align: bottom;
 }
 
 img.center {
