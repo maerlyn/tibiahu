@@ -30,13 +30,9 @@ EOF;
     foreach ($characters as $character) {
       set_time_limit(15);
       $deaths = TibiaWebsite::getDeaths($character->getName());
-      if ($deaths == "403") {
-        set_time_limit(20);
-        sleep(10);
-        if ("403" == ($deaths = TibiaWebsite::getDeaths($character->getName()))) {
-          echo("403 forbidden, megallas ({$character->getName()})\n");
-          return;
-        }
+      if ($deaths === null) {
+        echo("403 forbidden, megallas ({$character->getName()})\n");
+        return;
       }
       
       if (is_array($deaths)) {
@@ -44,6 +40,7 @@ EOF;
           $c = new Criteria();
           $c->add(LevelHistoryPeer::CHARACTER_ID, $character->getId());
           $c->add(LevelHistoryPeer::CREATED_AT, $death["time"]);
+          
           if (!LevelHistoryPeer::doCount($c)) {
             $lvlh = new LevelHistory();
             $lvlh->setCharacterId($character->getId());

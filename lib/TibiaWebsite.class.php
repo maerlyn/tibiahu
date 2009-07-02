@@ -18,16 +18,9 @@ abstract class TibiaWebsite
   public static function whoIsOnline($world = "Secura")
   {
     $world = ucfirst($world);
-    $website = RemoteFile::get("http://www.tibia.com/community/?subtopic=whoisonline&world={$world}");
-    
-    if (false !== stripos($website, "403 forbidden")) {
-      set_time_limit(20);
-      sleep(10);
-      $website = RemoteFile::get("http://www.tibia.com/community/?subtopic=whoisonline&world={$world}");
-      if (false !== stripos($website, "403 forbidden")) {
-        return array();
-      }
-    }    
+    if (false === ($website = RemoteFile::get("http://www.tibia.com/community/?subtopic=whoisonline&world={$world}"))) {
+      return array();
+    }
     
     preg_match_all("@<tr bgcolor=.+?>(.+?)<.tr>@is", $website, $matches);
         
@@ -63,15 +56,14 @@ abstract class TibiaWebsite
   */
   public static function characterInfo($charname)
   {
-    $website = RemoteFile::get("http://www.tibia.com/community/?subtopic=character&name=" . urlencode($charname));
+    if (false === ($website = RemoteFile::get("http://www.tibia.com/community/?subtopic=character&name=" . urlencode($charname)))) {
+      return null;
+    }
+
     if (stripos($website, "</B> does not exist.</TD>")) {
       return null;
     }
 
-    if (false !== stripos($website, "403 forbidden")) {
-      return "403";
-    }
-    
     $character = array();
 
     preg_match(
@@ -188,7 +180,10 @@ abstract class TibiaWebsite
   */
   public static function lastDeath($charname)
   {
-    $website = RemoteFile::get("http://www.tibia.com/community/?subtopic=character&name=" . urlencode($charname));
+    if (false === ($website = RemoteFile::get("http://www.tibia.com/community/?subtopic=character&name=" . urlencode($charname)))) {
+      return null;
+    }
+    
     if (stripos($website, "</B> does not exist.</TD>")) {
       return null;
     }
@@ -219,12 +214,12 @@ abstract class TibiaWebsite
   */
   public static function getDeaths($charname)
   {
-    $website = RemoteFile::get("http://www.tibia.com/community/?subtopic=character&name=" . urlencode($charname));
-    if (false !== stripos($website, "</B> does not exist.</TD>")) {
+    if (false === ($website = RemoteFile::get("http://www.tibia.com/community/?subtopic=character&name=" . urlencode($charname)))) {
       return null;
     }
-    if (false !== stripos($website, "403 forbidden")) {
-      return "403";
+    
+    if (false !== stripos($website, "</B> does not exist.</TD>")) {
+      return null;
     }
     
     $deaths = array();
@@ -255,7 +250,9 @@ abstract class TibiaWebsite
   */
   public static function characterExists($charname)
   {
-    $website = RemoteFile::get("http://www.tibia.com/community/?subtopic=character&name=" . urlencode($charname));
+    if (false === ($website = RemoteFile::get("http://www.tibia.com/community/?subtopic=character&name=" . urlencode($charname)))) {
+      return null;
+    }
     return (false === stripos($website, "</B> does not exist.</TD>"));
   }
   
@@ -268,7 +265,9 @@ abstract class TibiaWebsite
   public static function getGuildList($world)
   {
     $world = ucfirst($world);
-    $website = RemoteFile::get("http://www.tibia.com/community/?subtopic=guilds&world=" . urlencode($world));
+    if (false === $website = RemoteFile::get("http://www.tibia.com/community/?subtopic=guilds&world=" . urlencode($world))) {
+      return null;
+    }
     
     preg_match_all("#<img src=\"http://static.tibia.com/images/(?:guildlogos|community)/.+?\.gif\".+?><b>(.+?)</b>#is", $website, $matches);
     
@@ -283,7 +282,9 @@ abstract class TibiaWebsite
   */
   public static function getGuildMembers($guild)
   {
-    $website = RemoteFile::get("http://www.tibia.com/community/?subtopic=guilds&page=view&GuildName=" . urlencode($guild));
+    if (false === ($website = RemoteFile::get("http://www.tibia.com/community/?subtopic=guilds&page=view&GuildName=" . urlencode($guild)))) {
+      return null;
+    }
     if (false !== stripos($website, "Internal error")) {
       return array();
     }
@@ -303,7 +304,10 @@ abstract class TibiaWebsite
   */
   public static function verifyCode($character, $code)
   {
-    $website = RemoteFile::get("http://www.tibia.com/community/?subtopic=character&name=" . urlencode($character));
+    if (false === ($website = RemoteFile::get("http://www.tibia.com/community/?subtopic=character&name=" . urlencode($character)))) {
+      return null;
+    }
+    
     if (false !== stripos($website, "</B> does not exist.</TD>")) {
       return false;
     }
@@ -322,7 +326,9 @@ abstract class TibiaWebsite
   */
   public static function getListOfCreatures()
   {
-    $website = RemoteFile::get("http://tibia.wikia.com/wiki/List_of_Creatures");
+    if (false === ($website = RemoteFile::get("http://tibia.wikia.com/wiki/List_of_Creatures"))) {
+      return null;
+    }
 /*    <tr>
 <td><a href="/wiki/Adept_of_the_Cult" title="Adept of the Cult">Adept of the Cult</a>*/
 
@@ -418,7 +424,9 @@ abstract class TibiaWebsite
   */
   public static function getNewsticker()
   {
-    $website = RemoteFile::get("http://www.tibia.com/news/?subtopic=latestnews");
+    if (false === ($website = RemoteFile::get("http://www.tibia.com/news/?subtopic=latestnews"))) {
+      return null;
+    }
     
     if (!preg_match("#<div id=\"newsticker\"(.+?)<div id=\"featuredarticle\"#is", $website, $matches)) {
       return null;
@@ -446,7 +454,10 @@ abstract class TibiaWebsite
   */
   public static function getLatestNews()
   {
-    $website = RemoteFile::get("http://www.tibia.com/news/?subtopic=latestnews");
+    if (false === ($website = RemoteFile::get("http://www.tibia.com/news/?subtopic=latestnews"))) {
+      return null;
+    }
+    
     if (!preg_match_all(
       "#<div class='NewsHeadline'>(.+?)</tr></table><br/>#is",
       $website,
@@ -475,7 +486,10 @@ abstract class TibiaWebsite
   */
   public static function getFeaturedArticle()
   {
-    $website = RemoteFile::get("http://www.tibia.com/news/?subtopic=latestnews");
+    if (false === ($website = RemoteFile::get("http://www.tibia.com/news/?subtopic=latestnews"))) {
+      return null;
+    }
+    
     if (!preg_match(
       "#<div id='TeaserThumbnail'><a href='http://www.tibia.com/news/.subtopic=latestnews&amp;id=(\d+)'><img#is",
       $website,
@@ -504,7 +518,10 @@ abstract class TibiaWebsite
   */
   public static function getActivePolls()
   {
-    $website = RemoteFile::get("http://www.tibia.com/community/?subtopic=polls");
+    if (false === ($website = RemoteFile::get("http://www.tibia.com/community/?subtopic=polls"))) {
+      return null;
+    }
+    
     preg_match("#<b>Active Polls</b>(.+?)</table>#is", $website, $matches);
     
     preg_match_all("#<tr.+?>(.+?)</tr>#is", $matches[1], $matches);
@@ -532,7 +549,9 @@ abstract class TibiaWebsite
   */
   public static function getKillStatistics($world = "Secura")
   {
-    $website = RemoteFile::get("http://www.tibia.com/community/?subtopic=killstatistics&world=" . ucfirst($world));
+    if (false === ($website = RemoteFile::get("http://www.tibia.com/community/?subtopic=killstatistics&world=" . ucfirst($world)))) {
+      return null;
+    }
     
     preg_match("#<table.+?width=100%>.+?<b>Last Day</b>.+?<b>Last Week</b>(.+?)</table>#is", $website, $matches);
     preg_match_all("#<tr.+?>(.+?)</tr>#is", $matches[1], $matches);

@@ -41,7 +41,7 @@ EOF;
           continue;
         }
         else
-        if ($info == "403") {
+        if ($info === null) {
           $this->logSection("error", "403, varakozas es uj proba (aktualis index: {$character->getId()})");
           ++$forbidden;
           sleep(10);
