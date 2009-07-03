@@ -6,6 +6,6 @@ require("Tibiahu.class.php");
 
 //echo("<pre>");print_r(
 var_dump(
-TibiaWebsite::getKillStatistics()
+TibiaWebsite::characterInfo("lules")
 );
 

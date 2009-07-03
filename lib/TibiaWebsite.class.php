@@ -134,20 +134,18 @@ abstract class TibiaWebsite
     
     // --- --- --- 
     
-    //<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=4 WIDTH=100%><TR BGCOLOR=#505050><TD COLSPAN=2 CLASS=white><B>Character Deaths</B></TD></TR><TR BGCOLOR=#F1E0C6><TD WIDTH=25%>Feb&#160;25&#160;2009,&#160;08:09:29&#160;CET</TD><TD>Died at Level 44 by an orc berserker</TD></TR></TABLE>
-    if (preg_match("@<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=4 WIDTH=100%><TR BGCOLOR=#505050><TD COLSPAN=2 CLASS=white><B>Character Deaths</B></TD>.+?</TABLE>@is", $website, $matches)) 
-    {
+    if (preg_match("@<td colspan=\"2\" class=\"white\" ><b>Character Deaths</b></td>.+?</table>@is", $website, $matches)) {
       $deathlist = $matches[0];
-      $character["deaths"] = array();
-      
-      //<TR BGCOLOR=#F1E0C6><TD WIDTH=25%>Feb&#160;25&#160;2009,&#160;08:09:29&#160;CET</TD><TD>Died at Level 44 by an orc berserker</TD></TR>
-      preg_match_all("@<TR BGCOLOR=#.{6}><TD W.+?>(.+?)</TD><TD>Died at Level \\d+ by a(.+?)</TD></TR>@is", $deathlist, $matches);
-      foreach ($matches[0] as $key => $value) {
-        $character["deaths"][] = array(
-          "time"    =>  strtotime(str_replace("&#160;", " ", $matches[1][$key])),
-          "reason"  =>  ($matches[2][$key][0] != "n" ? $matches[2][$key] : substr($matches[2][$key], 2))
+      $deaths = array();
+      preg_match_all("@<tr bgcolor=\"#.{6}\" ><td w.+?>(.+?)</td><td>Died at Level (\\d+) by (.+?).</td></tr>@is", $deathlist, $matches);
+      foreach($matches[0] as $k => $v) {
+        $deaths[] = array(
+          "time"    =>  strtotime(str_replace("&#160;", " ", $matches[1][$k])),
+          "level"   =>  $matches[2][$k],
+          "reason"  =>  trim(preg_replace('#^(an |a )(.+?)$#i', "\\2", $matches[3][$k]))
         );
       }
+      $character["deaths"] = $deaths;
     }
     
     //<TD WIDTH=20% VALIGN=top CLASS=red>Banished:</TD><TD CLASS=red>until Mar&#160;04&#160;2009,&#160;15:52:25&#160;CET because of hacking</TD></TR>

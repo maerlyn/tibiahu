@@ -15,6 +15,7 @@ class NewsPeer extends BaseNewsPeer
   {
     $c = new Criteria();
     $c->addDescendingOrderByColumn(NewsPeer::CREATED_AT);
+    $c->addDescendingOrderByColumn(NewsPeer::ID);
     return $c;
   }
 
