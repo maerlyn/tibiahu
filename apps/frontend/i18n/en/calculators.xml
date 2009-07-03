@@ -40,6 +40,14 @@
         <source>Ha megcsináltad a %paradox%et és nálad van a %phoenixegglink%, a %sparkofphoenixlink% 10%-al olcsóbb, azaz %sotp_price%gp, így az összköltséged %total_price%gp.</source>
         <target>If you passed the %paradox% and you have the %phoenixegglink% on you, the %sparkofphoenixlink% costs 10% less (%sotp_price%gp), so your total price is %total_price%gp.</target>
       </trans-unit>
+      <trans-unit id="10">
+        <source>Ennyi tapasztalattal az aktuális szinted &lt;b&gt;%level_current%&lt;/b&gt;,&lt;br /&gt; a következő szinthez &lt;b&gt;%xp_next%&lt;/b&gt; xp kell, ebből &lt;b&gt;%xp_remaining%&lt;/b&gt; van még hátra.</source>
+        <target>With this amount of experience your current level is &lt;b&gt;%level_current%&lt;/b&gt;, you need &lt;b&gt;%xp_next%&lt;/b&gt; xp for the next level, and you still have to gather &lt;b&gt;%xp_remaining%&lt;/b&gt; xp to get there.</target>
+      </trans-unit>
+      <trans-unit id="11">
+        <source>Szörnyszerűsítve ez így néz ki:</source>
+        <target>This is how it looks in monster counts:</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

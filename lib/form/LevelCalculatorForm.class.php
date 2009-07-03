@@ -24,6 +24,8 @@
           )
       )));
       
+      $this->widgetSchema->setHelp("xp", "Elválasztásra használhatsz szóközt, vesszőt vagy pontot.");
+      
       $this->widgetSchema->setNameFormat("calculator_level[%s]");
     }
     

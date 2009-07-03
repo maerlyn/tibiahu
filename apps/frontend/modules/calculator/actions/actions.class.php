@@ -17,7 +17,7 @@ class calculatorActions extends sfActions
     
     if ($request->isMethod("post")) {
       $temp = $request->getParameter("calculator_level");
-      $temp["xp"] = str_replace(" ", "", $temp["xp"]);
+      $temp["xp"] = str_replace(array(" ", ",", "."), "", $temp["xp"]);
       $this->form->bind($temp);
       if ($this->valid = $this->form->isValid()) {
         $this->level_current = Tibiahu::getLevelForXp($this->form->getValue("xp"));
@@ -36,6 +36,8 @@ class calculatorActions extends sfActions
           "Ferumbras"     => ceil($this->xp_remaining / 12000),
           "Morgaroth"     => ceil($this->xp_remaining / 15000)
         );
+        
+        $this->xpshare_levels = Tibiahu::getXpShareLevels($this->level_current);
       }
     }
   }
