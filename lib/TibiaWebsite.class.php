@@ -464,7 +464,7 @@ abstract class TibiaWebsite
       $item = array(
         "date"  =>  strtotime(str_replace("&#160;", " ", preg_replace("#.+?<div class='NewsHeadlineDate'>(.+?) - .*#is", "\\1", $v))),
         "title" =>  preg_replace("#.+?<div class='NewsHeadlineText'>(.+?)</div>.*#is", "\\1", $v),
-        "body"  =>  self::articleCleanup(preg_replace("#.+?<tr>[\n ]+?<td.+?>(.+?)</td>[\n ]+?<tr><td><div.*#is", "\\1", $v))
+        "body"  =>  self::articleCleanup(preg_replace("#.+?<tr>[\n ]+?<td.+?>(.+?)</td>[\n ]</tr></table>.*#is", "\\1", $v))
       );
       $items[] = $item;
     }
