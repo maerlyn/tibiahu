@@ -103,12 +103,16 @@ class CharacterPeer extends BaseCharacterPeer
       $c->add(CharacterPeer::VOCATION_ID, $values["vocation"]);
     }
     
+    if ($values["server"]) {
+      $c->add(CharacterPeer::SERVER_ID, $values["server"]);
+    }
+    
     $c->addAscendingOrderByColumn(CharacterPeer::NAME);
     
     if ($countOnly) {
       return parent::doCount($c);
     } else {
-      return parent::doSelectJoinGuild($c);
+      return parent::doSelectJoinAll($c);
     }
   }
 

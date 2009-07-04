@@ -20,6 +20,13 @@
         "vocation"  =>  new sfWidgetFormChoice(array(
           "label"   =>  "Kaszt",
           "choices" =>  array_merge(array("---" => "---"), CharacterPeer::getVocations())
+        )),
+        "server"    =>  new sfWidgetFormPropelChoice(array(
+          "label"     =>  "Szerver",
+          "model"     =>  "Server",
+          "add_empty" =>  true,
+          "order_by"  =>  array("Name", "asc")
+          
         ))
       ));
       
@@ -45,6 +52,10 @@
         )),
         "vocation"  =>  new sfValidatorChoice(array(
           "choices" =>  array_merge(array("---"), array_keys(CharacterPeer::getVocations()))
+        )),
+        "server"    =>  new sfValidatorPropelChoice(array(
+          "model"     =>  "Server",
+          "required"  =>  false
         ))
       ));
       
