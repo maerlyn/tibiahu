@@ -34,7 +34,7 @@ class feedActions extends sfActions
       }
       
       $content = $lvlupdown . "\n" . 
-        sprintf(__("%s\nÚj szint: %d\nDátum: %s\nOk: %s", null, "feed"),
+        sprintf(__("%s<br />\nÚj szint: %d<br />\nDátum: %s<br />\nOk: %s", null, "feed"),
           $lvlhistory->getCharacter()->getName(),
           $lvlhistory->getLevel(),
           format_datetime($lvlhistory->getCreatedAt()),
@@ -126,7 +126,7 @@ class feedActions extends sfActions
     foreach ($characters as $character) {
       $item = new sfFeedItem();
       
-      $content = sprintf(__("Bannolva ekkor: %s\nBannolva eddig: %s\nKaszt: %s\nSzint: %d", null, "feed"),
+      $content = sprintf(__("Bannolva ekkor: %s<br />\nBannolva eddig: %s<br />\nKaszt: %s<br />\nSzint: %d", null, "feed"),
         format_datetime($character->getBanishedAt()),
         format_datetime($character->getBanishedUntil()),
         $character->getVocation(),

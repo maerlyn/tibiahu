@@ -18,13 +18,13 @@
         <target>Death :(</target>
       </trans-unit>
       <trans-unit id="4">
-        <source>%s
-Új szint: %d
-Dátum: %s
+        <source>%s&lt;br /&gt;
+Új szint: %d&lt;br /&gt;
+Dátum: %s&lt;br /&gt;
 Ok: %s</source>
-        <target>%s
-New level: %d
-Date: %s
+        <target>%s&lt;br /&gt;
+New level: %d&lt;br /&gt;
+Date: %s&lt;br /&gt;
 Reason: %s</target>
       </trans-unit>
       <trans-unit id="5">
@@ -52,13 +52,13 @@ Reason: %s</target>
         <target>acctraders</target>
       </trans-unit>
       <trans-unit id="11">
-        <source>Bannolva ekkor: %s
-Bannolva eddig: %s
-Kaszt: %s
+        <source>Bannolva ekkor: %s&lt;br /&gt;
+Bannolva eddig: %s&lt;br /&gt;
+Kaszt: %s&lt;br /&gt;
 Szint: %d</source>
-        <target>Banished at: %s
-Banished until: %s
-Vocation: %s
+        <target>Banished at: %s&lt;br /&gt;
+Banished until: %s&lt;br /&gt;
+Vocation: %s&lt;br /&gt;
 Level: %s</target>
       </trans-unit>
     </body>
