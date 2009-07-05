@@ -9,6 +9,58 @@
         <source>Hírek feed</source>
         <target>News feed</target>
       </trans-unit>
+      <trans-unit id="2">
+        <source>Szintlépés \o/</source>
+        <target>Levelup \o/</target>
+      </trans-unit>
+      <trans-unit id="3">
+        <source>Halál :(</source>
+        <target>Death :(</target>
+      </trans-unit>
+      <trans-unit id="4">
+        <source>%s
+Új szint: %d
+Dátum: %s
+Ok: %s</source>
+        <target>%s
+New level: %d
+Date: %s
+Reason: %s</target>
+      </trans-unit>
+      <trans-unit id="5">
+        <source>A %s guild tagjainak szintlépései</source>
+        <target>Level changes of the %s guild's members</target>
+      </trans-unit>
+      <trans-unit id="6">
+        <source>%s szintváltozásai</source>
+        <target>Level changes of %s</target>
+      </trans-unit>
+      <trans-unit id="7">
+        <source>%si %s</source>
+        <target>%sn %s</target>
+      </trans-unit>
+      <trans-unit id="8">
+        <source>botterek</source>
+        <target>botters</target>
+      </trans-unit>
+      <trans-unit id="9">
+        <source>hackerek</source>
+        <target>hackers</target>
+      </trans-unit>
+      <trans-unit id="10">
+        <source>acctraderek</source>
+        <target>acctraders</target>
+      </trans-unit>
+      <trans-unit id="11">
+        <source>Bannolva ekkor: %s
+Bannolva eddig: %s
+Kaszt: %s
+Szint: %d</source>
+        <target>Banished at: %s
+Banished until: %s
+Vocation: %s
+Level: %s</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

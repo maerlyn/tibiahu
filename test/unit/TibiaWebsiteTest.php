@@ -64,7 +64,7 @@ $temp = TibiaWebsite::getNewsticker();
 $t->ok(is_array($temp) && 5 == count($temp), "getNewsTicker() returns an array with 5 elements");
 
 $temp = TibiaWebsite::getLatestNews();
-$t->ok(is_array($temp) && 5 == count($temp), "getLatestNews() returns an array with 5 elements");
+$t->ok(is_array($temp) && ($temp), "getLatestNews() returns a nonempty array");
 
 $temp = TibiaWebsite::getFeaturedArticle();
 $t->ok(is_array($temp) && 3 == count($temp), "getFeaturedArticle() returns an array with 3 elements");

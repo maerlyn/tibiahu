@@ -20,29 +20,34 @@ class feedActions extends sfActions
   {
     foreach ($levelhistory as $lvlhistory) {
       $item = new sfFeedItem();
+      
+      $this->getContext()->getConfiguration()->loadHelpers(array("I18N", "Date"));
     
       if ($prev_item = LevelHistoryPeer::getPreviousItem($lvlhistory)) {
         if ($prev_item->getLevel() < $lvlhistory->getLevel()) {
-          $lvlupdown = "lvlup \o/";
+          $lvlupdown = __("Szintlépés \\o/", null, "feed");
         } else {
-          $lvlupdown = "lvldown :'(";
+          $lvlupdown = __("Halál :(", null, "feed");
         }
       } else {
         $lvlupdown = "";
       }
+      
+      $content = $lvlupdown . "\n" . 
+        sprintf(__("%s\nÚj szint: %d\nDátum: %s\nOk: %s", null, "feed"),
+          $lvlhistory->getCharacter()->getName(),
+          $lvlhistory->getLevel(),
+          format_datetime($lvlhistory->getCreatedAt()),
+          $lvlhistory->getReason()
+        );
+      
     
-      $description = "{$lvlupdown}\n"
-                   . "{$lvlhistory->getCharacter()->getName()}\n"
-                   . "new level: {$lvlhistory->getLevel()}\n"
-                   . "date: {$lvlhistory->getCreatedAt("Y. m. d. H:i")}\n"
-                   . "reason: {$lvlhistory->getReason()}";
-
       $item->initialize(array(
         "title"       => $lvlhistory->getCharacter()->getName(),
         "link"        => url_for(array("sf_route" => "character_show", "sf_subject" => $lvlhistory->getCharacter())),
         "pubDate"     => $lvlhistory->getCreatedAt("U"),
         "uniqueId"    => $lvlhistory->getId(),
-        "description" => $description
+        "content"     => $content
       ));
       
       $feed->addItem($item);
@@ -51,16 +56,16 @@ class feedActions extends sfActions
   
   public function executeGuild(sfWebRequest $request)
   {
-    sfLoader::loadHelpers("Url");
+    $this->getContext()->getConfiguration()->loadHelpers(array("Url", "I18N"));
   
     $guild = $this->getRoute()->getObject();
     $levelhistory = LevelHistoryPeer::getForGuild($guild->getId(), 15);
     
     $feed = new sfAtom1Feed();
     $feed->initialize(array(
-      "title"      => $guild->getName() . " feed",
+      "title"      => sprintf(__("A %s guild tagjainak szintlépései", null, "feed"), $guild->getName()),
       "link"       => url_for(array("sf_route" => "guild_feed", "sf_subject" => $guild), true),
-      "authorName" => "Magyar Tibia rajongói oldal"
+      "authorName" => __("Magyar Tibia rajongói oldal")
     ));
     $this->generateFeedForHistory($feed, $levelhistory);
     $this->renderText($feed->asXml());
@@ -70,16 +75,16 @@ class feedActions extends sfActions
   
   public function executeCharacter(sfWebRequest $request)
   {
-    sfLoader::loadHelpers("Url");
+    $this->getContext()->getConfiguration()->loadHelpers(array("Url", "I18N"));
   
     $char = $this->getRoute()->getObject();
     $levelhistory = LevelHistoryPeer::getForCharacter($char, 15);
     
     $feed = new sfAtom1Feed();
     $feed->initialize(array(
-      "title"      => $char->getName() . " feed",
+      "title"      => sprintf(__("%s szintváltozásai", null, "feed"), $char->getName()),
       "link"       => url_for(array("sf_route" => "character_feed", "sf_subject" => $char), true),
-      "authorName" => "Magyar Tibia rajongói oldal"
+      "authorName" => __("Magyar Tibia rajongói oldal")
     ));
     $this->generateFeedForHistory($feed, $levelhistory);
     $this->renderText($feed->asXml());
@@ -94,40 +99,46 @@ class feedActions extends sfActions
     switch ($request->getParameter("reason")) {
       case "botters":
         $characters = CharacterPeer::getBotters($server->getId(), "feed");
+        $reason = "botterek";
         break;
         
       case "hackers":
         $characters = CharacterPeer::getHackers($server->getId(), "feed");
+        $reason = "hackerek";
         break;
         
       case "acctraders":
         $characters = CharacterPeer::getAcctraders($server->getId(), "feed");
+        $reason = "acctraderek";
         break;
     }
    
-    sfLoader::loadHelpers(("Url"));
+    $this->getContext()->getConfiguration()->loadHelpers(array("Url", "I18N", "Date"));
   
     $feed = new sfAtom1Feed();
     $feed->initialize(array(
-      "title"      => ucfirst($request->getParameter("reason")) . " feed for " . $server->getName(),
+      "title"      => sprintf(__("%si %s", null, "feed"), $server->getName(), __($reason, null, "feed")),
+      //ucfirst($request->getParameter("reason")) . " feed for " . $server->getName(),
       "link"       => url_for("@character_banfeed?reason=" . $request->getParameter("reason") . "&server=" . $server->getName(), true),
-      "authorName" => "Magyar Tibia rajongói oldal"
+      "authorName" => __("Magyar Tibia rajongói oldal")
     ));
     
     foreach ($characters as $character) {
       $item = new sfFeedItem();
+      
+      $content = sprintf(__("Bannolva ekkor: %s\nBannolva eddig: %s\nKaszt: %s\nSzint: %d", null, "feed"),
+        format_datetime($character->getBanishedAt()),
+        format_datetime($character->getBanishedUntil()),
+        $character->getVocation(),
+        $character->getLevel()
+      );
     
-      $description = "Banished at " . date("Y-m-d H:i:s", $character->getBanishedAt()) . "\n" 
-                   . "Banished until " . date("Y-m-d H:i:s", $character->getBanishedUntil()) . "\n"
-                   . "Vocation: " . $character->getVocation() . "\n"
-                   . "Banished at level " . $character->getLevel();
-                   
       $item->initialize(array(
         "title"       => $character->getName(),
         "link"        => url_for("@character_show?slug=" . $character->getSlug(), true),
         "pubDate"     => $character->getBanishedAt(),
         "uniqueId"    => $character->getId(),
-        "description" => $description
+        "content"     => $content
       ));
       
       $feed->addItem($item);
