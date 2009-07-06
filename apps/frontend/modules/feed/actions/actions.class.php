@@ -33,7 +33,7 @@ class feedActions extends sfActions
         $lvlupdown = "";
       }
       
-      $content = $lvlupdown . "\n" . 
+      $content = $lvlupdown . "<br />\n" . 
         sprintf(__("%s<br />\nÚj szint: %d<br />\nDátum: %s<br />\nOk: %s", null, "feed"),
           $lvlhistory->getCharacter()->getName(),
           $lvlhistory->getLevel(),
