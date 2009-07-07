@@ -3,6 +3,14 @@
 <div class="containerbox">
   <h3><?php echo __("Karakter adatlap", array(), "character") ?></h3>
   <div class="panel">
+    <?php if ($sf_user->hasFlash("redirect")): ?>
+    <div class="flash info">
+      <p>
+        <img src="<?php echo image_path("info.png") ?>" alt="information" />
+        <?php echo __($sf_user->getFlash("redirect"), null, "character") ?>
+      </p>  
+    </div>
+    <?php endif ?>
     <h2>
       <?php echo link_to($character->getName(), "@character_show?slug=" . $character->getSlug()) ?> 
       <a href="http://www.tibia.com/community/?subtopic=character&amp;name=<?php echo urlencode($character->getName()) ?>" title="<?php echo __("Karakterprofil a tibia.com-on", array(), "character") ?>"><img src="<?php echo image_path("tibiaicon.png") ?>" alt="tibia icon" /></a>

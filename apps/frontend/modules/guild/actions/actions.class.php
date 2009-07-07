@@ -26,6 +26,11 @@ class guildActions extends sfActions
         $this->form->bind($request->getParameter("search"));
         if ($this->form->isValid()) {
           $this->guilds = GuildPeer::getGuildsLike("%" . $this->form->getValue("name") . "%");
+          
+          if (count($this->guilds) == 1) {
+            $this->getUser()->setFlash("redirect", "Csak egy találat volt, ezért továbbvittünk a guild oldalára");
+            $this->redirect("@guild_show?slug=" . $this->guilds[0]->getSlug());
+          }
         } else {
           $this->guilds = array();
         }

@@ -24,6 +24,7 @@ class characterActions extends sfActions
         $this->characters = CharacterPeer::searchByName($this->form->getValue("name"));
         
         if (count($this->characters) == 1) {
+          $this->getUser()->setFlash("redirect", "Csak egy találat volt, ezért továbbvittünk a karakter oldalára");
           $this->redirect("@character_show?slug=" . $this->characters[0]->getSlug());
         }
       }

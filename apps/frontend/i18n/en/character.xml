@@ -60,6 +60,10 @@
         <source>Experience share maximum szint</source>
         <target>Highest level to share xp with</target>
       </trans-unit>
+      <trans-unit id="15">
+        <source>Csak egy találat volt, ezért továbbvittünk a karakter oldalára</source>
+        <target>As there was only one result, we redirected you to the character's page</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
