@@ -22,6 +22,10 @@ class characterActions extends sfActions
       
       if ($this->form->isValid()) {
         $this->characters = CharacterPeer::searchByName($this->form->getValue("name"));
+        
+        if (count($this->characters) == 1) {
+          $this->redirect("@character_show?slug=" . $this->characters[0]->getSlug());
+        }
       }
     }
   }
