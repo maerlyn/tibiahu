@@ -52,6 +52,7 @@
         <div class="panel">
           <ul>
             <li><?php echo link_to(__("Szintlépés"), "@calculator_level") ?></li>
+            <li><?php echo link_to("Magic level", "@calculator_mlvl") ?></li>
             <li><?php echo link_to("Stamina", "@calculator_stamina") ?></li>
             <li><?php echo link_to(__("Blessing árak", array(), "calculators"), "@calculator_blessing") ?></li>
           </ul>

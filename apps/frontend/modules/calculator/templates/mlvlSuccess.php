@@ -45,8 +45,9 @@
         <?php endforeach ?>
         </tbody>
       </table>
-      <br /><br />
+      
       <?php if (isset($rune_spells)): ?>
+      <br /><br />
         <?php echo __("Rúnavarázslatok", null, "calculators") ?>:<br />
         <table border="1">
           <thead>
