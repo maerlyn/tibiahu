@@ -61,9 +61,9 @@
           <td>
             <?php if ($lvl->getReason()): ?>
               <?php echo link_to($lvl->getReason(),"http://tibia.wikia.com/wiki/Special:Search?search=".urlencode($lvl->getReason())) ?> 
-              <?php if (isset($dir) && $dir == "up") { echo link_to(image_tag("file_edit", array("alt" => __("szerkesztés"))), "@character_addlvlup?slug=".$character->getSlug()."&lvlupid=".$lvl->getId(), array("class"=>"addlevelup", "id"=>"levelup".$lvl->getId())); } ?>
+              <?php if (isset($dir) && $dir == "up") { echo link_to(image_tag("file_edit", array("alt" => __("Szerkesztés", null, "character"))), "@character_addlvlup?slug=".$character->getSlug()."&lvlupid=".$lvl->getId(), array("class"=>"addlevelup", "id"=>"levelup".$lvl->getId())); } ?>
             <?php else: ?>
-              <?php echo link_to(image_tag("file_add", array("alt" => __("szerkesztés"))), "@character_addlvlup?slug=".$character->getSlug()."&lvlupid=".$lvl->getId(), array("class"=>"addlevelup", "id"=>"levelup".$lvl->getId())) ?>
+              <?php echo link_to(image_tag("file_add", array("alt" => __("Szerkesztés", null, "character"))), "@character_addlvlup?slug=".$character->getSlug()."&lvlupid=".$lvl->getId(), array("class"=>"addlevelup", "id"=>"levelup".$lvl->getId())) ?>
             <?php endif; ?>
            </td>
         </tr>

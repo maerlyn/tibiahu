@@ -102,4 +102,91 @@ class calculatorActions extends sfActions
     
   }
   
+  public function executeMlvl(sfWebRequest $request)
+  {
+    $this->form = new MlvlCalculatorForm();
+    if ($request->isMethod("post")) {
+      $this->form->bind($request->getParameter("mlvlcalc"));
+      
+      if ($this->form->isValid()) {
+        $values = $this->form->getValues();
+        
+        $this->mana = Tibiahu::getManaNeededToAdvance(
+          $values["current_mlvl"], $values["percent_remaining"], $values["target_mlvl"], $values["vocation"]
+        );
+        
+        $mana_per_sec_per_vocation = array(
+          0 => array(false => 1/3, true => 1/3),
+          1 => array(false => 1/2, true => 2/3),
+          2 => array(false => 2/3, true => 1),
+          3 => array(false => 2/3, true => 1),
+        );
+        $mana_per_sec = $mana_per_sec_per_vocation[$values["vocation"]][$values["promotion"]];
+        
+        if ($this->soft_boots = $values["soft_boots"]) {
+          $mana_per_sec += 2;
+        }
+        
+        $time = $this->mana / $mana_per_sec;
+        $temp["days"] = floor($time / 86400);
+        $time -= $temp["days"] * 86400;
+        $temp["hours"] = floor($time / 3600);
+        $time -= $temp["hours"] * 3600;
+        $temp["minutes"] = floor($time / 60);
+        $time -= $temp["minutes"] * 60;
+        $temp["seconds"] = floor($time);
+        $this->time = $temp;
+        
+        $instant_spells = array(
+          0 =>  array(
+            "Exura"             =>  20,
+            "Whirlwind throw"   =>  40,
+            "Berserk"           =>  115,
+            "Fierce berserk"    =>  340
+          ),
+          1 =>  array(
+            "Divine missile"    =>  20,
+            "Divine caldera"    =>  160,
+            "Divine healing"    =>  210,
+          ),
+          2 =>  array(
+            "Exura"             =>  20,
+            "Strong haste"      =>  100,
+            "Undead legion"     =>  500,
+            "Eternal winter"    =>  1200,
+          ),
+          3 =>  array(
+            "Exura"             =>  20,
+            "Great energy beam" =>  110,
+            "Invisible"         =>  440,
+            "Hell's core"       =>  1200,
+          )
+        );
+        $this->instant_spells = $instant_spells[$values["vocation"]];
+        
+        $rune_spells = array(
+          1 =>  array(
+            "Holy missile"  =>  array("mana" => 300, "price" => 1600),
+            "Enchant spear" =>  array("mana" => 350, "price" => 300000),
+          ),
+          2 =>  array(
+            "Stalagmite"    =>  array("mana" => 350, "price" => 1500),
+            "Stone shower"  =>  array("mana" => 430, "price" => 2300),
+            "Icicle"        =>  array("mana" => 460, "price" => 2500),
+            "Avalanche"     =>  array("mana" => 530, "price" => 2700),
+          ),
+          3 =>  array(
+            "Thunderstorm"  =>  array("mana" => 430, "price" => 2300),
+            "Fireball"      =>  array("mana" => 460, "price" => 2500),
+            "Great fireball"=>  array("mana" => 530, "price" => 2700),
+            "Sudden death"  =>  array("mana" => 985, "price" => 6000),
+          )
+        );
+        if (isset($rune_spells[$values["vocation"]])) {
+          $this->rune_spells = $rune_spells[$values["vocation"]];
+        }
+      }
+    }
+  }
+  
 }

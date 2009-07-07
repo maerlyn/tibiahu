@@ -64,6 +64,10 @@
         <source>Csak egy találat volt, ezért továbbvittünk a karakter oldalára</source>
         <target>As there was only one result, we redirected you to the character's page</target>
       </trans-unit>
+      <trans-unit id="16">
+        <source>Szerkesztés</source>
+        <target>Edit</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

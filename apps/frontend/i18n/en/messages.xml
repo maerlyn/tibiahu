@@ -356,6 +356,30 @@
         <source>Elválasztásra használhatsz szóközt, vesszőt vagy pontot.</source>
         <target>You may use spaces, commas or dots.</target>
       </trans-unit>
+      <trans-unit id="107">
+        <source>Aktuális mlvl</source>
+        <target>Current mlvl</target>
+      </trans-unit>
+      <trans-unit id="108">
+        <source>Hátralevő százalék</source>
+        <target>Percent remaining</target>
+      </trans-unit>
+      <trans-unit id="109">
+        <source>Cél mlvl</source>
+        <target>Target mlvl</target>
+      </trans-unit>
+      <trans-unit id="110">
+        <source>Kötelező kitölteni.</source>
+        <target>Required.</target>
+      </trans-unit>
+      <trans-unit id="111">
+        <source>Túl magas szint!</source>
+        <target>Too high mlvl!</target>
+      </trans-unit>
+      <trans-unit id="112">
+        <source>A cél mlvl legyen nagyobb, mint az aktuális!</source>
+        <target>The target mlvl must be greater than the current!</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

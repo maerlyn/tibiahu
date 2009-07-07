@@ -112,6 +112,10 @@ calculator_blessing:
   url:    /calculator/blessing
   param:  { module: calculator, action: blessing }
   
+calculator_mlvl:
+  url:    /calculator/mlvl
+  param:  { module: calculator, action: mlvl }  
+  
 ### sfguard routes ###
 
 sf_guard_signin:

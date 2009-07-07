@@ -97,4 +97,49 @@ class Tibiahu
     );
   }
   
+  /**
+  * Returns mana required to advance to next magic level
+  *
+  * @param int the current magic level
+  * @param int vocation (0 Knight, 1 Paladin, 2 Druid, 3 Sorcerer)
+  * @return float required mana
+  */
+  static public function getManaForMlvl($current_mlvl, $vocation)
+  {
+    $vocation_multipliers = array(
+      0 =>  3,
+      1 =>  1.4,
+      2 =>  1.1,
+      3 =>  1.1,
+    );
+    
+    if (!isset($vocation_multipliers[$vocation])) {
+      throw new InvalidArgumentException("Invalid vocation");
+    }
+    
+    return floor(1600 * pow($vocation_multipliers[$vocation], $current_mlvl));
+  }
+  
+  /**
+  * Returns mana required to advance from $from_level+$percent_remaining% to $target_mlvl
+  * 
+  * @param int original mlvl
+  * @param int percentage remaining, according to the tibia client
+  * @param int target mlvl
+  * @param int vocation (0 Knight, 1 Paladin, 2 Druid, 3 Sorcerer)
+  * @return float total mana
+  */
+  static public function getManaNeededToAdvance($from_mlvl, $percent_remaining, $target_mlvl, $vocation)
+  {
+    $mana = round(($percent_remaining / 100) * Tibiahu::getManaForMlvl($from_mlvl, $vocation));
+    
+    if ($from_mlvl + 1 != $target_mlvl) {
+      for ($i = $from_mlvl + 1; $i < $target_mlvl; ++$i) {
+        $mana += Tibiahu::getManaForMlvl($i, $vocation);
+      }
+    }
+    
+    return $mana;
+  }
+  
 }

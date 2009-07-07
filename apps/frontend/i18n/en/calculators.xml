@@ -48,6 +48,62 @@
         <source>Szörnyszerűsítve ez így néz ki:</source>
         <target>This is how it looks in monster counts:</target>
       </trans-unit>
+      <trans-unit id="12">
+        <source>Magic level kalkulátor</source>
+        <target>Magic level calculator</target>
+      </trans-unit>
+      <trans-unit id="13">
+        <source>Ez a fejlődés összesen &lt;b&gt;%mana%&lt;/b&gt; manát jelent, ennyi regenerálódásához szükséges idő:</source>
+        <target>This advancement requires &lt;b&gt;%mana%&lt;/b&gt; mana points, to regenerate that, you need</target>
+      </trans-unit>
+      <trans-unit id="14">
+        <source>[0][1]1 nap (1,+Inf]%count% nap </source>
+        <target>[0][1]1 day (1,+Inf]%count% days </target>
+      </trans-unit>
+      <trans-unit id="15">
+        <source>[0]0 óra [1]1 óra (1,+Inf]%count% óra </source>
+        <target>[0]0 hours [1]1 hour (1,+Inf]%count% hours </target>
+      </trans-unit>
+      <trans-unit id="16">
+        <source>[0]0 perc [1]1 perc (1,+Inf]%count% perc </source>
+        <target>[0]0 minutes [1]1 minute (1,+Inf]%count% minutes </target>
+      </trans-unit>
+      <trans-unit id="17">
+        <source>[0]0 másodperc[1]1 másodperc(1,+Inf]%count% másodperc</source>
+        <target>[0]0 seconds[1]1 second(1,+Inf]%count% seconds</target>
+      </trans-unit>
+      <trans-unit id="18">
+        <source>Felhasznált soft boots töltés ára: %price% gp</source>
+        <target>Price of soft boots refills: %price% gp</target>
+      </trans-unit>
+      <trans-unit id="19">
+        <source>Instant varázslatok</source>
+        <target>Instant spells</target>
+      </trans-unit>
+      <trans-unit id="20">
+        <source>Varázslat</source>
+        <target>Spell</target>
+      </trans-unit>
+      <trans-unit id="21">
+        <source>Darabszám</source>
+        <target>Count</target>
+      </trans-unit>
+      <trans-unit id="22">
+        <source>Rúnavarázslatok</source>
+        <target>Rune spells</target>
+      </trans-unit>
+      <trans-unit id="23">
+        <source>Gyártott bp</source>
+        <target>Backpacks made</target>
+      </trans-unit>
+      <trans-unit id="24">
+        <source>Profit</source>
+        <target>Income</target>
+      </trans-unit>
+      <trans-unit id="25">
+        <source>Számolj!</source>
+        <target>Calculate!</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
