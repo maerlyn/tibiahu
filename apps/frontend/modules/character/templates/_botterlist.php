@@ -20,10 +20,10 @@
       <td><?php echo link_to($botter->getName(), "@character_show?slug=" . $botter->getSlug()) ?></td>
       <td><?php echo $botter->getLevel() ?></td>
       <td><?php echo $botter->getVocation() ?></td>
-      <td><?php if (null !== ($gname = $botter->getGuildName()))     { echo link_to($gname, "@guild_show?slug=" . $botter->getGuildSlug()); } ?></td>
-      <td><?php if (null !== ($at    = $botter->getBanishedAt()))    { echo format_datetime($at); } ?></td>
-      <td><?php if (null !== ($until = $botter->getBanishedUntil())) { echo format_datetime($until); } ?></td>
-      <td><?php if ($level = $botter->getBanishedLevel())            { echo $level; } ?></td>
+      <td><?php if (null !== ($gname = $botter->getGuildName()))  { echo link_to($gname, "@guild_show?slug=" . $botter->getGuildSlug()); } ?></td>
+      <td><?php if (null !== ($at    = $botter->getBanishedAt())) { echo format_datetime($at); } ?></td>
+      <td><?php if ($until = $botter->getBanishedUntil())         { echo format_datetime($until); } else { echo("until deletion"); } ?></td>
+      <td><?php if ($level = $botter->getBanishedLevel())         { echo $level; } ?></td>
     </tr>
   <?php endforeach; ?>
   </tbody>

@@ -112,7 +112,9 @@ EOF;
           } else {
             if ($ban->getBanishedUntil("U") != $info["banishment"]["reason"]) {
               $ban->setBanishedUntil($info["banishment"]["until"]);
-              $ban->setBanishedAt(Tibiahu::guessBanishmentDate($info["banishment"]["until"]));
+              if ($info["banishment"]["until"] != 0) { //ban until deletion
+                $ban->setBanishedAt(Tibiahu::guessBanishmentDate($info["banishment"]["until"]));
+              }
               $ban->setLevel($info["level"]);
             }
           }
