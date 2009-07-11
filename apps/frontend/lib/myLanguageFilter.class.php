@@ -17,11 +17,12 @@
         $this->getContext()->getUser()->isFirstRequest(false);
       }
       
-      if (!preg_match("/^(hu|en)\\./i", $this->getContext()->getRequest()->getHost())) {
+      $domain = sfConfig::get("app_domain", $host);
+      $host = $this->getContext()->getRequest()->getHost();
+      if (!preg_match("/^(hu|en)\\." . preg_quote($domain) . "/i", $this->getContext()->getRequest()->getHost())) {
         $uri = $this->getContext()->getRequest()->getUri();
-        $host = $this->getContext()->getRequest()->getHost();
         $culture = $this->getContext()->getUser()->getCulture();
-        $redir = str_replace("/{$host}/", "/{$culture}.{$host}/", $uri);
+        $redir = str_replace("/{$host}/", "/{$culture}.{$domain}/", $uri);
         $this->getContext()->getController()->redirect($redir);
       }
       // execute next filter

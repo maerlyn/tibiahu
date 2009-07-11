@@ -1,6 +1,7 @@
 all:
 
   max_news_on_index:    10
+  domain:               tibia.local
 
   sf_guard_plugin:
     routes_register:    false
