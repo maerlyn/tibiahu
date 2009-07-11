@@ -17,8 +17,8 @@
         $this->getContext()->getUser()->isFirstRequest(false);
       }
       
-      $domain = sfConfig::get("app_domain", $host);
       $host = $this->getContext()->getRequest()->getHost();
+      $domain = sfConfig::get("app_domain", $host);
       if (!preg_match("/^(hu|en)\\." . preg_quote($domain) . "/i", $this->getContext()->getRequest()->getHost())) {
         $uri = $this->getContext()->getRequest()->getUri();
         $culture = $this->getContext()->getUser()->getCulture();

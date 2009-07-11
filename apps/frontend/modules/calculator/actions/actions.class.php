@@ -126,16 +126,15 @@ class calculatorActions extends sfActions
         if ($this->soft_boots = $values["soft_boots"]) {
           $mana_per_sec += 2;
         }
-        
+
         $time = $this->mana / $mana_per_sec;
-        $temp["days"] = floor($time / 86400);
-        $time -= $temp["days"] * 86400;
-        $temp["hours"] = floor($time / 3600);
-        $time -= $temp["hours"] * 3600;
-        $temp["minutes"] = floor($time / 60);
-        $time -= $temp["minutes"] * 60;
-        $temp["seconds"] = floor($time);
-        $this->time = $temp;
+        $this->time = $this->secondsToTime($time);
+
+        if ($values["current_mlvl"] + 1 == $values["target_mlvl"]) {
+          $this->one_percent = floor(0.01 * Tibiahu::getManaForMlvl($values["current_mlvl"], $values["vocation"]));
+          $this->one_percent_time = $this->one_percent / $mana_per_sec;
+          $this->one_percent_time = $this->secondsToTime($this->one_percent_time);
+        }
         
         $instant_spells = array(
           0 =>  array(
@@ -188,5 +187,17 @@ class calculatorActions extends sfActions
       }
     }
   }
-  
+    
+  private function secondsToTime($seconds)
+  {
+    $temp["days"] = floor($seconds / 86400);
+    $seconds -= $temp["days"] * 86400;
+    $temp["hours"] = floor($seconds / 3600);
+    $seconds -= $temp["hours"] * 3600;
+    $temp["minutes"] = floor($seconds / 60);
+    $seconds -= $temp["minutes"] * 60;
+    $temp["seconds"] = floor($seconds);
+    return $temp;
+  }
+ 
 }

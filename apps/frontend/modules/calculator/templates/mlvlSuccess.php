@@ -20,6 +20,11 @@
         array("%mana%" => format_number($mana)), "calculators") ?>
       <b><?php include_partial("time", array("time" => $time)) ?></b>.<br /><br />
       
+      <?php if (isset($one_percent)): ?>
+        1% = <?php echo format_number($one_percent) ?> mana = 
+        <?php include_partial("time", array("time" => $one_percent_time)) ?><br /><br />
+      <?php endif ?>
+      
       <?php if ($soft_boots): ?>
       <?php echo __("Felhasznált soft boots töltés ára: %price% gp", 
         array("%price%" => format_number(floor($mana / 28800 * 10000))), "calculators") ?>
@@ -48,7 +53,7 @@
       
       <?php if (isset($rune_spells)): ?>
       <br /><br />
-        <?php echo __("Rúnavarázslatok", null, "calculators") ?>:<br />
+      <?php echo __("Rúnavarázslatok", null, "calculators") ?>:<br />
         <table border="1">
           <thead>
             <tr>
