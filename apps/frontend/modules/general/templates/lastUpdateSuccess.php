@@ -1,13 +1,11 @@
-<?php use_helper("Date") ?>
+<?php use_helper("Date", "Number") ?>
 <?php slot("title", __("Utolsó frissítések")) ?>
 <div class="containerbox">
   <h3><?php echo __("Utolsó frissítések") ?></h3>
   <div class="panel">
-    <p>
-      <?php echo __("A legutóbbi 10 frissítésünk így nézett ki:") ?><br />
-    </p>       
-      <br/>
-      <table class="cronlog">
+    <?php error_reporting(0);foreach($servers as $server): ?>
+      <b><?php echo($servername = $server->getName()) ?></b>
+      <table class="cronlog" border="1">
         <thead>
           <tr>
             <th><?php echo __("Dátum") ?></th>
@@ -18,17 +16,19 @@
           </tr>
         </thead>
         <tbody>
-<?php foreach ($cronlog as $cronlog_obj): ?>
-<?php $temp = unserialize(str_replace("&quot;",'"',$cronlog_obj->getData())) ?>
+        <?php foreach ($whoisonline as $whoisonline_object): ?>
+        <?php if (!isset($wio[$timestamp = $whoisonline_object->getCreatedAt()])) { $wio[$timestamp] = unserialize(str_replace("&quot;", '"', $whoisonline_object->getData())); } ?>
           <tr>
-            <td><?php echo format_datetime($cronlog_obj->getCreatedAt()) ?></td>
-            <td><?php echo $temp["updates"] ?></td>
-            <td><?php echo $temp["inserts"] ?></td>
-            <td><?php echo $temp["levelups"] ?></td>
-            <td><?php echo $temp["leveldowns"] ?></td>
+            <td><?php echo format_datetime($timestamp) ?></td>
+            <td><?php echo format_number($wio[$timestamp][$servername]["updates"]) ?></td>
+            <td><?php echo format_number($wio[$timestamp][$servername]["inserts"]) ?></td>
+            <td><?php echo format_number($wio[$timestamp][$servername]["levelups"]) ?></td>
+            <td><?php echo format_number($wio[$timestamp][$servername]["leveldowns"]) ?></td>
           </tr>
-<?php endforeach; ?>        
+        <?php endforeach ?>
         </tbody>
       </table>
+      <br /><br />
+    <?php endforeach; ?>
   </div>
 </div>

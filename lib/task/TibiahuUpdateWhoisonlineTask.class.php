@@ -28,8 +28,15 @@ EOF;
       echo("Whoisonline lista lekerese ({$server->getName()})...\n");
       $characters = TibiaWebsite::whoIsOnline($server->getName());
       
+      $updatedata[$server->getName()] = array(
+        "updates" =>      0,
+        "inserts" =>      0,
+        "levelups"  =>    0,
+        "leveldowns"  =>  0,
+      );
+      
       foreach ($characters as $character) {
-        set_time_limit(5);
+        set_time_limit(10);
         
         //echo("{$character["name"]}\t");
         $char = CharacterPeer::retrieveByName($character["name"]);
@@ -37,11 +44,11 @@ EOF;
           $char = new Character();
           $char->setName($character["name"]);
           $char->setServerId($server->getId());
-          ++$inserts;
+          ++$updatedata[$server->getName()]["inserts"];
           $this->logSection("new char", $character["name"]);
           //echo("new character\t");
         } else {
-          ++$updates;
+          ++$updatedata[$server->getName()]["updates"];
         }
         
         $char->setVocation($character["vocation"]);
@@ -57,10 +64,10 @@ EOF;
             }
             //echo("lvldown\t");
             $this->logSection("lvldown", $character["name"]);
-            ++$leveldowns;
+            ++$updatedata[$server->getName()]["leveldowns"];
           } else {
             $this->logSection("lvlup", $character["name"]);
-            ++$levelups;
+            ++$updatedata[$server->getName()]["levelups"];
           }
         }
         $char->setLevel($character["level"]);
@@ -73,21 +80,18 @@ EOF;
         }
         
         //echo("\n");
-      }    
+        $chars_seen += count($characters);
+      } // /foreach
     }
+    
+    print_r($updatedata);
           
     $cronlog = new CronLog();
     $cronlog->setType("whoisonline");
-    $cronlog->setData(serialize(array(
-      "updates"    => $updates,
-      "inserts"    => $inserts,
-      "levelups"   => $levelups,
-      "leveldowns" => $leveldowns
-    )));
+    $cronlog->setData(serialize($updatedata));
     $cronlog->save();
     
-    $this->logSection('update', sprintf("%s karakter frissitve", count($characters)));
-    $this->logSection("update", "{$levelups} lvlup, {$leveldowns} lvldown");
+    $this->logSection('update', sprintf("%s karakter frissitve", $chars_seen));
   }
 
 }

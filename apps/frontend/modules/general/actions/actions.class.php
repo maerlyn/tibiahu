@@ -18,12 +18,13 @@ class generalActions extends sfActions
   
   public function executeHomepage(sfWebRequest $request)
   {
-    $this->cronlog = CronLogPeer::getLast(10, "whoisonline");
+    //$this->cronlog = CronLogPeer::getLast(10, "whoisonline");
   }
   
   public function executeLastUpdate(sfWebRequest $request)
   {
-    $this->cronlog = CronLogPeer::getLast(10, "whoisonline");
+    $this->servers = ServerPeer::getAllEnabled();
+    $this->whoisonline = CronLogPeer::getLast(10, "whoisonline");
   }
       
 }
