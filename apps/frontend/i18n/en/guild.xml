@@ -24,6 +24,26 @@
         <source>Csak egy találat volt, ezért továbbvittünk a guild oldalára</source>
         <target>As there was only one result, we redirected you to the guild's page</target>
       </trans-unit>
+      <trans-unit id="6">
+        <source>Statisztika</source>
+        <target>Statistics</target>
+      </trans-unit>
+      <trans-unit id="7">
+        <source>Legrégebben látott karakter</source>
+        <target>Least recently seen character</target>
+      </trans-unit>
+      <trans-unit id="8">
+        <source>Promoted karakterek</source>
+        <target>Promoted characters</target>
+      </trans-unit>
+      <trans-unit id="9">
+        <source>Átlagos szint</source>
+        <target>Average level</target>
+      </trans-unit>
+      <trans-unit id="10">
+        <source>Arány</source>
+        <target>Share</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
