@@ -22,7 +22,6 @@ EOF;
     $databaseManager = new sfDatabaseManager($this->configuration);
     
     $servers = ServerPeer::getAllEnabled();
-    $updates = $inserts = $levelups = $leveldowns = 0;    
     
     foreach ($servers as $server) {
       echo("Whoisonline lista lekerese ({$server->getName()})...\n");

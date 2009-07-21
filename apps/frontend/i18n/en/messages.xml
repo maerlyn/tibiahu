@@ -380,6 +380,14 @@
         <source>A cél mlvl legyen nagyobb, mint az aktuális!</source>
         <target>The target mlvl must be greater than the current!</target>
       </trans-unit>
+      <trans-unit id="113">
+      	<source>Dátum</source>
+      	<target>Date</target>
+      </trans-unit>
+      <trans-unit id="114">
+        <source>Online karakterek</source>
+        <target>Online characters</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
