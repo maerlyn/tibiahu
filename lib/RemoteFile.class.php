@@ -61,6 +61,9 @@ abstract class RemoteFile
     if ($status == "403") {
       return false;
     } else {
+      if (false !== stripos($url, "http://www.tibia.com")) {
+        $ret = iconv("ISO-8859-1", "UTF-8", $ret);
+      }
       return $ret;
     }
   }
