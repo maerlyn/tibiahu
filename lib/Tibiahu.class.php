@@ -59,7 +59,7 @@ class Tibiahu
   
   static public function getBlessingPrices($level)
   {
-    $ppb = 0;
+    $ppb = 0; // price per blessing
     if ($level < 30) {
       $ppb = 2000;
     } else 
@@ -141,5 +141,47 @@ class Tibiahu
     
     return $mana;
   }
+  
+  static public function getSoulRegenerationTimes($soul, $promotion)
+  {
+    $ret = array();
+    
+    switch ($promotion) {
+      case false:
+        $time_per_soul = 240;
+        break;
+        
+      case true:
+        $time_per_soul = 15;
+        $ret["full"]["sleeping"] = self::secondsToTime(900 * (200 - $soul));
+        break;
+    }
+    
+    $ret["full"]["hunting"] = self::secondsToTime($time_per_soul * (200 - $soul));
+    for ($i = 60; $i <= 200; $i += 60) {
+      if ($soul < $i) {
+        $ret["partial"]["hunting"][$i] = self::secondsToTime($time_per_soul * ($i - $soul));
+        
+        if ($promotion) {
+          $ret["partial"]["sleeping"][$i] = self::secondsToTime(900 * ($i - $soul));
+        }
+      }
+    }
+    
+    return $ret;
+  }
+
+  static public function secondsToTime($seconds)
+  {
+    $temp["days"] = floor($seconds / 86400);
+    $seconds -= $temp["days"] * 86400;
+    $temp["hours"] = floor($seconds / 3600);
+    $seconds -= $temp["hours"] * 3600;
+    $temp["minutes"] = floor($seconds / 60);
+    $seconds -= $temp["minutes"] * 60;
+    $temp["seconds"] = floor($seconds);
+    return $temp;
+  }
+
   
 }

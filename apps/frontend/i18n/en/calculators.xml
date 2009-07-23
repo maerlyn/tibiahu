@@ -104,6 +104,26 @@
         <source>Számolj!</source>
         <target>Calculate!</target>
       </trans-unit>
+      <trans-unit id="26">
+        <source>Részleges regeneráció</source>
+        <target>Partial regeneration times</target>
+      </trans-unit>
+      <trans-unit id="27">
+        <source>A soulod teljes regenerációjához ennyit kell vadásznod</source>
+        <target>To completely refill your soul, you have to hunt for</target>
+      </trans-unit>
+      <trans-unit id="28">
+        <source>Idő</source>
+        <target>Time</target>
+      </trans-unit>
+      <trans-unit id="29">
+        <source>Mivel van promotionöd, esetleg alhatsz, ennyit</source>
+        <target>Since you have promotion, alternatively you may sleep for</target>
+      </trans-unit>
+      <trans-unit id="30">
+        <source>Soul kalkulátor</source>
+        <target>Soul calculator</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -276,10 +276,6 @@
         <source>ne legyen neki</source>
         <target>should not have one</target>
       </trans-unit>
-      <trans-unit id="86">
-        <source>Részleges regeneráció:</source>
-        <target>Partial regeneration times:</target>
-      </trans-unit>
       <trans-unit id="87">
         <source>Offline idő</source>
         <target>Offline time</target>
@@ -387,6 +383,10 @@
       <trans-unit id="114">
         <source>Online karakterek</source>
         <target>Online characters</target>
+      </trans-unit>
+      <trans-unit id="115">
+        <source>Aktuális soul</source>
+        <target>Current soul</target>
       </trans-unit>
     </body>
   </file>

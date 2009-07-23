@@ -128,12 +128,12 @@ class calculatorActions extends sfActions
         }
 
         $time = $this->mana / $mana_per_sec;
-        $this->time = $this->secondsToTime($time);
+        $this->time = Tibiahu::secondsToTime($time);
 
         if ($values["current_mlvl"] + 1 == $values["target_mlvl"]) {
           $this->one_percent = floor(0.01 * Tibiahu::getManaForMlvl($values["current_mlvl"], $values["vocation"]));
           $this->one_percent_time = $this->one_percent / $mana_per_sec;
-          $this->one_percent_time = $this->secondsToTime($this->one_percent_time);
+          $this->one_percent_time = Tibiahu::secondsToTime($this->one_percent_time);
         }
         
         $instant_spells = array(
@@ -188,16 +188,18 @@ class calculatorActions extends sfActions
     }
   }
     
-  private function secondsToTime($seconds)
+  public function executeSoul(sfWebRequest $request)
   {
-    $temp["days"] = floor($seconds / 86400);
-    $seconds -= $temp["days"] * 86400;
-    $temp["hours"] = floor($seconds / 3600);
-    $seconds -= $temp["hours"] * 3600;
-    $temp["minutes"] = floor($seconds / 60);
-    $seconds -= $temp["minutes"] * 60;
-    $temp["seconds"] = floor($seconds);
-    return $temp;
+    $this->form = new SoulCalculatorForm();
+    
+    if ($request->isMethod("post")) {
+      $this->form->bind($request->getParameter("soulcalc"));
+      
+      if ($this->form->isValid()) {
+        $values = $this->form->getValues();
+        $this->results = Tibiahu::getSoulRegenerationTimes($values["current_soul"], $values["promotion"]);
+      }
+    }
   }
  
 }

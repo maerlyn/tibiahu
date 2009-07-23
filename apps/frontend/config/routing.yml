@@ -116,6 +116,10 @@ calculator_mlvl:
   url:    /calculator/mlvl
   param:  { module: calculator, action: mlvl }  
   
+calculator_soul:
+  url:    /calculator/soul
+  param:  { module: calculator, action: soul }  
+  
 ### sfguard routes ###
 
 sf_guard_signin:

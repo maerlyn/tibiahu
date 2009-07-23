@@ -55,6 +55,7 @@
             <li><?php echo link_to("Magic level", "@calculator_mlvl") ?></li>
             <li><?php echo link_to("Stamina", "@calculator_stamina") ?></li>
             <li><?php echo link_to(__("Blessing árak", array(), "calculators"), "@calculator_blessing") ?></li>
+            <li><?php echo link_to("Soul", "@calculator_soul") ?></li>
           </ul>
         </div>
       </div> <!-- /containerbox -->

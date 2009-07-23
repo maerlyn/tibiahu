@@ -17,7 +17,7 @@
     <?php endif; ?>
     
     <?php if (isset($partials) && count($partials)): ?>
-    <?php echo __("Részleges regeneráció:") ?><br />
+    <?php echo __("Részleges regeneráció", null, "calculators") ?>:<br />
     <table>
       <thead>
         <tr>
