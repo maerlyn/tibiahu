@@ -149,16 +149,18 @@ class Tibiahu
     switch ($promotion) {
       case false:
         $time_per_soul = 240;
+        $max_soul = 100;
         break;
         
       case true:
         $time_per_soul = 15;
+        $max_soul = 200;
         $ret["full"]["sleeping"] = self::secondsToTime(900 * (200 - $soul));
         break;
     }
     
-    $ret["full"]["hunting"] = self::secondsToTime($time_per_soul * (200 - $soul));
-    for ($i = 60; $i <= 200; $i += 60) {
+    $ret["full"]["hunting"] = self::secondsToTime($time_per_soul * ($max_soul - $soul));
+    for ($i = 60; $i <= $max_soul; $i += 60) {
       if ($soul < $i) {
         $ret["partial"]["hunting"][$i] = self::secondsToTime($time_per_soul * ($i - $soul));
         
