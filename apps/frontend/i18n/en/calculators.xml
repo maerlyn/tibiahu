@@ -69,8 +69,8 @@
         <target>[0]0 minutes [1]1 minute (1,+Inf]%count% minutes </target>
       </trans-unit>
       <trans-unit id="17">
-        <source>[0]0 másodperc[1]1 másodperc(1,+Inf]%count% másodperc</source>
-        <target>[0]0 seconds[1]1 second(1,+Inf]%count% seconds</target>
+        <source>[0][1]1 másodperc(1,+Inf]%count% másodperc</source>
+        <target>[0][1]1 second(1,+Inf]%count% seconds</target>
       </trans-unit>
       <trans-unit id="18">
         <source>Felhasznált soft boots töltés ára: %price% gp</source>
@@ -123,6 +123,10 @@
       <trans-unit id="30">
         <source>Soul kalkulátor</source>
         <target>Soul calculator</target>
+      </trans-unit>
+      <trans-unit id="31">
+        <source>Nincs mit újratöltened.</source>
+        <target>You have nothing to refill.</target>
       </trans-unit>
     </body>
   </file>

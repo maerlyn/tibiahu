@@ -159,13 +159,15 @@ class Tibiahu
         break;
     }
     
-    $ret["full"]["hunting"] = self::secondsToTime($time_per_soul * ($max_soul - $soul));
-    for ($i = 60; $i <= $max_soul; $i += 60) {
-      if ($soul < $i) {
-        $ret["partial"]["hunting"][$i] = self::secondsToTime($time_per_soul * ($i - $soul));
-        
-        if ($promotion) {
-          $ret["partial"]["sleeping"][$i] = self::secondsToTime(900 * ($i - $soul));
+    if ($soul <= $max_soul) {
+      $ret["full"]["hunting"] = self::secondsToTime($time_per_soul * ($max_soul - $soul));
+      for ($i = 60; $i <= $max_soul; $i += 60) {
+        if ($soul < $i) {
+          $ret["partial"]["hunting"][$i] = self::secondsToTime($time_per_soul * ($i - $soul));
+          
+          if ($promotion) {
+            $ret["partial"]["sleeping"][$i] = self::secondsToTime(900 * ($i - $soul));
+          }
         }
       }
     }

@@ -13,10 +13,15 @@
       </table>
     </form>
     <?php if (isset($results)): ?>
+    
+    <?php if (isset($results["hunting"])): ?>
     <?php echo __("A soulod teljes regenerációjához ennyit kell vadásznod", null, "calculators") ?>:
       <b><?php include_partial("time", array("time" => $results["full"]["hunting"])) ?></b><br />
+    <?php else: ?>
+      <?php echo __("Nincs mit újratöltened.", null, "calculators") ?>
+    <?php endif ?>
       
-    <?php if (isset($results["partial"]["hunting"])): ?>
+    <?php if (isset($results["partial"]) && isset($results["partial"]["hunting"])): ?>
     <?php echo __("Részleges regeneráció", null, "calculators") ?>:<br />
     <table border="1">
       <thead>
@@ -37,11 +42,11 @@
     <br />
     <?php endif ?>
     
-    <?php if (isset($results["full"]["sleeping"])): ?>
+    <?php if (isset($results["full"]) && isset($results["full"]["sleeping"])): ?>
     <?php echo __("Mivel van promotionöd, esetleg alhatsz, ennyit", null, "calculators") ?>:
       <b><?php include_partial("time", array("time" => $results["full"]["sleeping"])) ?></b><br />
       
-    <?php if (isset($results["partial"]["sleeping"])): ?>
+    <?php if (isset($results) && isset($results["partial"]["sleeping"])): ?>
       <?php echo __("Részleges regeneráció", null, "calculators") ?>:<br />
       <table border="1">
         <thead>
