@@ -14,7 +14,7 @@
     </form>
     <?php if (isset($results)): ?>
     
-    <?php if (isset($results["hunting"])): ?>
+    <?php if (isset($results["full"]["hunting"])): ?>
     <?php echo __("A soulod teljes regenerációjához ennyit kell vadásznod", null, "calculators") ?>:
       <b><?php include_partial("time", array("time" => $results["full"]["hunting"])) ?></b><br />
     <?php else: ?>
