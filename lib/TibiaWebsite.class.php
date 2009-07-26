@@ -167,6 +167,19 @@ abstract class TibiaWebsite
         );
     }
     
+    if (preg_match("@<TABLE.+?<TD COLSPAN=4 CLASS=white><B>Characters</B></TD>(.+?)</TD></TR></FORM></TABLE>[\\n ]</TD></TR></TABLE>@is", $website, $matches)) {
+      preg_match_all("@<tr.+?><nobr>(.+?)</nobr>.+?<nobr>(.+?)</nobr>@is", $matches[0], $matches);
+      $other_characters = array();
+      foreach ($matches[1] as $k => $charname) {
+        $charname = preg_replace("@^(\\d+\\. )@is", "", str_replace("&#160;", " ", $charname));
+        $other_characters[] = array(
+          "name"  =>  $charname,
+          "world" =>  $matches[2][$k],
+        );
+      }
+      $character["characters"] = $other_characters;
+    }
+    
     return $character;
   }
   
@@ -570,6 +583,18 @@ abstract class TibiaWebsite
     }
     
     return $killstats;
+  }
+ 
+  /**
+  * Checks if a character is a gamemaster or not
+  * 
+  * @param string character name
+  * @return boolean GM status 
+  */
+  public static function isGamemaster($name)
+  {
+    $contents = RemoteFile::get("http://www.tibia.com/community/?subtopic=character&name=" . urlencode($name));
+    return (false !== stripos($contents, "<TD>Position:</TD><TD>Gamemaster</TD></TR>"));
   }
   
 }
