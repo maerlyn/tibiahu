@@ -268,5 +268,28 @@ CREATE TABLE `tibia_newscategory_i18n`
 		ON DELETE CASCADE
 )Type=InnoDB;
 
+#-----------------------------------------------------------------------------
+#-- tibia_gamemaster
+#-----------------------------------------------------------------------------
+
+DROP TABLE IF EXISTS `tibia_gamemaster`;
+
+
+CREATE TABLE `tibia_gamemaster`
+(
+	`id` INTEGER  NOT NULL AUTO_INCREMENT,
+	`name` VARCHAR(255),
+	`last_seen` DATETIME,
+	`server_id` INTEGER,
+	PRIMARY KEY (`id`),
+	UNIQUE KEY `tibia_gamemaster_U_1` (`name`),
+	KEY `tibia_gamemaster_I_1`(`last_seen`),
+	INDEX `tibia_gamemaster_FI_1` (`server_id`),
+	CONSTRAINT `tibia_gamemaster_FK_1`
+		FOREIGN KEY (`server_id`)
+		REFERENCES `tibia_server` (`id`)
+		ON DELETE CASCADE
+)Type=InnoDB;
+
 # This restores the fkey checks, after having unset them earlier
 SET FOREIGN_KEY_CHECKS = 1;

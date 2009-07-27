@@ -93,3 +93,11 @@ propel:
     culture:         { isCulture: true, type: varchar, size: 7, required: true, primaryKey: true }
     name:            { type: varchar, size: 64 }
     slug:            { type: varchar, size: 64, index: unique }
+
+  tibia_gamemaster:
+    _attributes:     { phpName: Gamemaster }
+    id:              ~
+    name:            { type: varchar, size: 255, index: unique }
+    last_seen:       { type: timestamp, index: true }
+    server_id:       { type: integer, foreignTable: tibia_server, foreignReference: id, onDelete: cascade }
+    
