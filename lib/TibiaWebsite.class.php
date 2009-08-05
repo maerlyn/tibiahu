@@ -9,6 +9,8 @@
 abstract class TibiaWebsite
 {
   
+  private static $characterInfo_cache = array();
+  
   /**
   * Gets the data of the currently online characters
   * 
@@ -56,6 +58,10 @@ abstract class TibiaWebsite
   */
   public static function characterInfo($charname)
   {
+    if (isset(self::$characterInfo_cache[$charname])) {
+      return self::$characterInfo_cache[$charname];
+    }
+    
     if (false === ($website = RemoteFile::get("http://www.tibia.com/community/?subtopic=character&name=" . urlencode($charname)))) {
       return null;
     }
@@ -123,6 +129,12 @@ abstract class TibiaWebsite
     preg_match("@<TD>Last login:</TD><TD>(.+?)</TD></TR>@is", $characterinfo, $matches);    
     $character["lastlogin"] = strtotime(str_replace("&#160;", " ", $matches[1]));
     
+    //<TD>Position:</TD><TD>Gamemaster</TD>
+    if (false !== stripos($characterinfo, "<td>Position:</td>")) {
+      preg_match("@<td>Position:</td><td>(.+?)</td>@is", $characterinfo, $matches);
+      $character["position"] = $matches[1];
+    }
+    
     //<TD>Account&#160;Status:</TD><TD>Premium Account</TD></TR>
     preg_match("@<TD>Account&#160;Status:</TD><TD>(Premium|Free) Account</TD></TR>@is", $characterinfo, $matches);
     $character["accountstatus"] = $matches[1];
@@ -170,16 +182,17 @@ abstract class TibiaWebsite
     if (preg_match("@<TABLE.+?<TD COLSPAN=4 CLASS=white><B>Characters</B></TD>(.+?)</TD></TR></FORM></TABLE>[\\n ]</TD></TR></TABLE>@is", $website, $matches)) {
       preg_match_all("@<tr.+?><nobr>(.+?)</nobr>.+?<nobr>(.+?)</nobr>@is", $matches[0], $matches);
       $other_characters = array();
-      foreach ($matches[1] as $k => $charname) {
-        $charname = preg_replace("@^(\\d+\\. )@is", "", str_replace("&#160;", " ", $charname));
+      foreach ($matches[1] as $k => $character_name) {
+        $character_name = preg_replace("@^(\\d+\\. )@is", "", str_replace("&#160;", " ", $character_name));
         $other_characters[] = array(
-          "name"  =>  $charname,
+          "name"  =>  $character_name,
           "world" =>  $matches[2][$k],
         );
       }
       $character["characters"] = $other_characters;
     }
     
+    self::$characterInfo_cache[$charname] = $character;
     return $character;
   }
   
@@ -593,8 +606,8 @@ abstract class TibiaWebsite
   */
   public static function isGamemaster($name)
   {
-    $contents = RemoteFile::get("http://www.tibia.com/community/?subtopic=character&name=" . urlencode($name));
-    return (false !== stripos($contents, "<TD>Position:</TD><TD>Gamemaster</TD></TR>"));
+    $charinfo = self::characterInfo($name);
+     return (isset($charinfo["position"]) && $charinfo["position"] == "Gamemaster");
   }
   
 }
