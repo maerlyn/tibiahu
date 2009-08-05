@@ -607,7 +607,7 @@ abstract class TibiaWebsite
   public static function isGamemaster($name)
   {
     $charinfo = self::characterInfo($name);
-     return (isset($charinfo["position"]) && $charinfo["position"] == "Gamemaster");
+    return (isset($charinfo["position"]) && $charinfo["position"] == "Gamemaster");
   }
   
 }

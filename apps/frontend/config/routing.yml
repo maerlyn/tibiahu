@@ -120,6 +120,18 @@ calculator_soul:
   url:    /calculator/soul
   param:  { module: calculator, action: soul }  
   
+### gm finder routes ###
+
+gmfinder_index:
+  url:    /gamemasters
+  param:  { module: gamemaster, action: index }  
+  
+gmfinder_show:
+  url:      /gamemasters/:name
+  class:    sfPropelRoute
+  param:    { module: gamemaster, action: show }  
+  options: { model: Server, type: object }
+  
 ### sfguard routes ###
 
 sf_guard_signin:

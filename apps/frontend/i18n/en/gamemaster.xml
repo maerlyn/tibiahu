@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xliff PUBLIC "-//XLIFF//DTD XLIFF//EN" "http://www.oasis-open.org/committees/xliff/documents/xliff.dtd">
+<xliff version="1.0">
+  <file source-language="hu" target-language="en" datatype="plaintext" original="gamemaster" date="2009-05-01T17:59:28Z" product-name="gamemaster">
+    <header/>
+    <body>
+      <trans-unit id="1">
+        <source>GM-kereső</source>
+        <target>GM-finder</target>
+      </trans-unit>
+      <trans-unit id="2">
+        <source>Válassz szervert</source>
+        <target>Select a server</target>
+      </trans-unit>
+      <trans-unit id="3">
+        <source>Szerverváltás</source>
+        <target>Switch server</target>
+      </trans-unit>
+      <trans-unit id="4">
+        <source>Ismert GM-ek a &lt;b&gt;%server%&lt;/b&gt; szerveren</source>
+        <target>Known GMs on the server &lt;b&gt;%server%&lt;/b&gt;</target>
+      </trans-unit>      
+      <trans-unit id="5">
+        <source>Utoljára bejelentkezett</source>
+        <target>Last login</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
