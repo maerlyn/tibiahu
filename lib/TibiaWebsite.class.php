@@ -62,7 +62,10 @@ abstract class TibiaWebsite
       return self::$characterInfo_cache[$charname];
     }
     
-    if (false === ($website = RemoteFile::get("http://www.tibia.com/community/?subtopic=character&name=" . urlencode($charname)))) {
+    if (
+        false === ($website = RemoteFile::get("http://www.tibia.com/community/?subtopic=character&name=" . urlencode($charname))) ||
+        strlen($website) < 512
+       ) {
       return null;
     }
 

@@ -31,7 +31,11 @@ EOF;
     foreach ($characters as $character) {
       set_time_limit(15);
       
-      $info = TibiaWebsite::characterInfo($character->getName());
+      if (!$info = TibiaWebsite::characterInfo($character->getName())) {
+        sleep(5);
+        continue;
+      }
+      //echo $character->getName() . " - " . count($info) . "\n";
       
       try {
         if (is_null($info)) { //deleted
@@ -130,7 +134,7 @@ EOF;
         echo("MENTESI HIBA: " . $e->getMessage() . "\n");
       }
       
-      usleep(300);
+      usleep(300000);
     }
     
     if (!$is_aborted) {
