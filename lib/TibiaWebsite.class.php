@@ -253,12 +253,18 @@ abstract class TibiaWebsite
     if (preg_match("@<td colspan=\"2\" class=\"white\" ><b>Character Deaths</b></td>.+?</table>@is", $website, $matches)) {
       $deathlist = $matches[0];
       
-      preg_match_all("@<tr bgcolor=\"#.{6}\" ><td w.+?>(.+?)</td><td>Died at Level (\\d+) by (.+?).</td></tr>@is", $deathlist, $matches);
+      preg_match_all("@<tr bgcolor=\"#.{6}\" ><td w.+?>(.+?)</td><td>(?:Killed |Died) at Level (\\d+) by (.+?)\.</td></tr>@is", $deathlist, $matches);
       foreach($matches[0] as $k => $v) {
+        $reason = trim(preg_replace('#^(an |a )(.+?)$#i', "\\2", $matches[3][$k]));
+        if (false !== stripos($reason, " of <a ")) {
+          $reason = explode(" of <a ", $reason);
+          $reason = $reason[0];
+        }
+      
         $deaths[] = array(
           "time"    =>  strtotime(str_replace("&#160;", " ", $matches[1][$k])),
           "level"   =>  $matches[2][$k],
-          "reason"  =>  trim(preg_replace('#^(an |a )(.+?)$#i', "\\2", $matches[3][$k]))
+          "reason"  =>  $reason,
         );
       }
     }
@@ -493,7 +499,7 @@ abstract class TibiaWebsite
       $item = array(
         "date"  =>  strtotime(str_replace("&#160;", " ", preg_replace("#.+?<div class='NewsHeadlineDate'>(.+?) - .*#is", "\\1", $v))),
         "title" =>  preg_replace("#.+?<div class='NewsHeadlineText'>(.+?)</div>.*#is", "\\1", $v),
-        "body"  =>  self::articleCleanup(preg_replace("#.+?<tr>[\n ]+?<td.+?>(.+?)</td>[\n ]</tr></table>.*#is", "\\1", $v))
+        "body"  =>  self::articleCleanup(preg_replace("#.+?<tr>.+?<td.+?>(.+?)</td>.+?</tr></table>.*#is", "\\1", $v))
       );
       $items[] = $item;
     }
