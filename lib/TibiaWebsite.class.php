@@ -331,10 +331,9 @@ abstract class TibiaWebsite
     if (false === ($website = RemoteFile::get("http://www.tibia.com/community/?subtopic=guilds&page=view&GuildName=" . urlencode($guild)))) {
       return null;
     }
-    
-    preg_match_all("#<table border=0 cellspacing=1.+?<b>Guild Members</b></td></tr>(.+?)</table>#is", $website, $matches);
-    preg_match_all("#<a href=\"http://www.tibia.com.+?subtopic=characters.+?\">(.+?)</a>#is", $matches[1][0], $matches);
-    
+
+    #preg_match_all("#<b>Guild Members</b></td></tr>(.+?)</table>#is", $website, $matches);
+    preg_match_all("#<a href=\"http://www.tibia.com.+?subtopic=characters.+?name=.+?\">(.+?)</a>#is", $website /*$matches[1][0]*/, $matches);
     return str_replace("&#160;", " ", $matches[1]);
   }
   
