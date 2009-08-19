@@ -23,9 +23,12 @@ EOF;
     $new_newsticker_items = 0;
     if ($newsticker_items = TibiaWebsite::getNewsTicker()) {
       $last_newsticker_item = SettingPeer::get("last.newsticker");
+      $last_newsticker_items = unserialize($last_newsticker_item->get());
+      $current_newsticker_items = array();
       foreach ($newsticker_items as $item) {
-        if ($item["body"] == $last_newsticker_item->get()) {
-          break;
+        $current_newsticker_items[] = md5($item["body"]);
+        if (false !== array_search(md5($item["body"]), $last_newsticker_items)) {
+          continue;
         }
         $this->logSection("newsticker", "new: " . $item["body"]);
         
@@ -43,7 +46,7 @@ EOF;
         $database_item->save();
         ++$new_newsticker_items;
       }
-      $last_newsticker_item->set($newsticker_items[0]["body"]);
+      $last_newsticker_item->set(serialize($current_newsticker_items));
       $last_newsticker_item->save();
     }
     $this->logSection("newsticker", $new_newsticker_items . " new items");
