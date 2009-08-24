@@ -26,5 +26,10 @@ class generalActions extends sfActions
     $this->servers = ServerPeer::getAllEnabled();
     $this->whoisonline = CronLogPeer::getLast(10, "whoisonline");
   }
+  
+  public function executeContact(sfWebRequest $request)
+  {
+    
+  }
       
 }

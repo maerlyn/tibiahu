@@ -388,6 +388,10 @@
         <source>Aktuális soul</source>
         <target>Current soul</target>
       </trans-unit>
+      <trans-unit id="116">
+        <source>Ha kérdésed, megjegyzésed, ötleted van az oldallal kapcsolatban, netán hibát találtál, általában megtalálsz Securán, mint %ttd%, vagy e-mailben elérsz a %email% címen.</source>
+        <target>If you have a question, a remark or a new idea regarding the site, or you have found a bug, feel free to contact me! You can find me on Secura as %ttd% or send me an email to %email%.</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

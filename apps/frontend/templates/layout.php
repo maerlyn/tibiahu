@@ -77,7 +77,7 @@
 
   <div id="footer">
     <div id="footerbox" class="center">
-      :: <?php echo __("Copyright &copy; 2009 Tibia.hu") ?> :: <?php echo __("Kapcsolat") ?>: Tele the Druid ::<br />
+      :: <?php echo __("Copyright &copy; 2009 Tibia.hu") ?> :: <?php echo link_to(__("Kapcsolat"), "@contact") ?> ::<br />
       :: <?php echo __("A Tibia egyetlen hivatalos oldala a <a href=\"http://tibia.com/\">tibia.com</a>") ?>,
       <?php echo __("ez egy rajongói oldal. Tibia &copy; CipSoft GmbH, 2006") ?> ::<br />
       :: <?php echo __("Szerveridő: ");use_helper("Date");echo format_datetime(time()) ?> :: 

@@ -148,6 +148,10 @@ sf_guard_password:
   
 ### rules that don't fit any other category :) ###  
   
+contact:
+  url:    /contact
+  param:  { module: general, action: contact }
+  
 last_update:
   url:    /lastupdates
   param:  { module: general, action: lastUpdate }  

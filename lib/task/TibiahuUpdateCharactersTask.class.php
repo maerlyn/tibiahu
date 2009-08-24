@@ -31,7 +31,7 @@ EOF;
     $processed_count = 0;
     foreach ($characters as $character) {
       set_time_limit(15);
-      ++$processed_count();
+      ++$processed_count;
       if ($processed_count % 100 == 0) {
         $last_id->set($character->getId());
         $last_id->save();

@@ -375,3 +375,8 @@ ul.prop li {
   background-color: white;
   color: black;
 }
+
+.email {
+  unicode-bidi:bidi-override; 
+  direction: rtl; 
+}
