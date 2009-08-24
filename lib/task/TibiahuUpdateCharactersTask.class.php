@@ -28,8 +28,14 @@ EOF;
 
     $deleted = $renamed = $forbidden = $banishments = 0;
     $is_aborted = false;
+    $processed_count = 0;
     foreach ($characters as $character) {
       set_time_limit(15);
+      ++$processed_count();
+      if ($processed_count % 100 == 0) {
+        $last_id->set($character->getId());
+        $last_id->save();
+      }
       
       if (!$info = TibiaWebsite::characterInfo($character->getName())) {
         sleep(5);
@@ -84,7 +90,15 @@ EOF;
           } else { //meg nem talalkoztunk az uj karival, sima atnevezes
             $this->logSection("rename", "{$character->getName()} # {$info["name"]}");
             $character->setName($info["name"]);
-            $character->save();
+            if (0 == $character->save()) {
+              $selectCriteria = new Criteria();
+              $selectCriteria->add(CharacterPeer::ID, $character->getId());
+              $updateCriteria = new Criteria();
+              $updateCriteria->add(CharacterPeer::NAME, $character->getName());
+              $updateCriteria->add(CharacterPeer::SLUG, $character->getSlug());
+              BasePeer::doUpdate($selectCriteria, $updateCriteria, Propel::getConnection());
+            }
+            
           }
           
           ++$renamed;
@@ -134,7 +148,7 @@ EOF;
         echo("MENTESI HIBA: " . $e->getMessage() . "\n");
       }
       
-      usleep(300000);
+      usleep(280000);
     }
     
     if (!$is_aborted) {
