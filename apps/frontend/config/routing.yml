@@ -130,7 +130,9 @@ gmfinder_show:
   url:      /gamemasters/:name
   class:    sfPropelRoute
   param:    { module: gamemaster, action: show }  
-  options: { model: Server, type: object }
+  options:  { model: Server, type: object }
+  requirements: { sf_method: [get, post] }
+
   
 ### sfguard routes ###
 

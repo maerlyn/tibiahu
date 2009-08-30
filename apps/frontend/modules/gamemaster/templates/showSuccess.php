@@ -17,11 +17,22 @@
       <tbody>
       <?php foreach ($gamemasters as $gm): ?>
         <tr>
-          <td><a href="http://www.tibia.com/community/?subtopic=character&name=<?php echo urlencode($gm->getName()) ?>"><?php echo $gm->getName() ?></a></td>
+          <td><a href="http://www.tibia.com/community/?subtopic=character&amp;name=<?php echo urlencode($gm->getName()) ?>"><?php echo $gm->getName() ?></a></td>
           <td><?php echo format_datetime($gm->getLastSeen()) ?></td>
         </tr>
       <?php endforeach ?>
       </tbody>
     </table>
+  </div>
+  <h3>GM hozzáadása</h3>
+  <div class="panel">
+    <form action="" method="post">
+    <table>
+      <?php echo $form ?>
+      <tr>
+        <td colspan="2"><input type="submit" value="Hozzáad" /></td>
+      </tr>
+    </table>
+    </form>
   </div>
 </div>

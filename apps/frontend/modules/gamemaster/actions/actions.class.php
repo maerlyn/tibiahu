@@ -25,5 +25,12 @@ class gamemasterActions extends sfActions
     $this->forward404Unless($this->current_server = $this->getRoute()->getObject());
     $this->servers = ServerPeer::getAllEnabled();
     $this->gamemasters = GamemasterPeer::getForServer($this->current_server->getId());
+    
+    $this->form = new AddGMForm();
+    if ($request->isMethod("post")) {
+      $this->form->bind($request->getParameter($this->form->getName()));
+      if ($this->form->isValid()) {
+      }
+    }
   }
 }
