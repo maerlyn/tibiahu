@@ -101,3 +101,18 @@ propel:
     last_seen:       { type: timestamp, index: true }
     server_id:       { type: integer, foreignTable: tibia_server, foreignReference: id, onDelete: cascade }
     
+  tibia_article:
+    _attributes:      { phpName: Article, isI18N: true, i18nTable: tibia_article_i18n }
+    id:               ~
+    user_id:          { type: integer, foreignTable: sf_guard_user, foreignReference: id, onDelete: setnull }
+    created_at:       ~
+    updated_at:       ~
+    
+  tibia_article_i18n: 
+    _attributes:      { phpName: ArticleI18N }
+    id:               { type: integer, required: true, primaryKey: true, foreignTable: tibia_article, foreignReference: id, onDelete: cascade }
+    culture:          { isCulture: true, type: varchar, size: 7, required: true, primaryKey: true }
+    title:            { type: varchar, size: 255, required: true }
+    slug:             { type: varchar, size: 255, required: true, index: true }
+    body_markdown:    { type: longvarchar, required: true }
+    body_html:        { type: longvarchar, required: true }

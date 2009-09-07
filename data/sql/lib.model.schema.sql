@@ -291,5 +291,49 @@ CREATE TABLE `tibia_gamemaster`
 		ON DELETE CASCADE
 )Type=InnoDB;
 
+#-----------------------------------------------------------------------------
+#-- tibia_article
+#-----------------------------------------------------------------------------
+
+DROP TABLE IF EXISTS `tibia_article`;
+
+
+CREATE TABLE `tibia_article`
+(
+	`id` INTEGER  NOT NULL AUTO_INCREMENT,
+	`user_id` INTEGER,
+	`created_at` DATETIME,
+	`updated_at` DATETIME,
+	PRIMARY KEY (`id`),
+	INDEX `tibia_article_FI_1` (`user_id`),
+	CONSTRAINT `tibia_article_FK_1`
+		FOREIGN KEY (`user_id`)
+		REFERENCES `sf_guard_user` (`id`)
+		ON DELETE SET NULL
+)Type=InnoDB;
+
+#-----------------------------------------------------------------------------
+#-- tibia_article_i18n
+#-----------------------------------------------------------------------------
+
+DROP TABLE IF EXISTS `tibia_article_i18n`;
+
+
+CREATE TABLE `tibia_article_i18n`
+(
+	`id` INTEGER  NOT NULL,
+	`culture` VARCHAR(7)  NOT NULL,
+	`title` VARCHAR(255)  NOT NULL,
+	`slug` VARCHAR(255)  NOT NULL,
+	`body_markdown` TEXT  NOT NULL,
+	`body_html` TEXT  NOT NULL,
+	PRIMARY KEY (`id`,`culture`),
+	KEY `tibia_article_i18n_I_1`(`slug`),
+	CONSTRAINT `tibia_article_i18n_FK_1`
+		FOREIGN KEY (`id`)
+		REFERENCES `tibia_article` (`id`)
+		ON DELETE CASCADE
+)Type=InnoDB;
+
 # This restores the fkey checks, after having unset them earlier
 SET FOREIGN_KEY_CHECKS = 1;

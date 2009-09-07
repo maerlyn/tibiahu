@@ -98,6 +98,22 @@ news_feed:
   url:    /feed/news
   param:  { module: feed, action: news }
   
+### articles rules ###
+
+article_index:
+  url:    /articles/:page
+  param:  { module: article, action: index, page: 1 }
+  requirements:
+    page: \d+
+    
+article_show:
+  url:      /article/:id/:slug
+  class:    sfPropelRoute
+  param:    { module: article, action: show }
+  options:  { model: Article, type: object, method: doSelectOneForRoute }
+  requirements:
+    id: \d+
+  
 ### calculator rules ###
 
 calculator_level:
