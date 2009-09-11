@@ -19,12 +19,15 @@ class articleActions extends sfActions
   {
     $this->pager = new sfPropelPager(
       "Article",
-      sfConfig::get("app_max_news_on_index")
+      sfConfig::get("app_max_articles_on_index", 5)
     );
     $this->pager->setCriteria(ArticlePeer::getIndexCriteria());
-    $this->pager->setPeerMethod("doSelectJoinAll");
+    $this->pager->setPeerMethod("doSelectJoinAllWithI18N");
     $this->pager->setPage($request->getParameter("page", 1));
     $this->pager->init(); 
+    
+    $this->results = $this->pager->getResults();
+    sfPropelActAsTaggableBehavior::preloadTags($this->results);
   }
   
   public function executeShow(sfWebRequest $request)

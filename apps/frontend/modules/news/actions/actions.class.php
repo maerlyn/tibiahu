@@ -19,7 +19,7 @@ class newsActions extends sfActions
   {
     $this->pager = new sfPropelPager(
       "News",
-      sfConfig::get("app_max_news_on_index")
+      sfConfig::get("app_max_news_on_index", 10)
     );
     $this->pager->setCriteria(NewsPeer::getIndexCriteria());
     $this->pager->setPeerMethod("doSelectJoinAllWithI18n");

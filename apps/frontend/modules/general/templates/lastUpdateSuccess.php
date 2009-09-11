@@ -36,17 +36,17 @@
     <?php foreach($stat as $servername => $v) { $names[] = $servername; $statdata[$servername] = implode(",", $v["updates"]); } ?>
     <?php $statdata = implode("|",$statdata); ?>
     <b><?php echo __("Online karakterek") ?>:</b><br />
-    <img src="http://chart.apis.google.com/chart?cht=lc&amp;chs=500x175&amp;chds=0,1000,0,1000&amp;chd=t:<?php echo $statdata ?>&amp;chco=ff0000,00ff00&amp;chdl=<?php echo implode("|", $names) ?>&amp;chxt=x,y&amp;chxl=0:|<?php echo implode ("|", $dates) ?>|1:||500|1000&amp;chf=bg,s,363636&amp;chxs=0,bababa|1,bababa&amp;chg=-1,10" alt="online stat" />
+    <img src="http://chart.apis.google.com/chart?cht=lc&amp;chs=500x175&amp;chds=0,1000,0,1000&amp;chd=t:<?php echo $statdata ?>&amp;chco=ff0000,00ff00,0000ff&amp;chdl=<?php echo implode("|", $names) ?>&amp;chxt=x,y&amp;chxl=0:|<?php echo implode ("|", $dates) ?>|1:||500|1000&amp;chf=bg,s,363636&amp;chxs=0,bababa|1,bababa&amp;chg=-1,10" alt="online stat" />
     <br /><br />
     
     <?php $statdata = array(); foreach($stat as $servername => $v) { $statdata[$servername] = implode(",", $v["levelups"]); } $statdata = implode("|", $statdata); ?>
     <b><?php echo __("Szintlépések") ?>:</b><br />
-    <img src="http://chart.apis.google.com/chart?cht=lc&amp;chs=500x175&amp;chds=0,50,0,50&amp;chd=t:<?php echo $statdata ?>&amp;chco=ff0000,00ff00&amp;chdl=<?php echo implode("|", $names) ?>&amp;chxt=x,y&amp;chxl=0:|<?php echo implode("|", $dates) ?>|1:||25|50&amp;chf=bg,s,363636&amp;chxs=0,bababa|1,bababa&chg=-1,20" alt="levelup stat" />
+    <img src="http://chart.apis.google.com/chart?cht=lc&amp;chs=500x175&amp;chds=0,50,0,50&amp;chd=t:<?php echo $statdata ?>&amp;chco=ff0000,00ff00,0000ff&amp;chdl=<?php echo implode("|", $names) ?>&amp;chxt=x,y&amp;chxl=0:|<?php echo implode("|", $dates) ?>|1:||25|50&amp;chf=bg,s,363636&amp;chxs=0,bababa|1,bababa&chg=-1,20" alt="levelup stat" />
     <br /><br />
     
     <?php $statdata = array(); foreach($stat as $servername => $v) { $statdata[$servername] = implode(",", $v["leveldowns"]); } $statdata = implode("|", $statdata); ?>
     <b><?php echo __("Halálok") ?>:</b><br />
-    <img src="http://chart.apis.google.com/chart?cht=lc&amp;chs=500x175&amp;chds=0,20,0,20&amp;chd=t:<?php echo $statdata ?>&amp;chco=ff0000,00ff00&amp;chdl=<?php echo implode("|", $names) ?>&amp;chxt=x,y&amp;chxl=0:|<?php echo implode("|", $dates) ?>|1:||20&amp;chf=bg,s,363636&amp;chxs=0,bababa|1,bababa&amp;chg=-1,25" alt="levelup stat" />
+    <img src="http://chart.apis.google.com/chart?cht=lc&amp;chs=500x175&amp;chds=0,20,0,20&amp;chd=t:<?php echo $statdata ?>&amp;chco=ff0000,00ff00,0000ff&amp;chdl=<?php echo implode("|", $names) ?>&amp;chxt=x,y&amp;chxl=0:|<?php echo implode("|", $dates) ?>|1:||20&amp;chf=bg,s,363636&amp;chxs=0,bababa|1,bababa&amp;chg=-1,25" alt="levelup stat" />
     
   </div>
 </div>

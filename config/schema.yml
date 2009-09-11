@@ -40,7 +40,7 @@ propel:
     id:         ~
     created_at: ~
     type:       varchar(100)
-    data:       varchar(255)
+    data:       longvarchar
 
   tibia_setting:
     _attributes: { phpName: Setting }

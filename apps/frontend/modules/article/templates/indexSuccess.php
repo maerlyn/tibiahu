@@ -1,6 +1,6 @@
 <?php slot("title", __("Cikkek", null, "article")) ?>
 <?php use_helper("Date") ?>
-<?php include_partial("list", array("articles" => $pager->getResults())) ?>
+<?php include_partial("list", array("articles" => $results)) ?>
 
 <?php if ($pager->haveToPaginate()): ?>
   <div class="pagination">
