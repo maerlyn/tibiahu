@@ -39,6 +39,7 @@ EOF;
         
         $database_item->setTitle("New newsticker item", "en");
         $database_item->setTitle("Új rövidhír", "hu");
+        $database_item->setSlug("uj_rovidhir", "hu");
         
         $database_item->setBody($item["body"], "en");
         $database_item->setBody($item["body"], "hu");

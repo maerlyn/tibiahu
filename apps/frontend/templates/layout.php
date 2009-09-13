@@ -30,7 +30,8 @@
         <h3><?php echo __("Menü") ?></h3>
         <div class="panel">
           <ul>
-            <li><?php echo link_to(__("Keresés"), "@character_search") ?></li>
+            <li><?php echo link_to(__("Hírek", null, "news"), "@news_index") ?></li>
+            <li><?php echo link_to(__("Cikkek", null, "article"), "@article_index") ?></li>
             <li><?php echo link_to(__("Részletes keresés"), "@character_advancedsearch") ?></li>
             <li><?php echo link_to(__("Guildek"), "@guild_index") ?></li>
             <li><?php echo link_to(__("Botterek"), "@character_botters") ?></li>

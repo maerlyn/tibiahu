@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xliff PUBLIC "-//XLIFF//DTD XLIFF//EN" "http://www.oasis-open.org/committees/xliff/documents/xliff.dtd">
+<xliff version="1.0">
+  <file source-language="hu" target-language="en" datatype="plaintext" 
+    original="article" date="2009-05-01T17:59:28Z" product-name="article">
+    <header/>
+    <body>
+      <trans-unit id="1">
+        <source>Cikkek</source>
+        <target>Articles</target>
+      </trans-unit>
+      <trans-unit id="2">
+        <source>Dátum</source>
+        <target>Published</target>
+      </trans-unit>
+      <trans-unit id="3">
+        <source>Cimkék</source>
+        <target>Tags</target>
+      </trans-unit>
+      <trans-unit id="4">
+        <source>Írta</source>
+        <target>Author</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
