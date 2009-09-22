@@ -53,18 +53,32 @@ EOF;
         $char->setVocation($character["vocation"]);
         if (!$char->isNew() && ($character["level"] != $char->getLevel())) {
           //echo("level changed from {$char->getLevel()} to {$character["level"]}\t");
-          $lh = new LevelHistory();
-          $lh->setCharacter($char);
-          $lh->setLevel($character["level"]);
           if ($character["level"] < $char->getLevel()) {
             if (count($d = TibiaWebsite::lastDeath($character["name"]))) {
-              $lh->setCreatedAt($d["time"]);
-              $lh->setReason($d["reason"]);
+              $c = new Criteria();
+              $c->add(LevelHistoryPeer::CHARACTER_ID, $char->getId());
+              $c->add(LevelHistoryPeer::CREATED_AT, $d["time"]);
+
+              if ($lh = LevelHistoryPeer::doSelectOne($c)) {
+                $lh->setLevel($character["level"]);
+              } else {
+                $lh = new LevelHistory();
+                $lh->setCharacter($char);
+                $lh->setLevel($character["level"]);
+                $lh->setCreatedAt($d["time"]);
+                $lh->setReason($d["reason"]);
+              }
+              
+              $lh->save();
+              
             }
             //echo("lvldown\t");
             $this->logSection("lvldown", $character["name"]);
             ++$updatedata[$server->getName()]["leveldowns"];
           } else {
+            $lh = new LevelHistory();
+            $lh->setCharacter($char);
+            $lh->setLevel($character["level"]);
             $this->logSection("lvlup", $character["name"]);
             ++$updatedata[$server->getName()]["levelups"];
           }
@@ -79,8 +93,8 @@ EOF;
         }
         
         //echo("\n");
-        $chars_seen += count($characters);
       } // /foreach
+      $chars_seen += count($characters);      
     }
     
     print_r($updatedata);

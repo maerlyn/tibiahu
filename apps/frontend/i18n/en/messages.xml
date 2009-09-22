@@ -25,16 +25,12 @@
         <target>Guilds</target>
       </trans-unit>
       <trans-unit id="6">
-        <source>Copyright &amp;copy; 2009 Tibia.hu</source>
-        <target/>
+        <source>Copyright &amp;copy; 2009 Tibia.hu, minden jog fenntartva</source>
+        <target>Copyright &amp;copy; 2009 Tibia.hu, all rights reserved</target>
       </trans-unit>
       <trans-unit id="7">
-        <source>A Tibia egyetlen hivatalos oldala a &lt;a href="http://tibia.com/"&gt;tibia.com&lt;/a&gt;</source>
-        <target>Tibia's only official site is &lt;a href="http://tibia.com/"&gt;tibia.com&lt;/a&gt;</target>
-      </trans-unit>
-      <trans-unit id="8">
-        <source>ez egy rajongói oldal. Tibia &amp;copy; CipSoft GmbH, 2006</source>
-        <target>this is a fansite. Tibia &amp;copy; CipSoft GmbH, 2006</target>
+        <source>Ez egy rajongói oldal, a hivatalos honlap: &lt;a href="http://tibia.com/"&gt;tibia.com&lt;/a&gt;</source>
+        <target>This is a fansite, the official site is &lt;a href="http://tibia.com/"&gt;tibia.com&lt;/a&gt;</target>
       </trans-unit>
       <trans-unit id="9">
         <source>Szerveridő: </source>
