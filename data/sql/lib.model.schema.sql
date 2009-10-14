@@ -114,7 +114,7 @@ CREATE TABLE `tibia_cronlog`
 	`id` INTEGER  NOT NULL AUTO_INCREMENT,
 	`created_at` DATETIME,
 	`type` VARCHAR(100),
-	`data` VARCHAR(255),
+	`data` TEXT,
 	PRIMARY KEY (`id`)
 )Type=InnoDB;
 

@@ -30,6 +30,14 @@ class gamemasterActions extends sfActions
     if ($request->isMethod("post")) {
       $this->form->bind($request->getParameter($this->form->getName()));
       if ($this->form->isValid()) {
+        $gm = new Gamemaster();
+        $gm->setName($this->form->getValue("name"));
+        $info = TibiaWebsite::characterInfo($gm->getName());
+        $gm->setServer(ServerPeer::retrieveByName($info["world"]));
+        $gm->save();
+        
+        $this->saved = $gm->getName();
+        $this->form = new AddGMForm();
       }
     }
   }

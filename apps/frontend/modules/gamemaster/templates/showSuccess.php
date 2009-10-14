@@ -24,13 +24,24 @@
       </tbody>
     </table>
   </div>
-  <h3>GM hozzáadása</h3>
+  <h3>GM hozzáadása<a name="addgmform">&nbsp;</a></h3>
   <div class="panel">
-    <form action="" method="post">
+    <?php if (isset($saved)): ?>
+    <i><?php echo $saved ?></i> mentve, a következő frissítéstől látszódni fog.
+    <?php endif ?>
+    <form action="<?php echo url_for($sf_context->getRouting()->getCurrentInternalUri(true)) ?>#addgmform" method="post">
+    <?php if ($form->hasGlobalErrors()) { echo $form->renderGlobalErrors(); } ?>
+    <?php if ($form["name"]->hasError()) { echo $form["name"]->renderError(); } ?>
     <table>
-      <?php echo $form ?>
       <tr>
-        <td colspan="2"><input type="submit" value="Hozzáad" /></td>
+        <td><?php echo $form["name"]->renderLabel() ?></td>
+        <td><?php echo $form["name"]->render() ?></td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <?php echo $form["_csrf_token"]->render() ?>
+          <input type="submit" value="Hozzáad" />
+        </td>
       </tr>
     </table>
     </form>
