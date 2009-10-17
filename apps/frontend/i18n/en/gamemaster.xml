@@ -6,7 +6,7 @@
     <body>
       <trans-unit id="1">
         <source>GM-kereső</source>
-        <target>GM-finder</target>
+        <target>GM finder</target>
       </trans-unit>
       <trans-unit id="2">
         <source>Válassz szervert</source>
@@ -23,6 +23,18 @@
       <trans-unit id="5">
         <source>Utoljára bejelentkezett</source>
         <target>Last login</target>
+      </trans-unit>
+      <trans-unit id="6">
+        <source>GM hozzáadása</source>
+        <target>Add new GM</target>
+      </trans-unit>
+      <trans-unit id="7">
+        <source>&lt;li&gt;%name%&lt;/li&gt; mentve, a következő frissítéstől látszódni fog.</source>
+        <target>&lt;li&gt;%name%&lt;/li&gt; has been saved, will be visible after the next update.</target>
+      </trans-unit>
+      <trans-unit id="8">
+        <source>Hozzáad</source>
+        <target>Add</target>
       </trans-unit>
     </body>
   </file>

@@ -1,4 +1,4 @@
-<?php slot("title", __("GM-kereső", null, "gamemaster")) ?>
+<?php slot("title", $current_server->getName() . " # " . __("GM-kereső", null, "gamemaster")) ?>
 <?php use_helper("Date") ?>
 <div class="containerbox">
   <h3><?php echo __("GM-kereső", null, "gamemaster") ?></h3>
@@ -6,7 +6,8 @@
     <?php echo __("Szerverváltás", null, "gamemaster") ?>:<br />
     <?php include_partial("serverlist", array("servers" => $servers, "current_server" => $current_server->getName())) ?>
     <br /><br />
-    <?php echo __("Ismert GM-ek a <b>%server%</b> szerveren", array("%server%" => $current_server->getName()), "gamemaster") ?>:<br />
+    <?php echo __("Ismert GM-ek a <b>%server%</b> szerveren", array(
+      "%server%" => $current_server->getName()), "gamemaster") ?>:<br />
     <table>
       <thead>
         <tr>
@@ -24,10 +25,11 @@
       </tbody>
     </table>
   </div>
-  <h3>GM hozzáadása<a name="addgmform">&nbsp;</a></h3>
+  <h3><?php echo __("GM hozzáadása", null, "gamemaster") ?><a name="addgmform">&nbsp;</a></h3>
   <div class="panel">
     <?php if (isset($saved)): ?>
-    <i><?php echo $saved ?></i> mentve, a következő frissítéstől látszódni fog.
+    <?php echo __("<li>%name%</li> mentve, a következő frissítéstől látszódni fog.", array(
+      "%name%" => $saved), "gamemaster") ?>
     <?php endif ?>
     <form action="<?php echo url_for($sf_context->getRouting()->getCurrentInternalUri(true)) ?>#addgmform" method="post">
     <?php if ($form->hasGlobalErrors()) { echo $form->renderGlobalErrors(); } ?>
@@ -40,7 +42,7 @@
       <tr>
         <td colspan="2">
           <?php echo $form["_csrf_token"]->render() ?>
-          <input type="submit" value="Hozzáad" />
+          <input type="submit" value="<?php echo __("Hozzáad", null, "gamemaster") ?>" />
         </td>
       </tr>
     </table>

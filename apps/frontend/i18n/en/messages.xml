@@ -388,6 +388,30 @@
         <source>Ha kérdésed, megjegyzésed, ötleted van az oldallal kapcsolatban, netán hibát találtál, általában megtalálsz Securán, mint %ttd%, vagy e-mailben elérsz a %email% címen.</source>
         <target>If you have a question, a remark or a new idea regarding the site, or you have found a bug, feel free to contact me! You can find me on Secura as %ttd% or send me an email to %email%.</target>
       </trans-unit>
+      <trans-unit id="117">
+        <source>Adj meg egy nevet!</source>
+        <target>Enter a name!</target>
+      </trans-unit>
+      <trans-unit id="118">
+        <source>Adj meg legalább %min_length% karaktert!</source>
+        <target>Has to be at least %min_length% characters long</target>
+      </trans-unit>
+      <trans-unit id="119">
+        <source>Legfeljebb %max_length% karaktert adhatsz meg!</source>
+        <target>Must not be longer than %max_length% characters</target>
+      </trans-unit>
+      <trans-unit id="120">
+        <source>Már van ilyen nevű GM az adatbázisban</source>
+        <target>This GM already exists in the database</target>
+      </trans-unit>
+      <trans-unit id="121">
+        <source>Nem létező, vagy nem GM karakter</source>
+        <target>Inexistent, or non-GM character</target>
+      </trans-unit>
+      <trans-unit id="122">
+        <source>Nem olyan szerveren van, amit figyel az oldal</source>
+        <target>Has to be on a server monitored by the site</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
