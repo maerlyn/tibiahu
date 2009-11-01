@@ -166,7 +166,7 @@ class calculatorActions extends sfActions
         $rune_spells = array(
           1 =>  array(
             "Holy missile"  =>  array("mana" => 300, "price" => 1600),
-            "Enchant spear" =>  array("mana" => 350, "price" => 300000),
+            "Enchant spear" =>  array("mana" => 350, "price" => 300000, "perbp" => 2000),
           ),
           2 =>  array(
             "Stalagmite"    =>  array("mana" => 350, "price" => 1500),

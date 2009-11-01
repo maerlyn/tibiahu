@@ -68,7 +68,7 @@
             <tr>
               <td><a href="http://tibia.wikia.com/wiki/Special:Search?search=<?php echo urlencode($spellname) ?>&amp;go=1"><?php echo $spellname ?></a></td>              
               <td class="center"><?php echo $spelldata["mana"] ?></td>
-              <td class="center"><?php echo format_number(sprintf("%.2f", $bps = ($mana / $spelldata["mana"] / 20))) ?></td>
+              <td class="center"><?php echo format_number(sprintf("%.2f", $bps = ($mana / $spelldata["mana"] / (isset($spelldata["perbp"]) ? $spelldata["perbp"] : 20)))) ?></td>
               <td class="center"><?php echo sprintf("%sgp (%s gp/bp)", format_number(floor($bps * $spelldata["price"])), format_number($spelldata["price"])) ?></td>
             </tr>
           <?php endforeach ?>
