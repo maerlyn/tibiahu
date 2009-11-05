@@ -23,7 +23,7 @@ EOF;
     
     $servers = ServerPeer::getAllEnabled();
     
-    foreach ($servers as $server) {
+    foreach ($servers as $server) { /** @var Server $server */
       echo("Whoisonline lista lekerese ({$server->getName()})...\n");
       $characters = TibiaWebsite::whoIsOnline($server->getName());
       
@@ -50,7 +50,16 @@ EOF;
           ++$updatedata[$server->getName()]["updates"];
         }
         
-        $char->setVocation($character["vocation"]);
+        if (!$char->isNew() && $char->getVocation() != $character["vocation"]) {
+          //vocation has changed
+          $char->setVocation($character["vocation"]);
+        }
+        
+        if (!$char->isNew() && $char->getServerId() != $server->getId()) {
+          //server has changed
+          $char->setServer($server);
+        }
+        
         if (!$char->isNew() && ($character["level"] != $char->getLevel())) {
           //echo("level changed from {$char->getLevel()} to {$character["level"]}\t");
           if ($character["level"] < $char->getLevel()) {
