@@ -23,11 +23,20 @@ EOF;
     
     $servers = ServerPeer::getAllEnabled();
     $sum_chars = $sum_guilds = 0;
+    $had_empty_server = false;
+    
     foreach ($servers as $server) {
       echo("Guilds for " . $server->getName() . "... ");
       $guilds = TibiaWebsite::getGuildList($server->getName());
+      
+      
       $sum_guilds += count($guilds);
       echo(count($guilds) . "\n");
+      
+      if (!count($guilds)) {
+        $had_empty_server = true;
+        continue;
+      }
       
       foreach ($guilds as $guild) {
         set_time_limit(15);
@@ -78,11 +87,13 @@ EOF;
       }
 
       usleep(500);
-    } 
+    }
     
-    $deleteCriteria = new Criteria();
-    $deleteCriteria->add(GuildPeer::UPDATED_AT, $task_start, Criteria::LESS_THAN);
-    $deleted_guilds = BasePeer::doDelete($deleteCriteria, $con);
+    if (!$had_empty_server) {
+      $deleteCriteria = new Criteria();
+      $deleteCriteria->add(GuildPeer::UPDATED_AT, $task_start, Criteria::LESS_THAN);
+      $deleted_guilds = BasePeer::doDelete($deleteCriteria, $con);
+    }
     
     $cl = new CronLog();
     $cl->setType("guild");
