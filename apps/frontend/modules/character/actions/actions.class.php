@@ -85,31 +85,52 @@ class characterActions extends sfActions
   
   public function executeBotters(sfWebRequest $request)
   {
-    if ($request->isXmlHttpRequest() && $request->hasParameter("server")) {
-      $this->forward404If(!$server = ServerPeer::retrieveByName($request->getParameter("server")));
-      $this->botters = CharacterPeer::getBotters($server->getId());
-    } else {
-      $this->servers = ServerPeer::getAllEnabled();
+    $this->servers = ServerPeer::getAllEnabled();
+    
+    if ($request->hasParameter("name")) {
+      $this->server = $this->getRoute()->getObject();
+      
+      $this->pager = new sfPropelPager(
+        "Character", sfConfig::get("app_characters_per_page", 100)
+      );
+      $this->pager->setCriteria(CharacterPeer::getBottersCriteria($this->server));
+      $this->pager->setPeerMethod("doSelectBanishedCharacters");
+      $this->pager->setPage($request->getParameter("page"));
+      $this->pager->init();
     }
   }
   
   public function executeHackers(sfWebRequest $request)
   {
-    if ($request->isXmlHttpRequest() && $request->hasParameter("server")) {
-      $this->forward404If(!$server = ServerPeer::retrieveByName($request->getParameter("server")));
-      $this->hackers = CharacterPeer::getHackers($server->getId());
-    } else {
-      $this->servers = ServerPeer::getAllEnabled();
+    $this->servers = ServerPeer::getAllEnabled();
+    
+    if ($request->hasParameter("name")) {
+      $this->server = $this->getRoute()->getObject();
+      
+      $this->pager = new sfPropelPager(
+        "Character", sfConfig::get("app_characters_per_page", 100)
+      );
+      $this->pager->setCriteria(CharacterPeer::getHackersCriteria($this->server));
+      $this->pager->setPeerMethod("doSelectBanishedCharacters");
+      $this->pager->setPage($request->getParameter("page"));
+      $this->pager->init();
     }
   }
 
   public function executeAcctraders(sfWebRequest $request)
   {
-    if ($request->isXmlHttpRequest() && $request->hasParameter("server")) {
-      $this->forward404If(!$server = ServerPeer::retrieveByName($request->getParameter("server")));
-      $this->acctraders = CharacterPeer::getAcctraders($server->getId());
-    } else {
-      $this->servers = ServerPeer::getAllEnabled();
+    $this->servers = ServerPeer::getAllEnabled();
+    
+    if ($request->hasParameter("name")) {
+      $this->server = $this->getRoute()->getObject();
+      
+      $this->pager = new sfPropelPager(
+        "Character", sfConfig::get("app_characters_per_page", 100)
+      );
+      $this->pager->setCriteria(CharacterPeer::getAcctradersCriteria($this->server));
+      $this->pager->setPeerMethod("doSelectBanishedCharacters");
+      $this->pager->setPage($request->getParameter("page"));
+      $this->pager->init();
     }
   }
   

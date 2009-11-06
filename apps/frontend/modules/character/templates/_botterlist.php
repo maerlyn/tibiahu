@@ -1,6 +1,8 @@
 <?php use_helper("Date") ?>
-∑<?php echo count($botters) ?> 
-<a href="<?php echo $feedurl ?>"><img src="<?php echo image_path("feed.png") ?>" alt="feed" /></a>
+
+<a href="<?php echo $feedurl ?>"><img src="<?php echo image_path("feed.png") ?>" alt="feed" /></a><br />
+∑<?php echo $total ?>, <?php echo $first ?> - <?php echo $last ?>:
+
 <br />
 <table class="botterlist">
    <thead>

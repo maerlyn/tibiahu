@@ -125,19 +125,23 @@ class CharacterPeer extends BaseCharacterPeer
     return parent::doSelect($c);
   }
 
-  private static function getBanishedCharacters($server_id, $reason, $for = "list")
+  private static function getBanishedCharactersCriteria($server_id, $reason, $for = "list")
   {
     $c = new Criteria();
     CharacterPeer::addSelectColumns($c);
     $c->addSelectColumn(BanishmentPeer::BANISHED_AT);
     $c->addSelectColumn(BanishmentPeer::BANISHED_UNTIL);
     $c->addSelectColumn(BanishmentPeer::LEVEL);
+    
     $c->addSelectColumn(GuildPeer::NAME);
     $c->addSelectColumn(GuildPeer::SLUG);
+    
     $c->add(CharacterPeer::SERVER_ID, $server_id);
     $c->add(BanishmentPeer::BANISHED_FOR_ID, BanishmentPeer::getReasonFromValue($reason));
+    
     $c->addJoin(CharacterPeer::ID, BanishmentPeer::CHARACTER_ID, Criteria::INNER_JOIN);
     $c->addJoin(CharacterPeer::GUILD_ID, GuildPeer::ID, Criteria::LEFT_JOIN);
+    
     switch ($for) {
       case "feed":
         $c->add(BanishmentPeer::LEVEL, 0, Criteria::NOT_EQUAL);
@@ -145,12 +149,20 @@ class CharacterPeer extends BaseCharacterPeer
         $c->addDescendingOrderByColumn(BanishmentPeer::BANISHED_AT);
         $c->setLimit(35);
         break;
+        
       case "list":
       default:
         $c->addAScendingOrderByColumn(CharacterPeer::NAME);
     }
-    $stmt = parent::doSelectStmt($c);
+
+    return $c;
+  }
+  
+  public static function doSelectBanishedCharacters(Criteria $c, $con = null)
+  {
+    $stmt = parent::doSelectStmt($c, $con);
     $ret = array();
+    
     while ($row = $stmt->fetch()) {
       $char = new Character();
       $offset = $char->hydrate($row);
@@ -162,23 +174,45 @@ class CharacterPeer extends BaseCharacterPeer
         "slug"  =>  $row[$offset + 4],
       ));
       $ret[] = $char;
-    }
-    return $ret;
+    }   
+    
+    return $ret; 
+  }
+  
+  public static function getBottersCriteria(Server $server)
+  {
+    return self::getBanishedCharactersCriteria($server->getId(), BanishmentPeer::REASON_UNOFFICIAL);
   }
   
   public static function getBotters($server_id, $for = "list")
   {
-    return self::getBanishedCharacters($server_id, BanishmentPeer::REASON_UNOFFICIAL, $for);
+    return self::doSelectBanishedCharacters(
+      self::getBanishedCharactersCriteria($server_id, BanishmentPeer::REASON_UNOFFICIAL, $for)
+    );
+  }
+  
+  public static function getHackersCriteria(Server $server)
+  {
+    return self::getBanishedCharactersCriteria($server->getId(), BanishmentPeer::REASON_HACKING);
   }
   
   public static function getHackers($server_id, $for = "list")
   {
-    return self::getBanishedCharacters($server_id, BanishmentPeer::REASON_HACKING, $for);
+    return self::doSelectBanishedCharacters(
+      self::getBanishedCharactersCriteria($server_id, BanishmentPeer::REASON_HACKING, $for)
+    );
+  }
+  
+  public static function getAcctradersCriteria(Server $server)
+  {
+    return self::getBanishedCharactersCriteria($server->getId(), BanishmentPeer::REASON_ACCTRADE);
   }
   
   public static function getAcctraders($server_id, $for = "list")
   {
-    return self::getBanishedCharacters($server_id, BanishmentPeer::REASON_ACCTRADE, $for);
+    return self::doSelectBanishedCharacters(
+      self::getBanishedCharactersCriteria($server_id, BanishmentPeer::REASON_ACCTRADE, $for)
+    );
   }
   
   public static function getForShow($character_id)

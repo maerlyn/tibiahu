@@ -21,24 +21,30 @@ character_botters:
   param:    { module: character, action: botters }    
 
 character_botters_for_server:
-  url:      /botters/:server
-  param:    { module: character, action: botters }
+  url:      /botters/:name/:page
+  class:    sfPropelRoute
+  options:  { model: Server, type: object }
+  param:    { module: character, action: botters, page: 1 }
 
 character_hackers:
   url:      /hackers
   param:    { module: character, action: hackers }
 
 character_hackers_for_server:
-  url:      /hackers/:server
-  param:    { module: character, action: hackers }
+  url:      /hackers/:name/:page
+  class:    sfPropelRoute
+  options:  { model: Server, type: object }
+  param:    { module: character, action: hackers, page: 1 }
 
 character_acctraders:
   url:      /acctraders
   param:    { module: character, action: acctraders }
 
 character_acctraders_for_server:
-  url:      /acctraders/:server
-  param:    { module: character, action: acctraders }
+  url:      /acctraders/:name/:page
+  class:    sfPropelRoute
+  options:  { model: Server, type: object }
+  param:    { module: character, action: acctraders, page: 1 }
     
 character_advancedsearch:
   url:      /search/character/advanced

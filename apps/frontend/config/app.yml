@@ -3,6 +3,8 @@ all:
   max_news_on_index:     10
   max_articles_on_index: 5
   
+  characters_per_page:   100
+  
   domain:               tibia.local
 
   sf_guard_plugin:
