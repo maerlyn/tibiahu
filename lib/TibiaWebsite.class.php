@@ -149,6 +149,8 @@ abstract class TibiaWebsite
     
     // --- --- --- 
 
+    $character["is_hidden"] = (false === stripos($website, "<B>Account Information</B>") && false === stripos($website, "<B>Characters</B>"));
+
     $deaths = array();
     
     if (preg_match("@<td colspan=\"2\" class=\"white\" ><b>Character Deaths</b></td>.+?</table>@is", $website, $matches)) {
