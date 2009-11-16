@@ -151,28 +151,7 @@ abstract class TibiaWebsite
 
     $character["is_hidden"] = (false === stripos($website, "<B>Account Information</B>") && false === stripos($website, "<B>Characters</B>"));
 
-    $deaths = array();
-    
-    if (preg_match("@<td colspan=\"2\" class=\"white\" ><b>Character Deaths</b></td>.+?</table>@is", $website, $matches)) {
-      $deathlist = $matches[0];
-      
-      preg_match_all("@<tr bgcolor=\"#.{6}\" ><td w.+?>(.+?)</td><td>(?:Killed |Died) at Level (\\d+) by (.+?)\.</td></tr>@is", $deathlist, $matches);
-      foreach($matches[0] as $k => $v) {
-        $reason = trim(preg_replace('#^(an |a )(.+?)$#i', "\\2", $matches[3][$k]));
-        if (false !== stripos($reason, " of <a ")) {
-          $reason = explode(" of <a ", $reason);
-          $reason = $reason[0];
-        }
-      
-        $deaths[] = array(
-          "time"    =>  strtotime(str_replace("&#160;", " ", $matches[1][$k])),
-          "level"   =>  $matches[2][$k],
-          "reason"  =>  $reason,
-        );
-      }
-    }
-    
-    $character["deaths"] = $deaths;
+    $character["deaths"] = self::processDeaths($website);
     
     //<TD WIDTH=20% VALIGN=top CLASS=red>Banished:</TD><TD CLASS=red>until Mar&#160;04&#160;2009,&#160;15:52:25&#160;CET because of hacking</TD></TR>
     //<TD WIDTH=20% VALIGN=top CLASS=red>Banished:</TD><TD CLASS=red>permanently because of invalid payment</TD></TR>
@@ -226,28 +205,9 @@ abstract class TibiaWebsite
       return null;
     }
     
-    $death = array();
+    $deaths = self::processDeaths($website);
     
-    if (preg_match("@<td colspan=\"2\" class=\"white\" ><b>Character Deaths</b></td>.+?</table>@is", $website, $matches)) {
-      $deathlist = $matches[0];
-      
-      //<TR BGCOLOR=#F1E0C6><TD WIDTH=25%>Feb&#160;25&#160;2009,&#160;08:09:29&#160;CET</TD><TD>Died at Level 44 by an orc berserker</TD></TR>
-      preg_match("@<tr bgcolor=\"#.{6}\" ><td w.+?>(.+?)</td><td>(?:Killed |Died) at Level (\\d+) by (.+?)\.</td></tr>@is", $deathlist, $matches);
-      $reason = trim(preg_replace('#^(an |a )(.+?)$#i', "\\2", $matches[3]));
-      if (false !== stripos($reason, " of <a ")) {
-        $reason = explode(" of <a ", $reason);
-        $reason = $reason[0];
-      }
-      
-      
-      $death = array(                                                               
-        "time"    =>  strtotime(str_replace("&#160;", " ", $matches[1])),
-        "level"   =>  $matches[2],
-        "reason"  =>  $reason,
-      );
-    }
-    
-    return $death;
+    return isset($deaths[0]) ? $deaths[0] : array();
   }
   
   /**
@@ -266,6 +226,17 @@ abstract class TibiaWebsite
       return null;
     }
     
+    return self::processDeaths($website);
+  }
+  
+  /**
+  * Extracts the deaths from the website
+  * 
+  * @param string the character page 
+  * @return array deaths
+  */
+  private static function processDeaths($website)
+  {
     $deaths = array();
     
     if (preg_match("@<td colspan=\"2\" class=\"white\" ><b>Character Deaths</b></td>.+?</table>@is", $website, $matches)) {
