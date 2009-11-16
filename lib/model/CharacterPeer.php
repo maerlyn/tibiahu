@@ -223,4 +223,28 @@ class CharacterPeer extends BaseCharacterPeer
     return isset($a[0]) ? $a[0] : null;
   }
   
+  public static function doDeleteAll($con = null)
+  {
+    if (file_exists($index = self::getLuceneIndexFile())) {
+      sfToolkit::clearDirectory($index);
+      rmdir($index);
+    }
+    
+    return parent::doDeleteAll($con);
+  }
+  
+  public static function getLuceneIndex()
+  {
+    if (file_exists($index = self::getLuceneIndexFile())) {
+      return Zend_Search_Lucene::open($index);
+    } else {
+      return Zend_Search_Lucene::create($index);
+    }
+  }
+  
+  public static function getLuceneIndexFile()
+  {
+    return sfConfig::get("sf_data_dir") . "/character.index/";
+  }
+  
 }

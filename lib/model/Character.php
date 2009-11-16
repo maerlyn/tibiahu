@@ -65,4 +65,55 @@ class Character extends BaseCharacter
     return isset($this->banishment["slug"])  ? $this->banishment["slug"]  : null;
   }
   
+  public function save(PropelPDO $con = null)
+  {
+    if (is_null($con)) {
+      $con = Propel::getConnection(CharacterPeer::DATABASE_NAME, Propel::CONNECTION_WRITE);
+    }
+    
+    $con->beginTransaction();
+
+    try {
+      $ret = parent::save($con);
+      $this->updateLuceneIndex();
+      $con->commit();
+      return $ret;
+    }           
+    catch (Exception $e) {
+      $con->rollBack();
+      throw $e;
+    }
+      
+    
+    return $ret;
+  }
+  
+  public function updateLuceneIndex()
+  {
+    $index = CharacterPeer::getLuceneIndex();
+    
+    foreach ($index->find("pk:" . $this->getId()) as $hit) {
+      $hit->delete();
+    }
+    
+    $char = new Zend_Search_Lucene_Document();
+    
+    $char->addField(Zend_Search_Lucene_Keyword("pk", $this->getId()));
+    $char->addField(Zend_Search_Lucene_UnStored("name", $this->getName()));
+    
+    $index->addDocument($char);
+    $index->commit();
+  }
+  
+  public function delete(PropelPDO $con = null)
+  {
+    $index = CharacterPeer::getLuceneIndex();
+    
+    foreach ($index->find("pk:" . $this->getId()) as $hit) {
+      $hit->delete();
+    }
+    
+    return parent::delete($con);
+  }
+  
 }
