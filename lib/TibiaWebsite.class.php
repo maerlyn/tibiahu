@@ -239,22 +239,52 @@ abstract class TibiaWebsite
   {
     $deaths = array();
     
-    if (preg_match("@<td colspan=\"2\" class=\"white\" ><b>Character Deaths</b></td>.+?</table>@is", $website, $matches)) {
+    if (preg_match("@<td colspan=\"2\" class=\"white\" ><b>Character Deaths</b></td>.+?</table>@is", $website, $matches)) 
+    {
       $deathlist = $matches[0];
       
-      preg_match_all("@<tr bgcolor=\"#.{6}\" ><td w.+?>(.+?)</td><td>(?:Killed |Died) at Level (\\d+) by (.+?)\.</td></tr>@is", $deathlist, $matches);
-      foreach($matches[0] as $k => $v) {
-        $reason = trim(preg_replace('#^(an |a )(.+?)$#i', "\\2", $matches[3][$k]));
-        if (false !== stripos($reason, " of <a ")) {
-          $reason = explode(" of <a ", $reason);
-          $reason = $reason[0];
-        }
+      preg_match_all("@<tr(.+?)</tr>@is", $deathlist, $rows);
       
-        $deaths[] = array(
-          "time"    =>  strtotime(str_replace("&#160;", " ", $matches[1][$k])),
-          "level"   =>  $matches[2][$k],
-          "reason"  =>  $reason,
-        );
+      foreach ($rows[0] as $row) {
+       
+        if (false !== stripos($row, "?subtopic=characters")) { //killed by a player
+          $death["reason_type"] = "player";
+          $death["reason"] = array();
+          
+          preg_match_all("@&name=.+?>(.+?)</a>@is", $row, $deathdata);
+          $reasons = array();
+          foreach ($deathdata[1] as $v) {
+            $reasons[] = str_replace("&#160;", " ", $v);
+          }
+          
+          preg_match("@<td w.+?>(.+?)</td><td>.+? at level (\\d+)@is", $row, $deathdata);
+          
+          $death = array(
+            "time"        =>  strtotime(str_replace("&#160;", " ", $deathdata[1])),
+            "level"       =>  $deathdata[2],
+            "reason_type" =>  "player",
+            "reason"      =>  $reasons,
+          );
+          
+        } else { // killed by a monster
+        
+          preg_match("@<tr bgcolor=\"#.{6}\" ><td w.+?>(.+?)</td><td>(?:Killed |Died) at Level (\\d+) by (.+?)\.</td></tr>@is", $row, $deathdata);
+          //die(var_dump($deathdata));
+          $reason = trim(preg_replace('#^(an |a )(.+?)$#i', "\\2", $deathdata[3]));
+          if (false !== stripos($reason, " of <a ")) {
+            $reason = explode(" of <a ", $reason);
+            $reason = $reason[0];
+          }
+          
+          $death = array(
+            "time"        =>  strtotime(str_replace("&#160;", " ", $deathdata[1])),
+            "level"       =>  $deathdata[2],
+            "reason_type" =>  "monster",
+            "reason"      =>  $reason,
+          );
+        }
+        
+        $deaths[] = $death;
       }
     }
     
