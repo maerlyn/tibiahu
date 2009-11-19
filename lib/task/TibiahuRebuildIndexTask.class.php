@@ -26,10 +26,11 @@ EOF;
     $con = Propel::getConnection(CharacterPeer::DATABASE_NAME, Propel::CONNECTION_READ);
     
     $sql = "SELECT `id`, `name` FROM `tibia_character`;";
-    $stmt = $con->query($sql);
+    $stmt = $con->query($sql); /** @var PDOStatement $stmt */
     
     $index = CharacterPeer::getLuceneIndexFile(); /** @var Zend_Search_Lucene $index */
     sfToolkit::clearDirectory($index);
+    rmdir($index);
     
     $index = CharacterPeer::getLuceneIndex();
     
@@ -44,10 +45,12 @@ EOF;
       $index->addDocument($char);
       
       if (++$i % 1000 == 0) {
-        echo($i . " ");
+        echo($i . "\r");
       }
     }
     $index->commit();
+    
+    echo "\n";
     
     $this->logSection("rebuild", sprintf("index rebuilt with %d characters", $i));
   }

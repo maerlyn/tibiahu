@@ -227,7 +227,7 @@ class CharacterPeer extends BaseCharacterPeer
   {
     if (file_exists($index = self::getLuceneIndexFile())) {
       sfToolkit::clearDirectory($index);
-      rmdir($index);
+      @rmdir($index);
     }
     
     return parent::doDeleteAll($con);
