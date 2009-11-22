@@ -40,8 +40,16 @@ class CharacterPeer extends BaseCharacterPeer
   
   public static function searchByName($name, $max = null)
   {
+    $hits = self::getLuceneIndex()->find("name:" . $name . "*");
+
+    $pks = array();
+    foreach ($hits as $hit) {
+      $pks[] = $hit->pk;
+    }
+    
     $c = new Criteria();
-    $c->add(CharacterPeer::NAME, "%" . $name . "%", Criteria::LIKE);
+    $c->add(self::ID, $pks, Criteria::IN);
+    
     if ($max) {
       $c->setLimit($max);
     }
