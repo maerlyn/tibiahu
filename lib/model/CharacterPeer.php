@@ -235,6 +235,8 @@ class CharacterPeer extends BaseCharacterPeer
   
   public static function getLuceneIndex()
   {
+    ProjectConfiguration::registerZend();
+  
     if (file_exists($index = self::getLuceneIndexFile())) {
       return Zend_Search_Lucene::open($index);
     } else {

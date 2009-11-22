@@ -1,6 +1,6 @@
 <?php
 
-class TibiahuUpdateDeathlistTask extends sfBaseTask
+class TibiahuRebuildIndexTask extends sfBaseTask
 {
 
   protected function configure()
@@ -24,6 +24,11 @@ EOF;
     Zend_Loader_Autoloader::getInstance();
     
     $con = Propel::getConnection(CharacterPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+    
+    $sql = "SELECT COUNT(*) FROM `tibia_character`;";
+    $stmt = $con->query($sql);
+    $row = $stmt->fetch(PDO::FETCH_NUM);
+    $this->logSection("rebuild", sprintf("%d characters in total", $row[0]));
     
     $sql = "SELECT `id`, `name` FROM `tibia_character`;";
     $stmt = $con->query($sql); /** @var PDOStatement $stmt */

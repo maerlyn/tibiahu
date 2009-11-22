@@ -3,6 +3,7 @@
 class Character extends BaseCharacter
 {
   private $banisment = null;
+  private $needIndexUpdate = false;
 
   public function wasOnlineLastTime()
   {
@@ -11,6 +12,7 @@ class Character extends BaseCharacter
   
   public function setName($v)
   {
+    $this->needIndexUpdate = true;
     $this->setSlug(Tibiahu::slugify($v));
     return parent::setName($v);
   }
@@ -75,7 +77,9 @@ class Character extends BaseCharacter
 
     try {
       $ret = parent::save($con);
-      $this->updateLuceneIndex();
+      if ($this->needIndexUpdate) {
+        $this->updateLuceneIndex();
+      }
       $con->commit();
       return $ret;
     }           
@@ -93,13 +97,13 @@ class Character extends BaseCharacter
     $index = CharacterPeer::getLuceneIndex();
     
     foreach ($index->find("pk:" . $this->getId()) as $hit) {
-      $hit->delete();
+      $index->delete($hit->id);
     }
     
     $char = new Zend_Search_Lucene_Document();
     
-    $char->addField(Zend_Search_Lucene_Keyword("pk", $this->getId()));
-    $char->addField(Zend_Search_Lucene_UnStored("name", $this->getName()));
+    $char->addField(Zend_Search_Lucene_Field::Keyword("pk", $this->getId()));
+    $char->addField(Zend_Search_Lucene_Field::UnStored("name", $this->getName()));
     
     $index->addDocument($char);
     $index->commit();
@@ -110,7 +114,7 @@ class Character extends BaseCharacter
     $index = CharacterPeer::getLuceneIndex();
     
     foreach ($index->find("pk:" . $this->getId()) as $hit) {
-      $hit->delete();
+      $index->delete($hit->id);
     }
     
     return parent::delete($con);
