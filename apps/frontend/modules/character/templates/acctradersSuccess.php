@@ -18,7 +18,7 @@
         "first"   =>  $pager->getFirstIndice(),
         "last"    =>  $pager->getLastIndice(),
         "botters" =>  $pager->getResults(),
-        "feedurl" =>  url_for("@character_banfeed?reason=acctraders&server=" . $sf_request->getParameter("server"))
+        "feedurl" =>  url_for("@character_banfeed?reason=acctraders&server=" . $server)
       )) ?>
     <?php endif ?>
     
