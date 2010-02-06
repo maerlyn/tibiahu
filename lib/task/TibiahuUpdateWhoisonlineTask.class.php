@@ -76,6 +76,7 @@ EOF;
                 $lh->setLevel($character["level"]);
                 $lh->setCreatedAt($d["time"]);
                 $lh->setReason($d["reason"]);
+                $lh->setIsDeath(true);
               }
               
               $lh->save();
@@ -88,6 +89,7 @@ EOF;
             $lh = new LevelHistory();
             $lh->setCharacter($char);
             $lh->setLevel($character["level"]);
+            $lh->setIsDeath(false);
             $this->logSection("lvlup", $character["name"]);
             ++$updatedata[$server->getName()]["levelups"];
           }

@@ -47,6 +47,7 @@ EOF;
             $lvlh->setCreatedAt($death["time"]);
             $lvlh->setReason($death["reason"]);
             $lvlh->setLevel($death["level"]);
+            $lvlh->setIsDeath(true);
             
             try {
               $lvlh->save();

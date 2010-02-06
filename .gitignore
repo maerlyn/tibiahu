@@ -6,6 +6,7 @@ config/databases.yml
 config/propel.ini
 
 data/sql/*
+data/character.index/*
 
 log/*
 

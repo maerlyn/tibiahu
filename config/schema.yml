@@ -34,6 +34,7 @@ propel:
     level:        { type: integer }
     created_at:   ~
     reason_id:    { type: integer, foreignTable: tibia_creature, foreignReference: id, onDelete: setnull }
+    is_death:     { type: boolean }
 
   tibia_cronlog:
     _attributes: { phpName: CronLog }

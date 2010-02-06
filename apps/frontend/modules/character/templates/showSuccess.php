@@ -55,7 +55,15 @@
       </thead>
       <tbody>
 <?php foreach($levelhistory as $lvl): ?>
-        <tr <?php if (isset($oldlvl)) {echo "class=\"".($oldlvl<$lvl->getLevel()?$dir="up":$dir="down")."\"";} $oldlvl=$lvl->getLevel(); ?>>
+<?php $dir = "";
+if (null !== $lvl->getIsDeath()) { //ergo true/false, nem null
+  $dir = ($lvl->getIsDeath() ? "down" : "up");
+  $oldlvl = $lvl->getLevel();
+} else { //is_death == null
+  if (isset($oldlvl)) { $dir = ($oldlvl < $lvl->getLevel() ? "up" : "down"); }
+  $oldlvl = $lvl->getLevel();
+} ?>
+        <tr class="<?php echo $dir ?>">
           <td><?php echo $lvl->getLevel() ?></td>
           <td><?php echo format_datetime($lvl->getCreatedAt()) ?></td>
           <td>
