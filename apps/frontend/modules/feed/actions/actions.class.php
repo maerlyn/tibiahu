@@ -18,13 +18,21 @@ class feedActions extends sfActions
   
   private function generateFeedForHistory(sfFeed $feed, array $levelhistory)
   {
-    foreach ($levelhistory as $lvlhistory) {
+    foreach ($levelhistory as $lvlhistory) { /** @var LevelHistory $lvlhistory */
       $item = new sfFeedItem();
       
       $this->getContext()->getConfiguration()->loadHelpers(array("I18N", "Date"));
     
+      $isDeath = null;;
+      if (null !== $lvlhistory->getIsDeath()) {
+        $isDeath = $lvlhistory->getIsDeath();
+      } else
       if ($prev_item = LevelHistoryPeer::getPreviousItem($lvlhistory)) {
-        if ($prev_item->getLevel() < $lvlhistory->getLevel()) {
+        $isDeath = ($prev_item->getLevel() >= $lvlhistory->getLevel());
+      }
+      
+      if ($isDeath !== null) {
+        if (!$isDeath) {
           $lvlupdown = __("Szintlépés \\o/", null, "feed");
         } else {
           $lvlupdown = __("Halál :(", null, "feed");
