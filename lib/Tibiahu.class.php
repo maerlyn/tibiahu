@@ -187,5 +187,40 @@ class Tibiahu
     return $temp;
   }
 
+  static public function statChatlog($log, $order = "lines")
+  {
+    if (!in_array($order, array("lines", "avg", "characters"))) {
+      throw new InvalidArgumentException("Invalid order");
+    }
+
+    $ret = array();
+
+    $lines = explode("\n", $log);
+    $ret["sum_lines"] = count($lines);
+
+    foreach($lines as $line) {
+      if (preg_match('@^\d{2}:\d{2} (.+?) \[\d+\]: (.*)@is', $line, $matches)) {
+        if (!isset($ret["character"][$matches[1]])) {
+          $ret["character"][$matches[1]] = array("lines" => 0, "characters" => 0);
+        }
+
+        $ret["character"][$matches[1]]["lines"] += 1;
+        $ret["character"][$matches[1]]["characters"] += strlen($matches[2]);
+      }
+    }
+
+    foreach($ret["character"] as $k => $v) {
+      $ret["character"][$k]["characters"] = $v["characters"] / $v["lines"];
+    }
+
+    function orderByAvg($v1, $v2)        { if ($v1["avg"]        == $v2["avg"])        { return 0; } return ($v1["avg"]        > $v2["avg"]        ? -1 : 1); }
+    function orderByLines($v1, $v2)      { if ($v1["lines"]      == $v2["lines"])      { return 0; } return ($v1["lines"]      > $v2["lines"]      ? -1 : 1); }
+    function orderByCharacters($v1, $v2) { if ($v1["characters"] == $v2["characters"]) { return 0; } return ($v1["characters"] > $v2["characters"] ? -1 : 1); }
+
+    uasort($ret["character"], "orderBy" . ucfirst($order));
+
+    return $ret;
+  }
+
   
 }

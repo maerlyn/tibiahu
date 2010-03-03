@@ -10,6 +10,8 @@ data/character.index/*
 
 log/*
 
+lib/temp.php
+
 lib/filter/base/*
 lib/form/base/*
 lib/model/om/*
@@ -24,3 +26,5 @@ plugins/sfPropelActAsTaggableBehaviorPlugin/lib/filter/base/*
 plugins/sfPropelActAsTaggableBehaviorPlugin/lib/form/base/*
 plugins/sfPropelActAsTaggableBehaviorPlugin/lib/model/map/*
 plugins/sfPropelActAsTaggableBehaviorPlugin/lib/model/om/*
+
+nbproject/*
