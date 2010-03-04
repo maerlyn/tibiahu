@@ -8,7 +8,12 @@
     <table>
       <tr>
         <td><?php echo $form["log"]->renderLabel() ?></td>
-        <td><?php echo $form["log"]->render() ?></td>
+        <td>
+          <?php echo $form["log"]->render() ?>
+        </td>
+        <td>
+          <?php echo $form["log"]->renderError() ?>
+        </td>
       </tr>
       <tr>
         <td></td>
@@ -22,13 +27,13 @@
     <?php else: ?>
     Összes feldolgozott sor: <?php echo $stat["sum_lines"] ?>
 
-    <table>
+    <table class="logstat">
       <thead>
         <tr>
-          <th>Név</th>
-          <th>Sorok</th>
-          <th>Karakterek</th>
-          <th>Karakter/sor átlag</th>
+          <th class="string">Név</th>
+          <th class="numeric">Sorok</th>
+          <th class="numeric">Karakterek</th>
+          <th class="numeric">Karakter/sor átlag</th>
         </tr>
       </thead>
       <tbody>

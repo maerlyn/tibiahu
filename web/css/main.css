@@ -306,9 +306,20 @@ table.searchresults a:active {
     color: #FDF8DA;
 }
 
-th.sorting {
+th.sorting,
+th.sorting_asc,
+th.sorting_desc {
   cursor: pointer;
+  padding-left: 20px;
+  padding-right: 20px;
+  background-position: center right;
+  background-repeat: no-repeat;
 }
+
+th.numeric.sorting_asc  { background-image: url(/images/sort-number-ascending.png);    }
+th.numeric.sorting_desc { background-image: url(/images/sort-number-descending.png);   }
+th.string.sorting_asc   { background-image: url(/images/sort-alphabet-ascending.png);  }
+th.string.sorting_desc  { background-image: url(/images/sort-alphabet-descending.png); }
 
 .underline {
   text-decoration: underline;
@@ -379,4 +390,8 @@ ul.prop li {
 .email {
   unicode-bidi:bidi-override; 
   direction: rtl; 
+}
+
+table.logstat {
+  width: 90%;
 }

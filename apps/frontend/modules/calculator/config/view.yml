@@ -3,4 +3,6 @@ levelSuccess:
 
 blessingSuccess:
   javascripts: [jquery-1.3.2.min.js, blessingcalc]
-  
+
+chatlogSuccess:
+  javascripts: [datatable]

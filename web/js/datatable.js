@@ -31,5 +31,14 @@ function doDataTables() {
     bProcessing: true,
     bStateSave: false
   });
+
+  $(".logstat").dataTable({
+    aaSorting: [],
+    bFilter: false,
+    bInfo: false,
+    bPaginate: false,
+    bPrcessing: false,
+    bStateSave: false
+  });
   
 }
