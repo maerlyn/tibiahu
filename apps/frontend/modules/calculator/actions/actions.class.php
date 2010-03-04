@@ -201,5 +201,17 @@ class calculatorActions extends sfActions
       }
     }
   }
- 
+
+  public function executeChatlog(sfWebRequest $request)
+  {
+    $this->form = new LogstatForm();
+
+    if ($request->isMethod("post")) {
+      $this->form->bind($request->getParameter("logstatform"));
+
+      if ($this->form->isValid()) {
+        $this->stat = Tibiahu::statChatlog($this->form->getValue("log"));
+      }
+    }
+  }
 }

@@ -210,7 +210,7 @@ class Tibiahu
     }
 
     foreach($ret["character"] as $k => $v) {
-      $ret["character"][$k]["characters"] = $v["characters"] / $v["lines"];
+      $ret["character"][$k]["avg"] = $v["characters"] / $v["lines"];
     }
 
     function orderByAvg($v1, $v2)        { if ($v1["avg"]        == $v2["avg"])        { return 0; } return ($v1["avg"]        > $v2["avg"]        ? -1 : 1); }
