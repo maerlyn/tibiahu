@@ -37,7 +37,7 @@
             <li><?php echo link_to(__("Botterek"), "@character_botters") ?></li>
             <li><?php echo link_to(__("Hackerek"), "@character_hackers") ?></li>
             <li><?php echo link_to(__("Tradelt/megosztott karakterek"), "@character_acctraders") ?></li>
-            <li><?php echo link_to(__("GM-kereső", null, "gamemaster"), "@gmfinder_index") ?>
+            <li><?php echo link_to(__("GM-kereső", null, "gamemaster"), "@gmfinder_index") ?></li>
           </ul>
         </div>
       </div>  <!-- /containerbox -->
@@ -58,6 +58,7 @@
             <li><?php echo link_to("Stamina", "@calculator_stamina") ?></li>
             <li><?php echo link_to(__("Blessing árak", array(), "calculators"), "@calculator_blessing") ?></li>
             <li><?php echo link_to("Soul", "@calculator_soul") ?></li>
+            <li><?php echo link_to(__("Chatlog statisztika", null, "calculators"), "@calculator_chatlog") ?></li>
           </ul>
         </div>
       </div> <!-- /containerbox -->
@@ -67,6 +68,16 @@
           <?php include_component("general", "language") ?>
         </div>
       </div> <!-- /containerbox -->
+
+      <div style="width: 122px; margin: auto;">
+        <script type="text/javascript">
+          google_ad_client = "pub-5937469762999819";
+          google_ad_slot = "0814251540";
+          google_ad_width = 120;
+          google_ad_height = 600;
+        </script>
+        <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+      </div>
       
     </div> <!-- /leftbox -->
 
@@ -87,7 +98,9 @@
   </div> <!-- /footer -->
 
 </div> <!-- /container -->
-<?php include_javascripts() ?>
+
+<script src="http://www.google-analytics.com/ga.js" type="text/javascript"></script>
 <script src="http://tibia.hu/mint/index.php?js" type="text/javascript"></script>
+<?php include_javascripts() ?>
 </body>
 </html>
