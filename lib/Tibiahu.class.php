@@ -197,6 +197,7 @@ class Tibiahu
 
     $lines = explode("\n", $log);
     $ret["sum_lines"] = count($lines);
+    $ret["character"] = array();
 
     foreach($lines as $line) {
       if (preg_match('@^\d{2}:\d{2} (.+?) \[\d+\]: (.*)@is', $line, $matches)) {
