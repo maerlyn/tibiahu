@@ -143,7 +143,7 @@ calculator_soul:
   param:  { module: calculator, action: soul }  
   
 calculator_chatlog:
-  url:    /calculator/chatlog
+  url:    /calculator/chat
   param:  { module: calculator, action: chatlog }
 
 ### gm finder routes ###
