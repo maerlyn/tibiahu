@@ -156,6 +156,14 @@
         <source>Karakter/sor átlag</source>
         <target>Character/line average</target>
       </trans-unit>
+      <trans-unit id="39">
+        <source>Ez a kalkulátor megmondja, ki mennyit beszélt - hány sort, hány karaktert, illetve átlagosan hány karaktert soronként.</source>
+        <target>This calculator will tell you how much everyone spoke - how many lines, characters, and what was their character/line average.</target>
+      </trans-unit>
+      <trans-unit id="40">
+        <source>Legynagyobb szövegméret: %num%MB</source>
+        <target>Maximum size allowed: %num%MB</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

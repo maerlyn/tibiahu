@@ -6,7 +6,7 @@ class LogstatForm extends sfForm
   /**
    * Returns the probable max length acceptable, using php.ini's post_max_size
    */
-  private function getMaxLength()
+  public  function getMaxLength()
   {
     if ($pms = @ini_get("post_max_size")) {
       if (strpos($pms, "M") !== false) {

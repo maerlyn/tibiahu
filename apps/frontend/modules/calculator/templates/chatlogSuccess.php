@@ -1,9 +1,16 @@
 <?php slot("title", __("Chatlog statisztika", null, "calculators")) ?>
 <?php include_javascripts_for_form($form); include_stylesheets_for_form($form) ?>
+<?php use_helper("Number") ?>
 <div class="containerbox">
   <h3><a href="<?php echo url_for("@calculator_chatlog") ?>"><?php echo __("Chatlog statisztika", null, "calculators") ?></a></h3>
   <div class="panel">
     <?php if (!isset($stat)): ?>
+
+    <?php echo __("Ez a kalkulátor megmondja, ki mennyit beszélt - hány sort, hány karaktert, illetve átlagosan hány karaktert soronként.",
+      null, "calculators") ?><br />
+    <?php echo __("Legynagyobb szövegméret: %num%MB",
+      array("%num%" => format_number(sprintf("%.2f", $form->getMaxLength() / 1024 / 1024))), "calculators") ?>
+
     <form method="post" action="<?php echo url_for("@calculator_chatlog") ?>">
       <?php echo $form["log"]->render() ?><br />
       <?php echo $form["log"]->renderError() ?>
