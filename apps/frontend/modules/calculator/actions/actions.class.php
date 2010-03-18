@@ -60,12 +60,12 @@ class calculatorActions extends sfActions
           
           $this->partials = Tibiahu::getPartialStaminaRegenerationTimes($stamina);
           
-          if ($stamina < (41*60)) {
-            $time += (41*60 - $stamina)*3; //3 percenkent 1 stamina
-            $stamina = 41*60;
+          if ($stamina < (40*60)) {
+            $time += (40*60 - $stamina)*3; //3 percenkent 1 stamina
+            $stamina = 40*60;
           }
           
-          $time += (42*60-$stamina)*12; //utolso oraban 12 percenkent 1 stamina
+          $time += (42*60-$stamina)*10; //utolso oraban 10 percenkent 1 stamina
         }
         
         $this->time = array(

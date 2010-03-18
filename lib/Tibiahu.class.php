@@ -48,11 +48,21 @@ class Tibiahu
   static public function getPartialStaminaRegenerationTimes($stamina)
   {
     $partials = array();
-    for ($i = 1; $i <= 41; ++$i) {
+    $regens = array();
+    for ($i = 1; $i <= 40; ++$i) {
       if ($i * 60 > $stamina) {
-        $regen = (($i * 60) - $stamina) * 3 + 10;
-        $partials[$i] = str_pad(floor($regen/60), 2, "0", STR_PAD_LEFT) . ":" . str_pad(($regen - (floor($regen/60)*60)), 2, "0", STR_PAD_LEFT);
+        $regens[$i] = (($i * 60) - $stamina) * 3 + 10;
       }
+    }
+    if ($stamina < 41*60) {
+      if (isset($regens[40])) {
+        $regens[41] = $regens[40] + 10*60;
+      } else {
+        $regens[41] = (41 * 60 - $stamina) * 10;
+      }
+    }
+    foreach ($regens as $k => $regen) {
+      $partials[$k] = str_pad(floor($regen/60), 2, "0", STR_PAD_LEFT) . ":" . str_pad(($regen - (floor($regen/60)*60)), 2, "0", STR_PAD_LEFT);
     }
     return $partials;
   }
