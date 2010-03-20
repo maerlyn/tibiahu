@@ -161,8 +161,8 @@
         <target>This calculator will tell you how much everyone spoke - how many lines, characters, and what was their character/line average.</target>
       </trans-unit>
       <trans-unit id="40">
-        <source>Legynagyobb szövegméret: %num%MB</source>
-        <target>Maximum size allowed: %num%MB</target>
+        <source>A bemásolt szöveg mérete ne legyen nagyobb, mint %num% MB!</source>
+        <target>The copied text should not be bigger than %num% MB</target>
       </trans-unit>
     </body>
   </file>

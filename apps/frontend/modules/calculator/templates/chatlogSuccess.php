@@ -8,7 +8,7 @@
 
     <?php echo __("Ez a kalkulátor megmondja, ki mennyit beszélt - hány sort, hány karaktert, illetve átlagosan hány karaktert soronként.",
       null, "calculators") ?><br />
-    <?php echo __("Legynagyobb szövegméret: %num%MB",
+    <?php echo __("A bemásolt szöveg mérete ne legyen nagyobb, mint %num% MB!",
       array("%num%" => format_number(sprintf("%.2f", $form->getMaxLength() / 1024 / 1024))), "calculators") ?>
 
     <form method="post" action="<?php echo url_for("@calculator_chatlog") ?>">
