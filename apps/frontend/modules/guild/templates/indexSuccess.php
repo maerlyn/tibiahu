@@ -1,7 +1,7 @@
 <?php if (!$sf_request->isXmlHttpRequest()): ?>
   <?php slot("title", __("Guildek")) ?>
   <div class="containerbox">
-    <h3><?php echo __("Guildek listája") ?></h3>
+    <h3><?php echo __("Guildek") ?></h3>
     <div class="panel">
       <br />
     
