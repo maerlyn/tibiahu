@@ -1,6 +1,6 @@
 <?php slot("title", __("Szintlépés kalkulátor")) ?>
 <div class="containerbox">
-  <h3><?php echo link_to(__("Szint kalkulátor"), "@calculator_level") ?></h3>
+  <h3><?php echo link_to(__("Szintlépés kalkulátor"), "@calculator_level") ?></h3>
   <div class="panel">
     <form action="<?php echo url_for("@calculator_level") ?>" method="post">
       <table>
