@@ -401,3 +401,7 @@ table.logstat {
   height: 200px;
   margin: 5px 0;
 }
+
+#leftbox .center {
+  text-align: center;
+}

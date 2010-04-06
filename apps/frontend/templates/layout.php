@@ -64,7 +64,7 @@
       </div> <!-- /containerbox -->
       
       <div class="containerbox">
-        <div class="panel">
+        <div class="panel center">
           <?php include_component("general", "language") ?>
         </div>
       </div> <!-- /containerbox -->
