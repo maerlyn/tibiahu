@@ -22,7 +22,7 @@ class calculatorActions extends sfActions
       if ($this->valid = $this->form->isValid()) {
         $this->level_current = Tibiahu::getLevelForXp($this->form->getValue("xp"));
         $this->xp_next = Tibiahu::getXpForLevel($this->level_current+1);
-        $this->xp_remaining = $this->xp_next - $this->form->getValue("xp");
+        $this->xp_remaining = intval($this->xp_next - $this->form->getValue("xp"));
         
         $this->monsters = array(
           "Rat"           => ceil($this->xp_remaining / 5),
