@@ -191,6 +191,10 @@ house_show:
     server: \w+
     slug:   \w+  
   
+userscripts:
+  url:    /userscripts
+  param:  { module: general, action: userscripts }
+
 # default rules
 homepage:
   url:   /

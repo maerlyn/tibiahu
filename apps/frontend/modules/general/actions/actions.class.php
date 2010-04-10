@@ -29,7 +29,12 @@ class generalActions extends sfActions
   
   public function executeContact(sfWebRequest $request)
   {
-    
+
+  }
+
+
+  public function executeUserscripts(sfWebRequest $request)
+  {
   }
       
 }

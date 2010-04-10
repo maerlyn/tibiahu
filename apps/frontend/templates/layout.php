@@ -38,6 +38,7 @@
             <li><?php echo link_to(__("Hackerek"), "@character_hackers") ?></li>
             <li><?php echo link_to(__("Tradelt/megosztott karakterek"), "@character_acctraders") ?></li>
             <li><?php echo link_to(__("GM-kereső", null, "gamemaster"), "@gmfinder_index") ?></li>
+            <li><?php echo link_to(__("Userscriptek"), "@userscripts") ?></li>
           </ul>
         </div>
       </div>  <!-- /containerbox -->

@@ -412,6 +412,52 @@
         <source>Nem olyan szerveren van, amit figyel az oldal</source>
         <target>Has to be on a server monitored by the site</target>
       </trans-unit>
+      <trans-unit id="123">
+        <source>Userscriptek</source>
+        <target>Userscripts</target>
+      </trans-unit>
+      <trans-unit id="124">
+        <source>A userscriptek olyan speciális javascript fájlok, amelyek egy-egy meghatározott oldal
+minden látogatásakor lefutnak, és ki tudják bővíteni annak funkcióit. Az Internet
+Explorer böngésző kivételével minden böngésző támogatja a userscriptek használatát:</source>
+        <target>Userscripts are special javascripts files than are run each time you visit
+a specific page, so they can extend the page's functions. With the exception of Internet
+Explorer, all major browsers have support for them:</target>
+      </trans-unit>
+      <trans-unit id="125">
+        <source>Lentebb megtalálod a %link%-val kapcsolatos scripteket.</source>
+        <target>You can find the scripts connected with %link% below.</target>
+      </trans-unit>
+      <trans-unit id="126">
+        <source>Karakterlinkelő</source>
+        <target>Character linker</target>
+      </trans-unit>
+      <trans-unit id="127">
+        <source>Tibia.com-on a karakterlapokon a karakter nevét átalakítja linkké, ami a tibia.hu-n
+levő karakterlapra mutat. Minden lapon, tehát nem ellenőrzi, olyan szerveren van-e
+a karakter, amivel foglalkozik az oldal, vagy létezik-e a karakter az oldal adatbázisában.</source>
+        <target>Converts the names on tibia.com's character pages to a link, pointing to the given
+character's details on tibia.hu. It does so on all pages, does not check if tibia.hu handles
+the character's server, of if it exists in the database.</target>
+      </trans-unit>
+      <trans-unit id="128">
+        <source>Karakterlinkelő script letöltése</source>
+        <target>Download the character linker script</target>
+      </trans-unit>
+      <trans-unit id="129">
+        <source>Házlinkelő</source>
+        <target>House linker</target>
+      </trans-unit>
+      <trans-unit id="130">
+        <source>Tibia.com-on a karakterlapokon ha az épp nézett karakternek van háza, a ház nevét
+átalakítja linkké, amely a tibia.hu-n keresztül a ház tibia.com-os adatlapjára vezet.</source>
+        <target>On tibia.com's character pages, if the current character has a house, the script
+converts it'ss name to a link, pointing to the house's details on tibia.com, via tibia.hu.</target>
+      </trans-unit>
+      <trans-unit id="131">
+        <source>Házlinkelő script letöltése</source>
+        <target>Download the house linker script</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

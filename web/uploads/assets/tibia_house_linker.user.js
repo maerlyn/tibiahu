@@ -1,10 +1,11 @@
 // ==UserScript==
 // @name          Tibia House Linker
-// @namespace     http://www.erig.net/
+// @namespace     http://tibia.hu/
 // @description   Links to houses on character pages
 // @include       http://www.tibia.com/community/?subtopic=character*
 // @version       0.2
-// @author        Erig (http://www.erig.net/), Tele (http://tibia.hu/)
+// @author        Erig (http://www.erig.net/)
+// @author        Tele (http://tibia.hu/)
 // ==/UserScript==
 
 // --------------------------------------------------------------------

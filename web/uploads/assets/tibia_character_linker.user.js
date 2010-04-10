@@ -3,7 +3,8 @@
 // @namespace     http://tibia.hu/
 // @description   Links to characters on character pages
 // @include       http://www.tibia.com/community/?subtopic=character*
-// @version       0.2
+// @version       0.3
+// @author        Erig (http://erig.net)
 // @author        Tele (http://tibia.hu)
 // ==/UserScript==
 
@@ -34,7 +35,7 @@
         var name = fc.nextSibling.textContent;
         slug = slug.replace(/ /g, "_").replace(/[^\w\d_]/g, "-").toLowerCase().replace(/[^-\w]/g, "");
         
-        fc.nextSibling.innerHTML = '<a href="http://tibia.hu/hu/character/' + slug + '">' + name + '</a>';
+        fc.nextSibling.innerHTML = '<a href="http://tibia.hu/character/' + slug + '">' + name + '</a>';
       }
     }
   }
