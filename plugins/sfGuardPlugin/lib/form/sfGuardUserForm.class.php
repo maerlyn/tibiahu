@@ -3,14 +3,28 @@
 /**
  * sfGuardUser form.
  *
- * @package    ##PROJECT_NAME##
- * @subpackage form
- * @author     ##AUTHOR_NAME##
- * @version    SVN: $Id: sfPropelFormTemplate.php 10377 2008-07-21 07:10:32Z dwhittle $
+ * @package    form
+ * @subpackage sf_guard_user
+ * @version    SVN: $Id: sfGuardUserForm.class.php 13001 2008-11-14 10:45:32Z noel $
  */
-class sfGuardUserForm extends BasesfGuardUserForm
+class sfGuardUserForm extends sfGuardUserAdminForm
 {
+  protected
+    $pkName = null;
+
   public function configure()
   {
+    parent::configure();
+
+    unset(
+      $this['last_login'],
+      $this['created_at'],
+      $this['salt'],
+      $this['algorithm'],
+      $this['is_active'],
+      $this['is_super_admin'],
+      $this['sf_guard_user_group_list'],
+      $this['sf_guard_user_permission_list']
+    );
   }
 }

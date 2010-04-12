@@ -13,8 +13,17 @@
  * @package    symfony
  * @subpackage plugin
  * @author     Fabien Potencier <fabien.potencier@symfony-project.com>
- * @version    SVN: $Id: sfGuardGroup.php 7634 2008-02-27 18:01:40Z fabien $
+ * @version    SVN: $Id: PluginsfGuardUserPeer.php 7634 2008-02-27 18:01:40Z fabien $
  */
-class sfGuardGroup extends PluginsfGuardGroup
+class PluginsfGuardUserPeer extends BasesfGuardUserPeer
 {
+  public static function retrieveByUsername($username, $isActive = true)
+  {
+    $c = new Criteria();
+    $c->add(self::USERNAME, $username);
+    $c->add(self::IS_ACTIVE, $isActive);
+
+    return self::doSelectOne($c);
+  }
+
 }

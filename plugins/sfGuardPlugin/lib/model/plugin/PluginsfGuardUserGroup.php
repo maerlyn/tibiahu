@@ -13,8 +13,14 @@
  * @package    symfony
  * @subpackage plugin
  * @author     Fabien Potencier <fabien.potencier@symfony-project.com>
- * @version    SVN: $Id: sfGuardGroup.php 7634 2008-02-27 18:01:40Z fabien $
+ * @version    SVN: $Id: PluginsfGuardUserGroup.php 11426 2008-09-10 06:34:47Z fabien $
  */
-class sfGuardGroup extends PluginsfGuardGroup
+class PluginsfGuardUserGroup extends BasesfGuardUserGroup
 {
+  public function save(PropelPDO $con = null)
+  {
+    parent::save($con);
+
+    $this->getsfGuardUser($con)->reloadGroupsAndPermissions();
+  }
 }

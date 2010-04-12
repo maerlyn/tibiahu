@@ -13,8 +13,15 @@
  * @package    symfony
  * @subpackage plugin
  * @author     Fabien Potencier <fabien.potencier@symfony-project.com>
- * @version    SVN: $Id: sfGuardGroup.php 7634 2008-02-27 18:01:40Z fabien $
+ * @version    SVN: $Id: PluginsfGuardPermissionPeer.php 7634 2008-02-27 18:01:40Z fabien $
  */
-class sfGuardGroup extends PluginsfGuardGroup
+class PluginsfGuardPermissionPeer extends BasesfGuardPermissionPeer
 {
+  public static function retrieveByName($name)
+  {
+    $c = new Criteria();
+    $c->add(self::NAME, $name);
+
+    return self::doSelectOne($c);
+  }
 }

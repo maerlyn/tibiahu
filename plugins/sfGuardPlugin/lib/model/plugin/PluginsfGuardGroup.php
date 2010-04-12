@@ -13,8 +13,12 @@
  * @package    symfony
  * @subpackage plugin
  * @author     Fabien Potencier <fabien.potencier@symfony-project.com>
- * @version    SVN: $Id: sfGuardGroup.php 7634 2008-02-27 18:01:40Z fabien $
+ * @version    SVN: $Id: PluginsfGuardGroup.php 7634 2008-02-27 18:01:40Z fabien $
  */
-class sfGuardGroup extends PluginsfGuardGroup
+class PluginsfGuardGroup extends BasesfGuardGroup
 {
+  public function __toString()
+  {
+    return $this->getName();
+  }
 }
