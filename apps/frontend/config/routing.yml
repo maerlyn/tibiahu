@@ -169,11 +169,11 @@ sf_guard_signin:
 sf_guard_signout:
   url:   /logout
   param: { module: sfGuardAuth, action: signout }
- 
-sf_guard_password:
-  url:   /request_password
-  param: { module: sfGuardAuth, action: password }  
   
+sf_guard_register:
+  url:   /register
+  param: { module: sfGuardAuth, action: register }
+
 ### rules that don't fit any other category :) ###  
   
 contact:

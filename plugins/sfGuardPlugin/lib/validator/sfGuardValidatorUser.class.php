@@ -35,7 +35,7 @@ class sfGuardValidatorUser extends sfValidatorBase
     $this->addOption('password_field', 'password');
     $this->addOption('throw_global_error', false);
 
-    $this->setMessage('invalid', 'Hibás felhasználónév és/vagy jelszó.');
+    $this->setMessage('invalid', 'Hibás felhasználónév és/vagy jelszó, vagy nem aktivált felhasználó.');
   }
 
   /**

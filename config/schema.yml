@@ -117,3 +117,9 @@ propel:
     slug:             { type: varchar, size: 255, required: true, index: true }
     body_markdown:    { type: longvarchar, required: true }
     body_html:        { type: longvarchar, required: true }
+
+  sf_guard_user_profile:
+    _attributes:      { phpName: sfGuardUserProfile }
+    id:
+    user_id:          { type: integer, foreignTable: sf_guard_user, foreignReference: id, required: true, onDelete: cascade }
+    email:            { type: varchar(255) }

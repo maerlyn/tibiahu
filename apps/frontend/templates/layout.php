@@ -70,6 +70,17 @@
         </div>
       </div> <!-- /containerbox -->
 
+      <div class="containerbox">
+        <div class="panel">
+          <?php if (!$sf_user->isAuthenticated()): ?>
+          <?php include_component("sfGuardAuth", "signin") ?>
+          <?php else: ?>
+          Bejelentkezve, mint <i><?php echo $sf_user->getUsername() ?></i><br />
+          <?php echo link_to("Kijelentkezés", "@sf_guard_signout") ?>
+          <?php endif ?>
+        </div>
+      </div>
+
       <div style="width: 122px; margin: auto;">
         <script type="text/javascript">
           google_ad_client = "pub-5937469762999819";
