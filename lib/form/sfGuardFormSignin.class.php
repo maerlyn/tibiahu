@@ -1,11 +1,11 @@
 <?php
 
-class sfGuardFormSignin extends sfForm
+class sfGuardFormSignin extends BaseForm
 {
   public function configure()
   {
     $this->setWidgets(array(
-      'username' => new sfWidgetFormInput(array("label" =>  "Felhasználónév")),
+      'username' => new sfWidgetFormInputText(array("label" =>  "Felhasználónév")),
       'password' => new sfWidgetFormInputPassword(array("label" => "Jelszó")),
     ));
 

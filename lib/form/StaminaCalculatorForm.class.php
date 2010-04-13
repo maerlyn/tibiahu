@@ -1,12 +1,12 @@
 <?php
   
-  class StaminaCalculatorForm extends sfForm
+  class StaminaCalculatorForm extends BaseForm
   {
     
     public function configure()
     {
       $this->setWidgets(array(
-        "stamina"  =>  new sfWidgetFormInput(array("label" => "Jelenlegi staminád"))
+        "stamina"  =>  new sfWidgetFormInputText(array("label" => "Jelenlegi staminád"))
       ));
       
       $this->widgetSchema->setHelp("stamina", 

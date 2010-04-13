@@ -22,7 +22,7 @@ class ProjectConfiguration extends sfProjectConfiguration
   public function setup()
   {
     // for compatibility / remove and enable only the plugins you want
-    $this->enableAllPluginsExcept(array('sfDoctrinePlugin', 'sfCompat10Plugin'));
+    $this->enableAllPluginsExcept(array('sfDoctrinePlugin', 'sfCompat10Plugin', 'sfPropelActAsTaggableBehaviorPlugin'));
 //    $this->setWebDir("/home/tibia/public_html/");
 //    $this->setCacheDir("/home/tibia/cache/");
 //    $this->setRootDir("/home/tibia/");

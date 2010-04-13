@@ -14,7 +14,7 @@
  * @package    symfony
  * @subpackage task
  * @author     Fabien Potencier <fabien.potencier@symfony-project.com>
- * @version    SVN: $Id: sfAssetsUpgrade.class.php 24395 2009-11-25 19:02:18Z Kris.Wallsmith $
+ * @version    SVN: $Id: sfDeprecatedPluginsValidation.class.php 25410 2009-12-15 15:19:07Z fabien $
  */
 class sfDeprecatedPluginsValidation extends sfValidation
 {
@@ -41,7 +41,7 @@ class sfDeprecatedPluginsValidation extends sfValidation
     $files = sfFinder::type('file')->name('*Configuration.class.php')->in($this->getProjectConfigDirectories());
     foreach ($files as $file)
     {
-      $content = file_get_contents($file);
+      $content = sfToolkit::stripComments(file_get_contents($file));
 
       $matches = array();
       if (false !== strpos($content, 'sfCompat10Plugin'))

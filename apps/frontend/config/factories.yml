@@ -35,6 +35,10 @@ all:
     param:
       session_name: tibiahu
 
+  mailer:
+    param:
+      delivery_strategy:  none
+
 #all:
 #  controller:
 #    class: sfFrontWebController
@@ -87,7 +91,7 @@ all:
 #    class: sfI18N
 #    param:
 #      source:               XLIFF
-#      debug:                off
+#      debug:                false
 #      untranslated_prefix:  "[T]"
 #      untranslated_suffix:  "[/T]"
 #      cache:

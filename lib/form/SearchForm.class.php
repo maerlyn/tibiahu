@@ -1,12 +1,12 @@
 <?php
   
-  class SearchForm extends sfForm
+  class SearchForm extends BaseForm
   {
     
     public function configure()
     {
       $this->setWidgets(array(
-        "name"  =>  new sfWidgetFormInput(array("label" => "Név"))
+        "name"  =>  new sfWidgetFormInputText(array("label" => "Név"))
       ));
       
       $this->setValidators(array(

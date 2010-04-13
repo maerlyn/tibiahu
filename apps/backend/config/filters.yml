@@ -10,5 +10,6 @@ myLanguageFilter:
   class: myLanguageFilter
  
 cache:     ~
-common:    ~
+common:
+  class: sfCommonFilter
 execution: ~

@@ -1,12 +1,12 @@
 <?php
   
-  class BlessingCalculatorForm extends sfForm
+  class BlessingCalculatorForm extends BaseForm
   {
     
     public function configure()
     {
       $this->setWidgets(array(
-        "level"  =>  new sfWidgetFormInput(array("label" => "Jelenlegi szinted"))
+        "level"  =>  new sfWidgetFormInputText(array("label" => "Jelenlegi szinted"))
       ));
       
       $this->setValidators(array(

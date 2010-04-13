@@ -1,6 +1,6 @@
 <?php
 
-class MlvlCalculatorForm extends sfForm
+class MlvlCalculatorForm extends BaseForm
 {
 
   public function configure()
@@ -14,17 +14,17 @@ class MlvlCalculatorForm extends sfForm
     
     $this->setWidgets(array(
       "current_mlvl"  
-        =>  new sfWidgetFormInput(array(
+        =>  new sfWidgetFormInputText(array(
               "label" =>  "Aktuális mlvl"
             )),
             
       "percent_remaining" 
-        =>  new sfWidgetFormInput(array(
+        =>  new sfWidgetFormInputText(array(
               "label" =>  "Hátralevő százalék"
             )),
             
       "target_mlvl"
-        =>  new sfWidgetFormInput(array(
+        =>  new sfWidgetFormInputText(array(
               "label" =>  "Cél mlvl"
             )),
             

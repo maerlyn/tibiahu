@@ -1,13 +1,13 @@
 <?php
 
-class SoulCalculatorForm extends sfForm
+class SoulCalculatorForm extends BaseForm
 {
 
   public function configure()
   {
     $this->setWidgets(array(
       "current_soul"  
-        =>  new sfWidgetFormInput(array(
+        =>  new sfWidgetFormInputText(array(
               "label" =>  "Aktuális soul"
             )),
             

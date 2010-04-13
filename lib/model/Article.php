@@ -4,4 +4,4 @@ class Article extends BaseArticle
 {
 }
 
-sfPropelBehavior::add('Article', array('sfPropelActAsTaggableBehavior'));
+#sfPropelBehavior::add('Article', array('sfPropelActAsTaggableBehavior'));

@@ -27,7 +27,7 @@ class articleActions extends sfActions
     $this->pager->init(); 
     
     $this->results = $this->pager->getResults();
-    sfPropelActAsTaggableBehavior::preloadTags($this->results);
+    #sfPropelActAsTaggableBehavior::preloadTags($this->results);
   }
   
   public function executeShow(sfWebRequest $request)

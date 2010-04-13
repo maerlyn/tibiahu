@@ -1,12 +1,12 @@
 <?php
   
-  class LevelCalculatorForm extends sfForm
+  class LevelCalculatorForm extends BaseForm
   {
     
     public function configure()
     {
       $this->setWidgets(array(
-        "xp"  =>  new sfWidgetFormInput(array("label" => "Jelenlegi XP-d"), array("class" => "number"))
+        "xp"  =>  new sfWidgetFormInputText(array("label" => "Jelenlegi XP-d"), array("class" => "number"))
       ));
       
       $this->setValidators(array(

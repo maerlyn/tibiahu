@@ -1,6 +1,6 @@
 <?php
 
-class sfGuardRegisterForm extends sfForm
+class sfGuardRegisterForm extends BaseForm
 {
 
   public function configure()
@@ -8,15 +8,15 @@ class sfGuardRegisterForm extends sfForm
     parent::configure();
 
     $this->setWidgets(array(
-      "username"  =>  new sfWidgetFormInput(array("label" => "Felhasználónév")),
+      "username"  =>  new sfWidgetFormInputText(array("label" => "Felhasználónév")),
       "password"  =>  new sfWidgetFormInputPassword(array("label" => "Jelszó")),
       "password2" =>  new sfWidgetFormInputPassword(array("label" => "Jelszó mégegyszer")),
-      "email"     =>  new sfWidgetFormInput(array("label" => "E-mail")),
+      "email"     =>  new sfWidgetFormInputText(array("label" => "E-mail")),
     ));
 
     $this->setValidators(array(
       "username"  =>  new sfValidatorString(array(
-        "min_length"  =>  6,
+        "min_length"  =>  4,
         "max_length"  =>  128,
       ), array(
         "min_length"  =>  "Túl rövid (legalább %min_length% karakter)",

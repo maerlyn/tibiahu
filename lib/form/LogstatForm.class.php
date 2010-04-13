@@ -1,6 +1,6 @@
 <?php
 
-class LogstatForm extends sfForm
+class LogstatForm extends BaseForm
 {
 
   /**

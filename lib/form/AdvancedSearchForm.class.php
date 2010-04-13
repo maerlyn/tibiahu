@@ -1,13 +1,13 @@
 <?php
   
-  class AdvancedSearchForm extends sfForm
+  class AdvancedSearchForm extends BaseForm
   {
     
     public function configure()
     {
       $this->setWidgets(array(
-        "name"  =>  new sfWidgetFormInput(array("label" => "Név")),
-        "level" =>  new sfWidgetFormInput(array("label" => "Szint")),
+        "name"  =>  new sfWidgetFormInputText(array("label" => "Név")),
+        "level" =>  new sfWidgetFormInputText(array("label" => "Szint")),
         "guild" =>  new sfWidgetFormChoice(array(
           "label"   =>  "Guild",
           "choices" =>  array(
