@@ -10,20 +10,17 @@ class sfGuardAuthActions extends BasesfGuardAuthActions
     $this->form = new sfGuardRegisterForm();
     if ($request->isMethod("post")) {
       $this->form->bind($request->getParameter("register"));
-      if ($this->form->isValid()) {
-        $values = $this->form->getValues();
-        $user = new sfGuardUser();
-        $user->setUsername($values["username"]);
-        $user->setPassword($values["password"]);
-        $user->setIsActive(false);
-        $profile = new sfGuardUserProfile();
-        $profile->setsfGuardUser($user);
-        $profile->setEmail($values["email"]);
-        $user->save();
 
-        $this->redirect($this->generateUrl("@sf_guard_pending"));
+      if ($this->form->isValid()) {
+        $user = $this->form->save();
+
+        $this->forward($this->generateUrl("@sf_guard_pending"));
       }
     }
+  }
+
+  public function executePending(sfWebRequest $request)
+  {
   }
 
 }

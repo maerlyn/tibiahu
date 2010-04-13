@@ -1,5 +1,7 @@
 # default values
 all:
+  domain: tibia.local
+
   sf_guard_plugin:
      remember_cookie_name:  tibahu_remember
      success_signin_url:    @news

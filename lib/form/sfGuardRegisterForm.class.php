@@ -29,10 +29,44 @@ class sfGuardRegisterForm extends sfForm
       "email"     =>  new sfValidatorEmail(),
     ));
 
-    $this->mergePostValidator(
-      new sfValidatorSchemaCompare("password", "==", "password2", array(), array("invalid" => "Nem egyezik a két jelszó"))
-    );
+    $this->mergePostValidator(new sfValidatorAnd(array(
+      new sfValidatorSchemaCompare("password", "==", "password2", array(), array("invalid" => "Nem egyezik a két jelszó")),
+
+      new sfValidatorPropelUnique(array(
+        "model"   =>  "sfGuardUser",
+        "column"  =>  "username",
+      ), array(
+        "invalid" =>  "Már használt felhasználónév",
+      )),
+
+      new sfValidatorPropelUnique(array(
+        "model"   =>  "sfGuardUserProfile",
+        "column"  =>  "email",
+      ), array(
+        "invalid" =>  "Már használt email cím",
+      )),
+    )));
 
     $this->widgetSchema->setNameFormat("register[%s]");
   }
+
+  public function save()
+  {
+    if (!$this->isValid()) {
+      throw $this->getErrorSchema();
+    }
+
+    $values = $this->getValues();
+    $user = new sfGuardUser();
+    $user->setUsername($values["username"]);
+    $user->setPassword($values["password"]);
+    $user->setIsActive(false);
+    $profile = new sfGuardUserProfile();
+    $profile->setsfGuardUser($user);
+    $profile->setEmail($values["email"]);
+    $user->save();
+
+    return $user;
+  }
+
 }

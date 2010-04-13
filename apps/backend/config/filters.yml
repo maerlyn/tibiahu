@@ -1,13 +1,14 @@
 rendering: ~
+
+remember:
+  class: sfGuardRememberMeFilter
+
 security:  ~
 
 # insert your own filters here
 myLanguageFilter:
   class: myLanguageFilter
-  
-security:
-  class: sfGuardBasicSecurityFilter  
-
+ 
 cache:     ~
 common:    ~
 execution: ~
