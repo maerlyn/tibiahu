@@ -14,7 +14,7 @@ class sfGuardAuthActions extends BasesfGuardAuthActions
       if ($this->form->isValid()) {
         $user = $this->form->save();
 
-        $this->forward($this->generateUrl("@sf_guard_pending"));
+        $this->redirect($this->generateUrl("sf_guard_pending"));
       }
     }
   }
