@@ -1,7 +1,4 @@
-<?php use_helper("Url") ?>
-<?php use_helper("Form") ?>
-<!-- <form action="<?php url_for("@character_search") ?>" method="post"> -->
-<?php echo form_tag("@character_search") ?>
+<form action="<?php url_for("@character_search") ?>" method="post">
   <table border="0">
     <?php echo $form ?>
     <tr>
