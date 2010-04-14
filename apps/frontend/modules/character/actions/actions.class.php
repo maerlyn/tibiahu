@@ -51,18 +51,17 @@ class characterActions extends sfActions
 
     if ($request->isMethod("post")) {
       $reason = strtolower($request->getParameter("reason"));
-      sfLoader::loadHelpers("I18N");      
       if (TibiaWebsite::verifyCode($character->getName(), $code)) {
         if (CreaturePeer::creatureExists($reason)) {
           $lvlup->setReason($reason);
           $lvlup->save();
-          $this->renderText(__("Mentve. Frissítés után látszódni fog."));
+          $this->renderText($this->getContext()->getI18N()->__("Mentve. Frissítés után látszódni fog."));
           return sfView::NONE;
         } else { //nincs ilyen leny
-          $this->error = __("Nem létező lényt adtál meg!");
+          $this->error = $this->getContext()->getI18N()->__("Nem létező lényt adtál meg!");
         }
       } else { //rossz az ellenorzokod
-        $this->error = __("Nem találom a kódot, próbáld meg mégegyszer.");
+        $this->error = $this->getContext()->getI18N()->__("Nem találom a kódot, próbáld meg mégegyszer.");
       }
     }
   }
