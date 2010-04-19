@@ -405,3 +405,14 @@ table.logstat {
 #leftbox .center {
   text-align: center;
 }
+
+.pagination a,
+.pagination b {
+  padding-left: 5px;
+  padding-right: 5px;
+  border: 1px solid #5A5A5A;
+}
+
+.pagination {
+  margin-bottom: 5px;
+}
