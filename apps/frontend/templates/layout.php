@@ -102,7 +102,7 @@
 
   <div id="footer">
     <div id="footerbox" class="center">
-      :: <?php echo __("Copyright &copy; 2009 Tibia.hu, minden jog fenntartva") ?> :: <?php echo link_to(__("Kapcsolat"), "@contact") ?> ::<br />
+      :: <?php echo __("Copyright &copy; 2009-2010 Tibia.hu, minden jog fenntartva") ?> :: <?php echo link_to(__("Kapcsolat"), "@contact") ?> ::<br />
       :: <?php echo __("Ez egy rajongói oldal, a hivatalos honlap: <a href=\"http://tibia.com/\">tibia.com</a>") ?> ::<br />
       :: <?php echo __("Szerveridő: ");use_helper("Date");echo format_datetime(time()) ?> :: 
       <a href="<?php echo url_for("@last_update") ?>"><?php echo __("Utolsó frissítés %minutes% perce", array("%minutes%" => floor((time()-CronLogPeer::getTimeOfLastUpdate())/60))) ?></a> ::
