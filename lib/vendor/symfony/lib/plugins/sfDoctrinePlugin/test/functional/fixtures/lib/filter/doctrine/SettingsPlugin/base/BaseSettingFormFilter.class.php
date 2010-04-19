@@ -6,7 +6,7 @@
  * @package    symfony12
  * @subpackage filter
  * @author     Your name here
- * @version    SVN: $Id: BaseSettingFormFilter.class.php 28974 2010-04-04 22:59:54Z Kris.Wallsmith $
+ * @version    SVN: $Id: sfDoctrineFormFilterGeneratedTemplate.php 24171 2009-11-19 16:37:50Z Kris.Wallsmith $
  */
 abstract class BaseSettingFormFilter extends BaseFormFilterDoctrine
 {
