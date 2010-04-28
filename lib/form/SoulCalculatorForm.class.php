@@ -17,8 +17,6 @@ class SoulCalculatorForm extends BaseForm
             )),
     ));
 
-    sfValidatorSchema::setRequiredMessage("Kötelező kitölteni.");
-    
     $this->setDefault("current_soul", "0");
     
     $this->setValidators(array(

@@ -44,8 +44,6 @@ class MlvlCalculatorForm extends BaseForm
               "label" =>  "Soft boots"
             )),
     ));
-
-    sfValidatorSchema::setRequiredMessage("Kötelező kitölteni.");
     
     $mlvl_validator = new sfValidatorInteger(array(
       "required"  =>  true,
