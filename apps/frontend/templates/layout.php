@@ -30,15 +30,12 @@
         <h3><?php echo __("Menü") ?></h3>
         <div class="panel">
           <ul>
-            <li><?php echo link_to(__("Hírek", null, "news"), "@news_index") ?></li>
-            <li><?php echo link_to(__("Cikkek", null, "article"), "@article_index") ?></li>
-            <li><?php echo link_to(__("Részletes keresés"), "@character_advancedsearch") ?></li>
-            <li><?php echo link_to(__("Guildek"), "@guild_index") ?></li>
-            <li><?php echo link_to(__("Botterek"), "@character_botters") ?></li>
-            <li><?php echo link_to(__("Hackerek"), "@character_hackers") ?></li>
-            <li><?php echo link_to(__("Tradelt/megosztott karakterek"), "@character_acctraders") ?></li>
-            <li><?php echo link_to(__("GM-kereső", null, "gamemaster"), "@gmfinder_index") ?></li>
-            <li><?php echo link_to(__("Userscriptek"), "@userscripts") ?></li>
+            <li><?php echo thu_menu(__("Hírek", null, "news"), "@news_index") ?></li>
+            <li><?php echo thu_menu(__("Cikkek", null, "article"), "@article_index") ?></li>
+            <li><?php echo thu_menu(__("Részletes keresés"), "@character_advancedsearch") ?></li>
+            <li><?php echo thu_menu(__("Guildek"), "@guild_index") ?></li>
+            <li><?php echo thu_menu(__("GM-kereső", null, "gamemaster"), "@gmfinder_index") ?></li>
+            <li><?php echo thu_menu(__("Userscriptek"), "@userscripts") ?></li>
           </ul>
         </div>
       </div>  <!-- /containerbox -->
@@ -54,12 +51,12 @@
         <h3><?php echo __("Kalkulátorok") ?></h3>
         <div class="panel">
           <ul>
-            <li><?php echo link_to(__("Szintlépés"), "@calculator_level") ?></li>
-            <li><?php echo link_to("Magic level", "@calculator_mlvl") ?></li>
-            <li><?php echo link_to("Stamina", "@calculator_stamina") ?></li>
-            <li><?php echo link_to(__("Blessing árak", array(), "calculators"), "@calculator_blessing") ?></li>
-            <li><?php echo link_to("Soul", "@calculator_soul") ?></li>
-            <li><?php echo link_to(__("Chatlog statisztika", null, "calculators"), "@calculator_chatlog") ?></li>
+            <li><?php echo thu_menu(__("Szintlépés"), "@calculator_level") ?></li>
+            <li><?php echo thu_menu("Magic level", "@calculator_mlvl") ?></li>
+            <li><?php echo thu_menu("Stamina", "@calculator_stamina") ?></li>
+            <li><?php echo thu_menu(__("Blessing árak", array(), "calculators"), "@calculator_blessing") ?></li>
+            <li><?php echo thu_menu("Soul", "@calculator_soul") ?></li>
+            <li><?php echo thu_menu(__("Chatlog statisztika", null, "calculators"), "@calculator_chatlog") ?></li>
           </ul>
         </div>
       </div> <!-- /containerbox -->
@@ -102,7 +99,8 @@
 
   <div id="footer">
     <div id="footerbox" class="center">
-      :: <?php echo __("Copyright &copy; 2009-2010 Tibia.hu, minden jog fenntartva") ?> :: <?php echo link_to(__("Kapcsolat"), "@contact") ?> ::<br />
+      :: <?php echo __("Copyright &copy; 2009-2010 Tibia.hu, minden jog fenntartva") ?> :: <?php echo link_to(__("Kapcsolat"), "@contact") ?> ::
+        <?php echo link_to(__("Impresszum"), "@staff") ?> ::<br />
       :: <?php echo __("Ez egy rajongói oldal, a hivatalos honlap: <a href=\"http://tibia.com/\">tibia.com</a>") ?> ::<br />
       :: <?php echo __("Szerveridő: ");use_helper("Date");echo format_datetime(time()) ?> :: 
       <a href="<?php echo url_for("@last_update") ?>"><?php echo __("Utolsó frissítés %minutes% perce", array("%minutes%" => floor((time()-CronLogPeer::getTimeOfLastUpdate())/60))) ?></a> ::
