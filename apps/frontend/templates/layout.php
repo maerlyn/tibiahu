@@ -30,7 +30,7 @@
         <h3><?php echo __("Menü") ?></h3>
         <div class="panel">
           <ul>
-            <li><?php echo thu_menu(__("Hírek", null, "news"), "@news_index") ?></li>
+            <li><?php echo thu_menu(__("Hírek", null, "news"), "@homepage") ?></li>
             <li><?php echo thu_menu(__("Cikkek", null, "article"), "@article_index") ?></li>
             <li><?php echo thu_menu(__("Részletes keresés"), "@character_advancedsearch") ?></li>
             <li><?php echo thu_menu(__("Guildek"), "@guild_index") ?></li>
