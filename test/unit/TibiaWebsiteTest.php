@@ -16,7 +16,7 @@ $t->ok(is_array($temp) && count($temp), "characterInfo() returns a non-empty arr
 $temp = TibiaWebsite::characterInfo("asdasdasdasd");
 $t->ok(is_null($temp), "characterInfo() returns null for a non-existent character");
 
-$temp = TibiaWebsite::getDeaths("Doa");
+$temp = TibiaWebsite::getDeaths("Katka beauty");
 $t->ok(is_array($temp) && count($temp),  "getDeaths() returns a non-empty array for an existing character with deaths");
 
 $temp = TibiaWebsite::getDeaths("Tele the Druid");
@@ -25,7 +25,7 @@ $t->ok(is_array($temp) && !count($temp), "getDeaths() returns an empty array for
 $temp = TibiaWebsite::getDeaths("asdasdasdasd");
 $t->ok(is_null($temp), "getDeaths() returns null for a non-existent character");
 
-$temp = TibiaWebsite::lastDeath("Doa");
+$temp = TibiaWebsite::lastDeath("Katka beauty");
 $t->ok(is_array($temp) && count($temp), "lastDeath() returns an array with one element for an existing character with deaths");
 
 $temp = TibiaWebsite::lastDeath("Tele the Druid");
