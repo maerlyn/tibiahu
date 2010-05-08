@@ -23,4 +23,11 @@ class sfGuardAuthActions extends BasesfGuardAuthActions
   {
   }
 
+  public function executeVerifyMail(sfWebRequest $request)
+  {
+    $this->forward404Unless($user = sfGuardUserPeer::retrieveForVerify($request->getParameter("hash")));
+    $user->setIsActive(true);
+    $user->save();
+  }
+
 }

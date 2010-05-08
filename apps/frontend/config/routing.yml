@@ -160,23 +160,32 @@ gmfinder_show:
   requirements: { sf_method: [get, post] }
 
   
-### sfguard routes ###
+### user routes ###
 
 sf_guard_signin:
-  url:   /login
+  url:   /user/login
   param: { module: sfGuardAuth, action: signin }
  
 sf_guard_signout:
-  url:   /logout
+  url:   /user/logout
   param: { module: sfGuardAuth, action: signout }
   
 sf_guard_register:
-  url:   /register
+  url:   /user/register
   param: { module: sfGuardAuth, action: register }
 
 sf_guard_pending:
-  url:   /pending
+  url:   /user/pending
   param: { module: sfGuardAuth, action: pending }
+
+user_verifymail:
+  url:   /user/verify/:hash
+  param: { module: sfGuardAuth, action: verifyMail }
+
+user_characters:
+  url:    /user/characters
+  param:  { module: user, action: characters }
+
 
 ### rules that don't fit any other category :) ###  
   
@@ -202,10 +211,6 @@ userscripts:
 staff:
   url:    /about
   param:  { module: general, action: staff }
-
-user_characters:
-  url:    /user/characters
-  param:  { module: user, action: characters }
 
 # default rules
 homepage:

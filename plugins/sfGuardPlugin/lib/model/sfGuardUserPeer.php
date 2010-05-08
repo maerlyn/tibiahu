@@ -17,4 +17,13 @@
  */
 class sfGuardUserPeer extends PluginsfGuardUserPeer
 {
+
+  public static function retrieveForVerify($email)
+  {
+    $c = new Criteria();
+    $c->add(self::PASSWORD, $email);
+    $c->add(self::IS_ACTIVE, false);
+    return self::doSelectOne($c);
+  }
+
 }

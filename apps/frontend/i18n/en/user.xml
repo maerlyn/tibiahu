@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xliff PUBLIC "-//XLIFF//DTD XLIFF//EN" "http://www.oasis-open.org/committees/xliff/documents/xliff.dtd">
+<xliff version="1.0">
+  <file source-language="hu" target-language="en" datatype="plaintext"
+    original="user" date="2009-05-01T17:59:28Z" product-name="user">
+    <header/>
+    <body>
+      <trans-unit id="1">
+        <source>Felhasználó aktiválás</source>
+        <target>User activation</target>
+      </trans-unit>
+      <trans-unit id="2">
+        <source>Sikeresen aktiváltad a felhasználódat, most már be tudsz jelentkezni.</source>
+        <target>User successfully activated, you may now log in.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
