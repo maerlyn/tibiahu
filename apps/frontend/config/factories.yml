@@ -5,6 +5,12 @@ prod:
       level:   err
       loggers: ~
 
+  mailer:
+    param:
+      delivery_stategy: realtime
+      transport:
+        class:  Swift_MailTransport
+
 cli:
   controller:
     class: sfConsoleController
