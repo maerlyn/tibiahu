@@ -73,6 +73,9 @@
           <?php include_component("sfGuardAuth", "signin") ?>
           <?php else: ?>
           Bejelentkezve, mint <i><?php echo $sf_user->getUsername() ?></i><br />
+          <ul>
+            <li><?php echo thu_menu("Karaktereim","@user_characters") ?></li>
+          </ul>
           <?php echo link_to("Kijelentkezés", "@sf_guard_signout") ?>
           <?php endif ?>
         </div>

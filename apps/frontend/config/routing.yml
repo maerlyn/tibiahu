@@ -203,6 +203,10 @@ staff:
   url:    /about
   param:  { module: general, action: staff }
 
+user_characters:
+  url:    /user/characters
+  param:  { module: user, action: characters }
+
 # default rules
 homepage:
   url:   /

@@ -123,3 +123,12 @@ propel:
     id:
     user_id:          { type: integer, foreignTable: sf_guard_user, foreignReference: id, required: true, onDelete: cascade }
     email:            { type: varchar(255) }
+
+  tibia_user_character:
+    _attributes:      { phpName: UserCharacter }
+    _propel_behaviors:
+      symfony:
+        form:   false
+        filter: false
+    user_id:          { type: integer, foreignTable: sf_guard_user, foreignReference: id, primaryKey: true, onDelete: cascade }
+    character_id:     { type: integer, foreignTable: tibia_character, foreignReference: id, primaryKey: true, onDelete: cascade }
