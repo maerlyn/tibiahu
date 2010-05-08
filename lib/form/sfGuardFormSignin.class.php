@@ -14,7 +14,9 @@ class sfGuardFormSignin extends BaseForm
       'password' => new sfValidatorString(),
     ));
 
-    $this->validatorSchema->setPostValidator(new sfGuardValidatorUser());
+    $this->validatorSchema->setPostValidator(new sfGuardValidatorUser(
+      array(),
+      array("invalid" => "Hibás felhasználónév és/vagy jelszó")));
 
     $this->widgetSchema->setNameFormat('signin[%s]');
   }
