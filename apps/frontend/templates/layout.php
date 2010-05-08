@@ -78,16 +78,6 @@
         </div>
       </div>
 
-      <div style="width: 122px; margin: auto;">
-        <script type="text/javascript">
-          google_ad_client = "pub-5937469762999819";
-          google_ad_slot = "0814251540";
-          google_ad_width = 120;
-          google_ad_height = 600;
-        </script>
-        <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
-      </div>
-      
     </div> <!-- /leftbox -->
 
     <div id="rightbox">
