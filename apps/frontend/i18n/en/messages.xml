@@ -458,6 +458,26 @@ converts it'ss name to a link, pointing to the house's details on tibia.com, via
         <source>Házlinkelő script letöltése</source>
         <target>Download the house linker script</target>
       </trans-unit>
+      <trans-unit id="132">
+        <source>Impresszum</source>
+        <target>About</target>
+      </trans-unit>
+      <trans-unit id="133">
+        <source>Programozás</source>
+        <target>Programming</target>
+      </trans-unit>
+      <trans-unit id="134">
+        <source>Design</source>
+        <target>Design</target>
+      </trans-unit>
+      <trans-unit id="135">
+        <source>Cikkszerzők</source>
+        <target>Article authors</target>
+      </trans-unit>
+      <trans-unit id="136">
+        <source>Hírfordítók</source>
+        <target>News translators</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

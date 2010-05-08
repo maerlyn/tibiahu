@@ -199,6 +199,10 @@ userscripts:
   url:    /userscripts
   param:  { module: general, action: userscripts }
 
+staff:
+  url:    /about
+  param:  { module: general, action: staff }
+
 # default rules
 homepage:
   url:   /

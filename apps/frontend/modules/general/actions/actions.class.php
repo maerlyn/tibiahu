@@ -36,5 +36,10 @@ class generalActions extends sfActions
   public function executeUserscripts(sfWebRequest $request)
   {
   }
-      
+
+  public function executeStaff(sfWebRequest $request)
+  {
+    
+  }
+
 }
