@@ -14,6 +14,18 @@ class sfGuardAuthActions extends BasesfGuardAuthActions
       if ($this->form->isValid()) {
         $user = $this->form->save();
 
+        $values = $this->form->getValues();
+        $mail = $this->getMailer()->compose(
+          array("noreply@tibia.hu" => "Tibia.hu mail bot"),
+          $values["email"],
+          $this->getContext()->getI18N()->__("register.subject", null, "email"),
+          $this->getContext()->getI18N()->__("register.body", array(
+            "%username%" => $values["username"],
+            "%link%"     => $this->getContext()->getRouting()->generate("user_verifymail", array("hash" => $user->getPassword()), true),
+          ), "email")
+        );
+        $this->getMailer()->send($mail);
+
         $this->redirect($this->generateUrl("sf_guard_pending"));
       }
     }
