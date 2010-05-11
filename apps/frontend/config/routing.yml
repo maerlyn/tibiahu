@@ -186,6 +186,17 @@ user_characters:
   url:    /user/characters
   param:  { module: user, action: characters }
 
+user_characters_add:
+  url:    /user/characters/add
+  param:  { module: user, action: addCharacter }
+  requirements:
+    sf_method: post
+
+user_characters_verify:
+  url:    /user/characters/verify
+  param:  { module: user, action: verify }
+  requirements:
+    sf_method: post
 
 ### rules that don't fit any other category :) ###  
   

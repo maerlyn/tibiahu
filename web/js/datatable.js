@@ -16,6 +16,7 @@ function doDataTables() {
   
   $(".searchresults").dataTable({
     aaSorting: [],
+    bAutoWidth: false,
     bFilter: false,
     bInfo: false,
     bPaginate: false,

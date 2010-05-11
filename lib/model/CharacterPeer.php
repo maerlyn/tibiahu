@@ -256,5 +256,14 @@ class CharacterPeer extends BaseCharacterPeer
   {
     return sfConfig::get("sf_data_dir") . "/character.index/";
   }
-  
+
+  public static function retrieveForUser(sfGuardUser $user)
+  {
+    $c = new Criteria();
+    $c->addJoin(self::ID, UserCharacterPeer::CHARACTER_ID);
+    $c->add(UserCharacterPeer::USER_ID, $user->getId());
+    $c->addAscendingOrderByColumn(self::NAME);
+    return self::doSelectJoinAll($c);
+  }
+
 }

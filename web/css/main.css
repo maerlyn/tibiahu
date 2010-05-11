@@ -424,3 +424,39 @@ ol li {
 ol { 
   padding-left: 30px;
 }
+
+a.button {
+  padding: 4px;
+  border: 1px solid #DDB255;
+  -moz-border-radius: 16px;
+  -webkit-border-radius: 16px;
+  border-radius: 16px;
+}
+
+a.addbutton {
+  padding-left: 20px;
+  background-image: url(/images/add.png);
+  background-repeat: no-repeat;
+  background-position: 3px center;
+}
+
+.hidden {
+  display: none;
+}
+
+.expanded {
+  -moz-border-radius-bottomleft: 0 !important;
+  -moz-border-radius-bottomright: 0 !important;
+  -webkit-border-radius-bottomleft: 0 !important;
+  -webkit-border-radius-bottomright: 0 !important;
+  border-radius-bottomleft: 0 !important;
+  border-radius-bottomright: 0 !important;
+  border-bottom: 1px solid #363636 !important;
+}
+
+#addbox {
+  width: 400px;
+  border: 1px solid #ddb255;
+  margin-top: 4px;
+  padding: 5px;
+}
