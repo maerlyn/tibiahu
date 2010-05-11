@@ -5,7 +5,7 @@
   <?php echo $form["password"]->renderLabel() ?><br />
   <?php echo $form["password"]->render() ?><br /><br />
   <?php echo $form->renderHiddenFields() ?>
-  <input type="submit" value="<?php echo __("Bejelentkezés") ?>" />
+  <input type="submit" value="<?php echo __("Bejelentkezés", null, "user") ?>" />
 </p>
 </form>
-<?php echo link_to(__("Regisztráció"), "@sf_guard_register") ?>
+<?php echo link_to(__("Regisztráció", null, "user"), "@sf_guard_register") ?>

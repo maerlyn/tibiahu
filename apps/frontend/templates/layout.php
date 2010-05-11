@@ -72,11 +72,11 @@
           <?php if (!$sf_user->isAuthenticated()): ?>
           <?php include_component("sfGuardAuth", "signin") ?>
           <?php else: ?>
-          Bejelentkezve, mint <i><?php echo $sf_user->getUsername() ?></i><br />
+          <?php echo __("Bejelentkezve, mint <em>%user%</em>", array("%user%" => $sf_user->getUsername()), "user") ?><br />
           <ul>
-            <li><?php echo thu_menu("Karaktereim","@user_characters") ?></li>
+            <li><?php echo thu_menu(__("Karaktereim", null, "user"), "@user_characters") ?></li>
           </ul>
-          <?php echo link_to("Kijelentkezés", "@sf_guard_signout") ?>
+          <?php echo link_to(__("Kijelentkezés", null, "user"), "@sf_guard_signout") ?>
           <?php endif ?>
         </div>
       </div>

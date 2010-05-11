@@ -482,6 +482,14 @@ converts it'ss name to a link, pointing to the house's details on tibia.com, via
         <source>Hibás felhasználónév és/vagy jelszó</source>
         <target>Invalid username and/or password</target>
       </trans-unit>
+      <trans-unit id="138">
+        <source>Felhasználónév</source>
+        <target>Username</target>
+      </trans-unit>
+      <trans-unit id="139">
+        <source>Jelszó</source>
+        <target>Password</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

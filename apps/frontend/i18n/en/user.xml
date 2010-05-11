@@ -13,6 +13,30 @@
         <source>Sikeresen aktiváltad a felhasználódat, most már be tudsz jelentkezni.</source>
         <target>User successfully activated, you may now log in.</target>
       </trans-unit>
+      <trans-unit id="3">
+        <source>Regisztráció</source>
+        <target>Registration</target>
+      </trans-unit>
+      <trans-unit id="4">
+        <source>Bejelentkezés</source>
+        <target>Log in</target>
+      </trans-unit>
+      <trans-unit id="5">
+        <source>Bejelentkezve, mint &lt;em&gt;%user%&lt;/em&gt;</source>
+        <target>Logged in as &lt;em&gt;%user%&lt;/em&gt;</target>
+      </trans-unit>
+      <trans-unit id="6">
+        <source>Karaktereim</source>
+        <target>My characters</target>
+      </trans-unit>
+      <trans-unit id="7">
+        <source>Kijelentkezés</source>
+        <target>Log out</target>
+      </trans-unit>
+      <trans-unit id="8">
+        <source>Sikeres regisztráció. A fiókod létrehoztuk, de még inaktív. E-mailben küldtünk egy linket, annak meglátogatásával tudod aktiválni.</source>
+        <target>Registration successful. Your account has been created, but it is still inactive. We have e-mailed you a link, you can activate it by visiting that.</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
