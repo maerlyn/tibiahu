@@ -13,9 +13,12 @@
         <source>register.body</source>
         <target>Kedves %username%!
 
-Regisztrációdat itt tudod aktiválni: %link%
+Sikeresen regisztráltál a Tibia.hu oldalon.
+A rendszerbe csak aktiválást követően tudsz belépni.
+Az aktiváláshoz kattints a következő linkre: %link%
 
--- A Tibia.hu levelező robotja</target>
+Üdvözlettel,
+a Tibia.hu csapata</target>
       </trans-unit>
     </body>
   </file>

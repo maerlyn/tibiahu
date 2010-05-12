@@ -19,6 +19,7 @@
     <b><?php echo __("Hírfordítók") ?></b>:
     <ul>
       <li><a href="/character/bexterke">Bexterke</a></li>
+      <li><a href="/character/catti-bia">Catti-bia</a></li>
       <li><a href="/character/kicsi_tibi">Kicsi Tibi</a></li>
       <li><a href="/character/saiax_the_paladin">Saiax the Paladin</a></li>
       <li><a href="/character/shiwo">Shiwo</a></li>

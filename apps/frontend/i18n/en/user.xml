@@ -10,8 +10,8 @@
         <target>User activation</target>
       </trans-unit>
       <trans-unit id="2">
-        <source>Sikeresen aktiváltad a felhasználódat, most már be tudsz jelentkezni.</source>
-        <target>User successfully activated, you may now log in.</target>
+        <source>Az aktiválás sikeresen megtörtént. Most már be tudsz jelentkezni.</source>
+        <target>Activation successful, you may log in now.</target>
       </trans-unit>
       <trans-unit id="3">
         <source>Regisztráció</source>
@@ -34,8 +34,12 @@
         <target>Log out</target>
       </trans-unit>
       <trans-unit id="8">
-        <source>Sikeres regisztráció. A fiókod létrehoztuk, de még inaktív. E-mailben küldtünk egy linket, annak meglátogatásával tudod aktiválni.</source>
-        <target>Registration successful. Your account has been created, but it is still inactive. We have e-mailed you a link, you can activate it by visiting that.</target>
+        <source>Sikeres regisztráció!</source>
+        <target>Registration successful!</target>
+      </trans-unit>
+      <trans-unit id="9">
+        <source>A fiókod létrehoztuk, de még inaktív. E-mailben küldtünk egy linket, annak meglátogatásával tudod aktiválni.</source>
+        <target>Your account has been created, but is yet inactive. We have e-mailed you a link where you can activate it.</target>
       </trans-unit>
     </body>
   </file>

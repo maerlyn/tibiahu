@@ -459,4 +459,5 @@ a.addbutton {
   border: 1px solid #ddb255;
   margin-top: 4px;
   padding: 5px;
+  line-height: 1.5em;
 }

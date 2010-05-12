@@ -13,9 +13,12 @@
         <source>register.body</source>
         <target>Dear %username%,
 
-You can activate your registration here: %link%
+you have successfully registered on Tibia.hu.
+Your account needs to be activated before you can log in.
+To activate, visit the following link: %link%
 
--- The Tibia.hu mailer bot</target>
+Regards,
+  the Tibia.hu staff</target>
       </trans-unit>
     </body>
   </file>

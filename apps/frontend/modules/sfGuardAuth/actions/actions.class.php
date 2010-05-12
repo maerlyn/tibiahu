@@ -16,7 +16,7 @@ class sfGuardAuthActions extends BasesfGuardAuthActions
 
         $values = $this->form->getValues();
         $mail = $this->getMailer()->compose(
-          array("noreply@tibia.hu" => "Tibia.hu mail bot"),
+          array("noreply@tibia.hu" => "Tibia.hu"),
           $values["email"],
           $this->getContext()->getI18N()->__("register.subject", null, "email"),
           $this->getContext()->getI18N()->__("register.body", array(
