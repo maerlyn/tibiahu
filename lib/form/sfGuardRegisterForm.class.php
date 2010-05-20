@@ -14,6 +14,8 @@ class sfGuardRegisterForm extends BaseForm
       "email"     =>  new sfWidgetFormInputText(array("label" => "E-mail")),
     ));
 
+    $this->widgetSchema->setHelp("password", "Legyen legalább nyolc karakter");
+
     $this->setValidators(array(
       "username"  =>  new sfValidatorString(array(
         "min_length"  =>  4,

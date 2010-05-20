@@ -12,7 +12,10 @@
         <tr>
           <th><?php echo $field->renderLabel() ?></th>
           <td><?php echo $field->render() ?></td>
-          <td><?php echo $field->renderError() ?></td>
+          <td>
+            <?php echo $field->renderError() ?>
+            <?php echo strip_tags($field->renderHelp()) ?>
+          </td>
         </tr>
         <?php endforeach ?>
         <tr>
