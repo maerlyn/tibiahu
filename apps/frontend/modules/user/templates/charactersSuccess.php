@@ -32,6 +32,7 @@
     
     <a id="addlink" class="button addbutton hidden">Hozzáadás</a>
     <div id="addbox" class="hidden">
+      <img src="<?php echo public_path("images/ajax-loader.gif") ?>" class="loader hidden" />
       Karakter neve: <input type="text" name="charname" id="input-charname" />
       <a href="<?php echo url_for("@user_characters_add") ?>" id="get-code"><em>Tovább...</em></a><br />
       <div id="ajaxcontainer-code"></div>

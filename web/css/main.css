@@ -431,6 +431,7 @@ a.button {
   -moz-border-radius: 16px;
   -webkit-border-radius: 16px;
   border-radius: 16px;
+  cursor: pointer;
 }
 
 a.addbutton {
@@ -460,4 +461,8 @@ a.addbutton {
   margin-top: 4px;
   padding: 5px;
   line-height: 1.5em;
+}
+
+#addbox .loader {
+  float: right;
 }
