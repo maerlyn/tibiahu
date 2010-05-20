@@ -198,6 +198,10 @@ user_characters_verify:
   requirements:
     sf_method: post
 
+user_settings:
+  url:    /user/settings
+  param:  { module: user, action: settings }
+
 ### rules that don't fit any other category :) ###  
   
 contact:

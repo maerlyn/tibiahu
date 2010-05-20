@@ -47,4 +47,18 @@ class userActions extends sfActions
     }
   }
 
+  public function executeSettings(sfWebRequest $request)
+  {
+    $this->form = new SettingsForm(array(), array("user" => $this->getUser()->getGuardUser()));
+
+    if ($request->isMethod("post")) {
+      $this->form->bind($request->getParameter("settings"));
+      if ($this->form->isValid()) {
+        if ($this->form->save()) {
+          $this->getUser()->setFlash("saved", "Mentve.");
+        }
+      }
+    }
+  }
+
 }

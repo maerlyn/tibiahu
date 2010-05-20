@@ -74,6 +74,7 @@
           <?php else: ?>
           <?php echo __("Bejelentkezve, mint <em>%user%</em>", array("%user%" => $sf_user->getUsername()), "user") ?><br />
           <ul>
+            <li><?php echo thu_menu(__("Beállítások", null, "user"), "@user_settings") ?></li>
             <li><?php echo thu_menu(__("Karaktereim", null, "user"), "@user_characters") ?></li>
           </ul>
           <?php echo link_to(__("Kijelentkezés", null, "user"), "@sf_guard_signout") ?>
