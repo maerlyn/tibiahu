@@ -70,117 +70,77 @@ abstract class TibiaWebsite
       return null;
     }
 
-    $character = array();
+    $website = str_ireplace("&#160;", " ", $website);
 
-    preg_match(
-      "@<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=4 WIDTH=100%><TR BGCOLOR=#505050><TD COLSPAN=2 CLASS=white><B>Character Information</B>.+?</TABLE>@is",
-      $website, 
-      $matches
+    libxml_use_internal_errors(true);
+    $domd = new DOMDocument("1.0", "iso-8859-1");
+    $domd->loadHTML($website);
+    libxml_use_internal_errors(false);
+
+    $domx = new DOMXPath($domd);
+    $table = $domx->query("//td[child::b='Character Information']/ancestor::table[1]")->item(0);
+
+    $character = array(
+      "name"        =>  $domx->query("//tr[child::td='Name:']/td[2]", $table)->item(0)->textContent,
+      "sex"         =>  $domx->query("//tr[child::td='Sex:']/td[2]", $table)->item(0)->textContent,
+      "profession"  =>  $domx->query("//tr[child::td='Profession:']/td[2]", $table)->item(0)->textContent,
+      "level"       =>  $domx->query("//tr[child::td='Level:']/td[2]", $table)->item(0)->textContent,
+      "world"       =>  $domx->query("//tr[child::td='World:']/td[2]", $table)->item(0)->textContent,
+      "residence"   =>  $domx->query("//tr[child::td='Residence:']/td[2]", $table)->item(0)->textContent,
+      "lastlogin"   =>  strtotime($domx->query("//tr[child::td='Last login:']/td[2]", $table)->item(0)->textContent),
+      "accountstatus" =>  $domx->query("//tr[child::td='Account Status:']/td[2]", $table)->item(0)->textContent,
+    );
+
+    $married = $domx->query("//tr[child::td='Married to:']/td[2]", $table);
+    if ($married->length) {
+      $character["married_to"] = $married->item(0)->textContent;
+    }
+
+    $guild = $domx->query("//tr[child::td='Guild membership:']/td[2]", $table);
+    if ($guild->length) {
+      $name = $domx->query("//tr[child::td='Guild membership:']/td[2]//a", $table)->item(0)->textContent;
+      $rank = substr($guild->item(0)->textContent, 0, -1 * (strlen($name) + strlen(" of the ")));
+      $character["guild"] = array(
+        "name"  =>  $name,
+        "rank"  =>  $rank,
       );
-    $characterinfo = $matches[0];
-   
-    
-    //<TD WIDTH=20%>Name:</TD><TD>Tele the Druid</TD></TR>
-    //<TD WIDTH=20%>Name:</TD><TD>Shaya Liron, will be deleted at Mar&#160;12&#160;2009,&#160;03:58:25&#160;CET</TD></TR>
-    preg_match("@<TD WIDTH=20%>Name:</TD><TD>(.+?)</TD></TR>@is", $characterinfo, $matches);
-    $character["name"] = $matches[1];
-    
+    }
+
+    $position = $domx->query("//tr[child::td='Position:']/td[2]", $table);
+    if ($position->length) {
+      $character["position"] = $position->item(0)->textContent;
+    }
+
+    $house = $domx->query("//tr[child::td='House:']/td[2]", $table);
+    if ($house->length) {
+      $house = $house->item(0)->textContent;
+      $character["house"] = substr($house, 0, strpos($house, " is paid until"));
+    }
+
+    $character["is_hidden"] = (false === stripos($website, "<B>Account Information</B>") && false === stripos($website, "<B>Characters</B>"));
+
+    $character["deaths"] = self::processDeaths($website);
+
+    $characters = $domx->query("//td[child::b='Characters']/ancestor::table[1]");
+    if ($characters->length) {
+      $character["characters"] = array();
+      $rows = $domx->query("tr[position() > 2]", $characters->item(0));
+      foreach($rows as $row) {
+        $character["characters"][] = array(
+          "name"  =>  preg_replace("@^(\\d+\\. )@is", "", $row->childNodes->item(0)->textContent),
+          "world" =>  $row->childNodes->item(1)->textContent,
+        );
+      }
+    }
+
+    // some cleanup
+
     if (stripos($character["name"], ", will be deleted at")) {
       $tmp = explode(", will be deleted at", $character["name"]);
       $character["name"] = $tmp[0];
       $character["deleted"] = strtotime(str_replace("&#160;", " ", $tmp[1]));
     }
-    
-    //<TD>Sex:</TD><TD>male</TD>
-    preg_match("@<TD>Sex:</TD><TD>((?:fe|)male)</TD>@is", $characterinfo, $matches);
-    $character["sex"] = $matches[1];
-    
-    //<TD>Profession:</TD><TD>Elder Druid</TD></TR>
-    preg_match("@<TD>Profession:</TD><TD>(.+?)</TD></TR>@is", $characterinfo, $matches);
-    $character["profession"] = $matches[1];
-    
-    //<TD>Level:</TD><TD>68</TD></TR>
-    preg_match("@<TD>Level:</TD><TD>(\\d+)</TD></TR>@is", $characterinfo, $matches);
-    $character["level"] = $matches[1];
-    
-    //<TD>World:</TD><TD>Secura</TD></TR>
-    preg_match("@<TD>World:</TD><TD>(.+?)</TD></TR>@is", $characterinfo, $matches);
-    $character["world"] = $matches[1];
-    
-    //<TD>Residence:</TD><TD>Kazordoon</TD>
-    preg_match("@<TD>Residence:</TD><TD>(.+?)</TD>@is", $characterinfo, $matches);
-    $character["residence"] = $matches[1];
-    
-    //<TR BGCOLOR=#F1E0C6><TD>Married to:</TD><TD><A HREF="http://www.tibia.com/community/?subtopic=characters&name=Maci+Laci+The+Druid">Maci&#160;Laci&#160;The&#160;Druid</A></TD></TR>
-    if (preg_match("@<td>Married to:</td><td><a href=.+?>(.+?)</a></td>@is", $characterinfo, $matches)) {
-      $character["married_to"] = str_replace("&#160;", " ", $matches[1]);
-    }
-    
-    //<TD>Guild&#160;membership:</TD><TD>Friend of the nature of the <A HREF="<url>">Pannon&#160;Guardians</A></TD></TR>
-    if (preg_match("@<TD>Guild&#160;membership:</TD><TD>(.+?) of the <A HREF.+?>(.+?)</A></TD></TR>@is", $characterinfo, $matches)) 
-    {
-      $character["guild"] = array(
-        "name"  =>  str_replace("&#160;", " ", $matches[2]),
-        "rank"  =>  str_replace("&#160;", " ", $matches[1])
-      );
-    }
-    
-    //<TD>Last login:</TD><TD>Mar&#160;01&#160;2009,&#160;18:54:54&#160;CET</TD></TR>
-    preg_match("@<TD>Last login:</TD><TD>(.+?)</TD></TR>@is", $characterinfo, $matches);    
-    $character["lastlogin"] = strtotime(str_replace("&#160;", " ", $matches[1]));
-    
-    //<TD>Position:</TD><TD>Gamemaster</TD>
-    if (false !== stripos($characterinfo, "<td>Position:</td>")) {
-      preg_match("@<td>Position:</td><td>(.+?)</td>@is", $characterinfo, $matches);
-      $character["position"] = $matches[1];
-    }
-    
-    //<TD>Account&#160;Status:</TD><TD>Premium Account</TD></TR>
-    preg_match("@<TD>Account&#160;Status:</TD><TD>(Premium|Free) Account</TD></TR>@is", $characterinfo, $matches);
-    $character["accountstatus"] = $matches[1];
-    
-    //<TD>House:</TD><TD>Nobility Quarter 2 (Kazordoon) is paid until Mar&#160;05&#160;2009</TD></TR>
-    if (preg_match("@<TD>House:</TD><TD>(.+?\\)) is paid until .+?</TD></TR>@is", $characterinfo, $matches)) {
-        $character["house"] = $matches[1];
-    }
-    
-    // --- --- --- 
 
-    $character["is_hidden"] = (false === stripos($website, "<B>Account Information</B>") && false === stripos($website, "<B>Characters</B>"));
-
-    $character["deaths"] = self::processDeaths($website);
-    
-    //<TD WIDTH=20% VALIGN=top CLASS=red>Banished:</TD><TD CLASS=red>until Mar&#160;04&#160;2009,&#160;15:52:25&#160;CET because of hacking</TD></TR>
-    //<TD WIDTH=20% VALIGN=top CLASS=red>Banished:</TD><TD CLASS=red>permanently because of invalid payment</TD></TR>
-    if (strpos($website, " CLASS=red>Banished:")) {
-        preg_match("@<TD WIDTH=20% VALIGN=top CLASS=red>Banished:</TD><TD CLASS=red>(.+?) because of (.+?)</TD></TR>@is", $website, $matches);
-        if (false !== strpos($matches[1], "until")) {
-            if (false !== strpos($matches[1], "deletion")) {
-                $until = 0; //nullas unix timestamp
-            } else {
-              $until = strtotime(str_replace("&#160;", " ", substr($matches[1], 6)));
-            }
-        } else {
-          $until = $matches[1];
-        }
-        $character["banishment"] = array(
-          "until"   =>  $until,
-          "reason"  =>  $matches[2]
-        );
-    }
-    
-    if (preg_match("@<TABLE.+?<TD COLSPAN=4 CLASS=white><B>Characters</B></TD>(.+?)</TD></TR></FORM></TABLE>[\\n ]</TD></TR></TABLE>@is", $website, $matches)) {
-      preg_match_all("@<tr.+?><nobr>(.+?)</nobr>.+?<nobr>(.+?)</nobr>@is", $matches[0], $matches);
-      $other_characters = array();
-      foreach ($matches[1] as $k => $character_name) {
-        $character_name = preg_replace("@^(\\d+\\. )@is", "", str_replace("&#160;", " ", $character_name));
-        $other_characters[] = array(
-          "name"  =>  $character_name,
-          "world" =>  $matches[2][$k],
-        );
-      }
-      $character["characters"] = $other_characters;
-    }
     
     self::$characterInfo_cache[$charname] = $character;
     return $character;
