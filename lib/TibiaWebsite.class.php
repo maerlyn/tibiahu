@@ -23,31 +23,28 @@ abstract class TibiaWebsite
     if (false === ($website = RemoteFile::get("http://www.tibia.com/community/?subtopic=whoisonline&world={$world}"))) {
       return array();
     }
-    
-    preg_match_all("@<tr bgcolor=.+?>(.+?)<.tr>@is", $website, $matches);
-        
-    $chars = array();
-    foreach ($matches[0] as $v) {
+
+    $website = str_ireplace("&#160;", " ", $website);
+
+    libxml_use_internal_errors(true);
+    $domd = new DOMDocument("1.0", "iso-8859-1");
+    $domd->loadHTML($website);
+    libxml_use_internal_errors(false);
+
+    $domx = new DOMXPath($domd);
+    $rows = $domx->query("//div[@class='BoxContent']/table//table[position() = 2]//tr[position() > 1]");
+
+    $return = array();
+    foreach ($rows as $char) {
       set_time_limit(5);
-      $char = array();
-      $name = preg_replace("#.+?subtopic=characters&name=(.+?)\">.+#is", "\\1", $v);
-      $name = urldecode($name);
-      $char["name"] = $name;
-      
-      if ($name[0] == "<") {
-        continue;
-      }
-      
-      $level = preg_replace("#.+?<td width=10%>(\d+?)</td>.+#is", "\\1", $v);
-      $char["level"] = $level;
-      
-      $voc = preg_replace("#.+?<td width=20%>(.+?)</td>.+#is", "\\1", $v);
-      $char["vocation"] = $voc;
-      
-      $chars[] = $char;
+      $return[] = array(
+        "name"      =>  $char->childNodes->item(0)->textContent,
+        "level"     =>  $char->childNodes->item(1)->textContent,
+        "vocation"  =>  $char->childNodes->item(2)->textContent,
+      );
     }
 
-    return $chars;
+    return $return;
   }
   
   /**
