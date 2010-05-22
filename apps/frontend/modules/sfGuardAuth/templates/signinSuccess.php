@@ -1,6 +1,6 @@
-<?php slot("title", "Bejelentkezés") ?>
+<?php slot("title", __("Bejelentkezés", null, "user")) ?>
 <div class="containerbox">
-  <h3><?php echo __("Bejelentkezés") ?></h3>
+  <h3><?php echo __("Bejelentkezés", null, "user") ?></h3>
   <div class="panel">
     <?php if ($form->hasGlobalErrors()): ?>
       <?php $form->renderGlobalErrors() ?>
@@ -21,7 +21,7 @@
           <td></td>
           <td>
             <?php echo $form->renderHiddenFields() ?>
-            <input type="submit" value="<?php echo __("Bejelentkezés") ?>" />
+            <input type="submit" value="<?php echo __("Bejelentkezés", null, "user") ?>" />
           </td>
         </tr>
       </table>

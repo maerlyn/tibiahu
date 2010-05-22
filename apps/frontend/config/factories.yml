@@ -43,7 +43,8 @@ all:
       
   storage:
     param:
-      session_name: tibiahu
+      session_name:           tibiahu
+      session_cookie_domain:  tibia.local
 
   mailer:
     param:

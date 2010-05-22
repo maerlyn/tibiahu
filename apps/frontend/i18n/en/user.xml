@@ -62,8 +62,8 @@
         <target>No such character in the database</target>
       </trans-unit>
       <trans-unit id="15">
-        <source>Az ellenőrzőkódod: &lt;strong&gt;%code%&lt;strong;&gt;</source>
-        <target>Your verification code is &lt;strong&gt;%code%&lt;strong;&gt;</target>
+        <source>Az ellenőrzőkódod: %code%</source>
+        <target>Your verification code is %code%</target>
       </trans-unit>
       <trans-unit id="16">
         <source>Nem találom az ellenőrzőkódot. Biztosan jó helyre raktad? Próbáld meg mégegyszer!</source>
