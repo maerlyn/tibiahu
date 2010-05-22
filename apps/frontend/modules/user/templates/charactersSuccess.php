@@ -1,16 +1,17 @@
+<?php slot("title", __("Karaktereim", null, "user")) ?>
 <div class="containerbox">
-  <h3>Karaktereim</h3>
+  <h3><?php echo link_to(__("Karaktereim", null, "user"), "@user_characters") ?></h3>
   <div class="panel">
     <?php echo format_number_choice("[0]Nincs karaktered|[1,+Inf]%count% karaktered van",
-      array("%count%" => count($characters)), count($characters)) ?>
+      array("%count%" => count($characters)), count($characters), "user") ?>
     <table class="searchresults">
       <thead>
         <tr>
-          <th>Név</th>
-          <th>Kaszt</th>
-          <th>Szint</th>
-          <th>Guild</th>
-          <th>Szerver</th>
+          <th><?php echo __("Név") ?></th>
+          <th><?php echo __("Kaszt") ?></th>
+          <th><?php echo __("Szint") ?></th>
+          <th><?php echo __("Guild") ?></th>
+          <th><?php echo __("Szerver") ?></th>
         </tr>
       </thead>
       <tbody>
@@ -27,14 +28,14 @@
     </table>
     <br />
     <noscript>
-      Engedélyezd a javascriptet, hogy új karaktert tudj hozzáadni a fiókodhoz.
+      <?php echo __("Engedélyezd a javascriptet, hogy új karaktert tudj hozzáadni a fiókodhoz.", null, "user") ?>
     </noscript>
     
-    <a id="addlink" class="button addbutton hidden">Hozzáadás</a>
+    <a id="addlink" class="button addbutton hidden"><?php echo __("Hozzáadás", null, "user") ?></a>
     <div id="addbox" class="hidden">
-      <img src="<?php echo public_path("images/ajax-loader.gif") ?>" class="loader hidden" />
-      Karakter neve: <input type="text" name="charname" id="input-charname" />
-      <a href="<?php echo url_for("@user_characters_add") ?>" id="get-code"><em>Tovább...</em></a><br />
+      <img src="<?php echo public_path("images/ajax-loader.gif") ?>" class="loader hidden" alt="loader" />
+      <?php echo __("Név") ?>: <input type="text" name="charname" id="input-charname" />
+      <a href="<?php echo url_for("@user_characters_add") ?>" id="get-code"><em><?php echo __("Tovább") ?>...</em></a><br />
       <div id="ajaxcontainer-code"></div>
     </div>
   </div>

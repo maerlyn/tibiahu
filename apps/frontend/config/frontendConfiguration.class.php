@@ -6,5 +6,6 @@ class frontendConfiguration extends sfApplicationConfiguration
   {
     ini_set("memory_limit", "32M");
     sfValidatorBase::setDefaultMessage("required", "Kötelező kitölteni");
+    sfValidatorBase::setDefaultMessage("invalid", "Érvénytelen");
   }
 }

@@ -1,8 +1,8 @@
 <br />
 <?php if (!isset($character) || !$character): ?>
-Nincs ilyen nevű karakter az adatbázisban.
+  <?php echo __("Nincs ilyen nevű karakter az adatbázisban.", null, "user") ?>
 <?php elseif (!$verification): ?>
-Nem találom az ellenőrzőkódot. Biztosan jó helyre raktad? Próbáld meg mégegyszer!
+  <?php echo __("Nem találom az ellenőrzőkódot. Biztosan jó helyre raktad? Próbáld meg mégegyszer!", null, "user") ?>
 <?php elseif ($verification): ?>
-Sikeres ellenőrzés. Frissítsd az oldalt, és látni fogod a listában.
+  <?php echo __("Sikeres ellenőrzés. Frissítsd az oldalt, és látni fogod a listában.", null, "user") ?>
 <?php endif ?>

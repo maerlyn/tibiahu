@@ -361,8 +361,8 @@
         <target>Target mlvl</target>
       </trans-unit>
       <trans-unit id="110">
-        <source>Kötelező kitölteni.</source>
-        <target>Required.</target>
+        <source>Kötelező kitölteni</source>
+        <target>Required</target>
       </trans-unit>
       <trans-unit id="111">
         <source>Túl magas szint!</source>
@@ -489,6 +489,42 @@ converts it'ss name to a link, pointing to the house's details on tibia.com, via
       <trans-unit id="139">
         <source>Jelszó</source>
         <target>Password</target>
+      </trans-unit>
+      <trans-unit id="140">
+        <source>Jelszó mégegyszer</source>
+        <target>Repeat password</target>
+      </trans-unit>
+      <trans-unit id="141">
+        <source>Legyen legalább nyolc karakter</source>
+        <target>Has to be at least 8 characters</target>
+      </trans-unit>
+      <trans-unit id="142">
+        <source>Már használt felhasználónév</source>
+        <target>Username already taken</target>
+      </trans-unit>
+      <trans-unit id="143">
+        <source>Nem egyezik a két jelszó</source>
+        <target>Passwords don't match</target>
+      </trans-unit>
+      <trans-unit id="144">
+        <source>Érvénytelen</source>
+        <target>Invalid</target>
+      </trans-unit>
+      <trans-unit id="145">
+        <source>Hagyd üresen, ha nem akarod megváltoztatni</source>
+        <target>Leave both empty unless you want to change it</target>
+      </trans-unit>
+      <trans-unit id="146">
+        <source>Mentés</source>
+        <target>Save</target>
+      </trans-unit>
+      <trans-unit id="147">
+        <source>Mentve.</source>
+        <target>Saved.</target>
+      </trans-unit>
+      <trans-unit id="148">
+        <source>Tovább</source>
+        <target>Next</target>
       </trans-unit>
     </body>
   </file>

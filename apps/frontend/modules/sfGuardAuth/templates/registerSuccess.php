@@ -1,6 +1,6 @@
-<?php slot("title", __("Regisztráció")) ?>
+<?php slot("title", __("Regisztráció", null, "user")) ?>
 <div class="containerbox">
-  <h3><?php echo __("Regisztráció") ?></h3>
+  <h3><?php echo link_to(__("Regisztráció", null, "user"), "@sf_guard_register") ?></h3>
   <div class="panel">
     <form method="post" action="<?php echo url_for("@sf_guard_register") ?>">
       <?php if ($form->hasGlobalErrors()): ?>
@@ -22,7 +22,7 @@
           <td></td>
           <td>
             <?php echo $form->renderHiddenFields() ?>
-            <input type="submit" value="<?php echo __("Regisztráció") ?>" />
+            <input type="submit" value="<?php echo __("Regisztráció", null, "user") ?>" />
           </td>
           <td></td>
         </tr>

@@ -1,8 +1,8 @@
 <br />
 <?php if (!isset($character) || !$character): ?>
-Nincs ilyen nevű karakter az adatbázisban.
+  <?php echo __("Nincs ilyen nevű karakter az adatbázisban.", null, "user") ?>
 <?php else: ?>
-Az ellenőrzőkódod: <strong><?php echo $code ?></strong>
-<a href="<?php echo url_for("@user_characters_verify") ?>" id="ajax-verify"><em>Ellenőrzés...</em></a><br />
+  <?php echo __("Az ellenőrzőkódod: <strong>%code%</strong>", array("%code%" => $code), "user") ?> 
+<a href="<?php echo url_for("@user_characters_verify") ?>" id="ajax-verify"><em><?php echo __("Tovább") ?>...</em></a><br />
 <div id="ajaxcontainer-verify"></div>
 <?php endif ?>

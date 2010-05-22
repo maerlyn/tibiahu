@@ -1,11 +1,12 @@
+<?php slot("title", __("Beállítások", null, "user")) ?>
 <div class="containerbox">
-  <h3><?php echo link_to("Beállítások", "@user_settings") ?></h3>
+  <h3><?php echo link_to(__("Beállítások", null, "user"), "@user_settings") ?></h3>
   <div class="panel">
     <?php if ($sf_user->hasFlash("saved")): ?>
     <div class="flash info">
       <p>
         <img src="<?php echo image_path("info.png") ?>" alt="information" />
-        <?php echo __($sf_user->getFlash("saved"), null, "character") ?>
+        <?php echo __($sf_user->getFlash("saved")) ?>
       </p>
     </div>
     <?php endif ?>
@@ -30,7 +31,7 @@
           <td></td>
           <td>
             <?php echo $form->renderHiddenFields() ?>
-            <input type="submit" value="Mentés" />
+            <input type="submit" value="<?php echo __("Mentés") ?>" />
           </td>
           <td></td>
         </tr>
