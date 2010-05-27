@@ -140,7 +140,6 @@ abstract class TibiaWebsite
       $character["name"] = $tmp[0];
       $character["deleted"] = strtotime(str_replace("&#160;", " ", $tmp[1]));
     }
-
     
     self::$characterInfo_cache[$charname] = $character;
     return $character;
@@ -195,56 +194,50 @@ abstract class TibiaWebsite
   private static function processDeaths($website)
   {
     $deaths = array();
-    
-    if (preg_match("@<td colspan=\"2\" class=\"white\" ><b>Character Deaths</b></td>.+?</table>@is", $website, $matches)) 
-    {
-      $deathlist = $matches[0];
-      
-      preg_match_all("@<tr(.+?)</tr>@is", $deathlist, $rows);
-      
-      foreach ($rows[0] as $row) {
-       
-        if (false !== stripos($row, "?subtopic=characters")) { //killed by a player
-          $death["reason_type"] = "player";
-          $death["reason"] = array();
-          
-          preg_match_all("@&name=.+?>(.+?)</a>@is", $row, $deathdata);
-          $reasons = array();
-          foreach ($deathdata[1] as $v) {
-            $reasons[] = str_replace("&#160;", " ", $v);
-          }
-          
-          preg_match("@<td w.+?>(.+?)</td><td>.+? at level (\\d+)@is", $row, $deathdata);
-          
-          $death = array(
-            "time"        =>  strtotime(str_replace("&#160;", " ", $deathdata[1])),
-            "level"       =>  $deathdata[2],
-            "reason_type" =>  "player",
-            "reason"      =>  $reasons,
-          );
-          
-        } else { // killed by a monster
-        
-          preg_match("@<tr bgcolor=\"#.{6}\" ><td w.+?>(.+?)</td><td>(?:Killed |Died) at Level (\\d+) by (.+?)\.</td></tr>@is", $row, $deathdata);
-          //die(var_dump($deathdata));
-          $reason = trim(preg_replace('#^(an |a )(.+?)$#i', "\\2", $deathdata[3]));
-          if (false !== stripos($reason, " of <a ")) {
-            $reason = explode(" of <a ", $reason);
-            $reason = $reason[0];
-          }
-          
-          $death = array(
-            "time"        =>  strtotime(str_replace("&#160;", " ", $deathdata[1])),
-            "level"       =>  $deathdata[2],
-            "reason_type" =>  "monster",
-            "reason"      =>  $reason,
-          );
+
+    $website = str_ireplace("&#160;", " ", $website);
+    $domd = new DOMDocument("1.0", "iso-8859-1");
+    libxml_use_internal_errors(true);
+    $domd->loadHTML($website);
+    libxml_use_internal_errors(false);
+
+    $domx = new DOMXPath($domd);
+    $rows = $domx->query("//td[child::b='Character Deaths']/ancestor::table[1]//tr[position() > 1]");
+
+    foreach ($rows as $row) { /* @var $row DOMElement */
+      if ($row->childNodes->item(1)->childNodes->length == 1) { //killed by a monster
+
+        preg_match("@at Level (\\d+) by (.+?)\.@is", $row->childNodes->item(1)->textContent, $data);
+        $reason = trim(preg_replace('#^(an |a )(.+?)$#i', "\\2", $data[2]));
+        if (false !== stripos($reason, " of <a ")) {
+          $reason = explode(" of <a ", $reason);
+          $reason = $reason[0];
         }
-        
-        $deaths[] = $death;
+
+        $deaths[] = array(
+          "time"        =>  strtotime($row->childNodes->item(0)->textContent),
+          "level"       =>  $data[1],
+          "reason_type" =>  "monster",
+          "reason"      =>  $reason,
+        );
+
+      } else { //killed by a player
+
+        $murderers = array();
+        foreach ($row->childNodes->item(1)->childNodes as $node) {
+          if ($node->nodeName == "a") { $murderers[] = $node->textContent; }
+        }
+        preg_match("#at level (\\d*)#is", $row->childNodes->item(1)->textContent, $data);
+        $deaths[] = array(
+          "time"            =>  strtotime($row->childNodes->item(0)->textContent),
+          "level"           =>  $data[1],
+          "reason_type"     =>  "player",
+          "reason"          =>  $murderers,
+        );
       }
+
     }
-    
+
     return $deaths;
   }
   
