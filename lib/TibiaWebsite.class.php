@@ -267,10 +267,19 @@ abstract class TibiaWebsite
     if (false === $website = RemoteFile::get("http://www.tibia.com/community/?subtopic=guilds&world=" . urlencode($world))) {
       return null;
     }
-    
-    preg_match_all("#<img src=\"http://static.tibia.com/images/(?:guildlogos|community)/.+?\.gif\".+?><b>(.+?)</b>#is", $website, $matches);
-    
-    return str_replace("&#160;", " ", $matches[1]);
+
+    $domd = new DOMDocument("1.0", "iso-8859-1");
+    libxml_use_internal_errors(true);
+    $domd->loadHTML($website);
+    libxml_use_internal_errors(false);
+
+    $domx = new DOMXPath($domd);
+    $items = $domx->evaluate("//td[child::b='Active Guilds on {$world}']/ancestor::table[1]//tr[position() > 2]/td[2]/b");
+
+    $ret = array();
+    foreach ($items as $item) { $ret[] = $item->textContent; }
+
+    return $ret;
   }
   
   /**
