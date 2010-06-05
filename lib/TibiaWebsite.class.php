@@ -328,12 +328,22 @@ abstract class TibiaWebsite
     if (false !== stripos($website, "</B> does not exist.</TD>")) {
       return false;
     }
-    
-    if (!preg_match("#<TD VALIGN=top>Comment:</TD><TD>(.+?)</TD></TR>#is", $website, $matches)) { //has no comment
+
+    $website = str_ireplace("&#160;", " ", $website);
+
+    $domd = new DOMDocument("1.0", "iso-8859-1");
+    libxml_use_internal_errors(true);
+    $domd->loadHTML($website);
+    libxml_use_internal_errors(false);
+
+    $domx = new DOMXPath($domd);
+    $items = $domx->evaluate("//tr[child::td='Comment:']/td[2]");
+
+    if (!$items->length) { //has no comment
       return false;
     }
     
-    return (false !== strpos($matches[1], $code));
+    return (false !== strpos($items->item(0)->textContent, $code));
   }
  
   /**
