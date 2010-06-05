@@ -268,6 +268,8 @@ abstract class TibiaWebsite
       return null;
     }
 
+    $website = str_ireplace("&#160;", " ", $website);
+
     $domd = new DOMDocument("1.0", "iso-8859-1");
     libxml_use_internal_errors(true);
     $domd->loadHTML($website);
@@ -294,9 +296,20 @@ abstract class TibiaWebsite
       return null;
     }
 
-    #preg_match_all("#<b>Guild Members</b></td></tr>(.+?)</table>#is", $website, $matches);
-    preg_match_all("#<a href=\"http://www.tibia.com.+?subtopic=characters.+?name=.+?\">(.+?)</a>#is", $website /*$matches[1][0]*/, $matches);
-    return str_replace("&#160;", " ", $matches[1]);
+    $website = str_ireplace("&#160;", " ", $website);
+
+    $domd = new DOMDocument("1.0", "iso-8859-1");
+    libxml_use_internal_errors(true);
+    $domd->loadHTML($website);
+    libxml_use_internal_errors(false);
+
+    $domx = new DOMXPath($domd);
+    $items = $domx->evaluate("//td[child::b='Guild Members']/ancestor::table[1]//tr[position() > 2]/td[2]/a");
+
+    $ret = array();
+    foreach ($items as $item) { $ret[] = $item->textContent; }
+
+    return $ret;
   }
   
   /**
