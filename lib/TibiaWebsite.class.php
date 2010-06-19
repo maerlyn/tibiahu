@@ -379,19 +379,23 @@ abstract class TibiaWebsite
  */
   public static function getWorlds()
   {
-    return array("Aldora", "Amera" ,"Antica" ,"Arcania", "Askara" ,"Astera",
-                 "Aurea", "Azura", "Balera", "Berylia", "Calmera", "Candia",
-                 "Celesta", "Chimera", "Danera", "Danubia", "Dolera", "Elera",
-                 "Elysia", "Empera", "Eternia", "Fortera", "Furora", "Galana",
-                 "Grimera", "Guardia", "Harmonia", "Hiberna", "Honera", "Inferna",
-                 "Iridia", "Isara", "Jamera", "Julera", "Keltera", "Kyra", 
-                 "Libera", "Lucera", "Luminera", "Lunara", "Malvera", "Menera",
-                 "Morgana", "Mythera", "Nebula", "Neptera", "Nerana", "Nova",
-                 "Obsidia", "Ocera", "Pacera", "Pandoria", "Premia", "Pythera",
-                 "Refugia", "Rubera", "Samera", "Saphira", "Secura", "Selena",
-                 "Shanera", "Shivera", "Silvera", "Solera", "Tenebra", "Thoria",
-                 "Titania", "Trimera", "Unitera", "Valoria", "Vinera", "Xantera",
-                 "Xerena", "Zanera");
+    if (false === ($website = RemoteFile::get("http://www.tibia.com/community/?subtopic=whoisonline"))) {
+      return null;
+    }
+    
+    $domd = new DOMDocument();
+    libxml_use_internal_errors(true);
+    $domd->loadHTML($website);
+    libxml_use_internal_errors(false);
+    $domx = new DOMXPath($domd);
+    $items = $domx->evaluate("//td[child::b='World']//ancestor::table[1]//tr[position() > 1]/td[1]");
+
+    $ret = array();
+    foreach ($items as $item) {
+      $ret[] = $item->textContent;
+    }
+
+    return $ret;
   }
  
  /**
