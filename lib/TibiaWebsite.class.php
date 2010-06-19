@@ -356,12 +356,20 @@ abstract class TibiaWebsite
     if (false === ($website = RemoteFile::get("http://tibia.wikia.com/wiki/List_of_Creatures"))) {
       return null;
     }
-/*    <tr>
-<td><a href="/wiki/Adept_of_the_Cult" title="Adept of the Cult">Adept of the Cult</a>*/
 
-    preg_match_all("#<tr>\n<td><a href=\"/wiki/.+?\" title=\".+?\">(.+?)</a>\n</td>#is", $website, $matches);
-    
-    return $matches[1];
+    $domd = new DOMDocument();
+    libxml_use_internal_errors(true);
+    $domd->loadHTML($website);
+    libxml_use_internal_errors(false);
+    $domx = new DOMXPath($domd);
+    $items = $domx->evaluate("//table[@class='sortable']//tr/td[1]");
+
+    $ret = array();
+    foreach ($items as $item) {
+      $ret[] = trim($item->textContent);
+    }
+
+    return $ret;
   }
  
  /**
