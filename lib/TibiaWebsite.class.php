@@ -629,29 +629,28 @@ abstract class TibiaWebsite
     if (false === ($website = RemoteFile::get("http://www.tibia.com/community/?subtopic=killstatistics&world=" . ucfirst($world)))) {
       return null;
     }
-    
-    preg_match("#<table.+?width=100%>.+?<b>Last Day</b>.+?<b>Last Week</b>(.+?)</table>#is", $website, $matches);
-    preg_match_all("#<tr.+?>(.+?)</tr>#is", $matches[1], $matches);
-    $matches[0] = str_replace("&#160;", "", $matches[0]);
-    
-    $killstats = array();
-    foreach($matches[0] as $v) {
-      if (false !== stripos($v, "#505050")) {
-        continue; // skip if it's a header tr
-      }
-      
-      preg_match_all("#<td.*?>(.+?)</td>#is", $v, $killstatmatches);
-      $item = array(
+
+    $website = str_replace("&#160;", " ", $website);
+
+    $domd = new DOMDocument();
+    libxml_use_internal_errors(true);
+    $domd->loadHTML($website);
+    libxml_use_internal_errors(false);
+    $domx = new DOMXPath($domd);
+
+    $items = $domx->query("//td[child::b='Killed Players']//ancestor::table[1]//tr[position() > 2]");
+
+    foreach($items as $item) {
+      $killstats[trim($domx->query("td[1]", $item)->item(0)->textContent)] = array(
         "last_day"  =>  array(
-          "killed_players"    =>  $killstatmatches[1][1],
-          "killed_by_players" =>  $killstatmatches[1][2]
+          "killed_players"    =>  $domx->query("td[2]", $item)->item(0)->textContent,
+          "killed_by_players" =>  $domx->query("td[3]", $item)->item(0)->textContent,
         ),
         "last_week" =>  array(
-          "killed_players"    =>  $killstatmatches[1][3],
-          "killed_by_players" =>  $killstatmatches[1][4]
-        )
+          "killed_players"    =>  $domx->query("td[4]", $item)->item(0)->textContent,
+          "killed_by_players" =>  $domx->query("td[5]", $item)->item(0)->textContent,
+        ),
       );
-      $killstats[$killstatmatches[1][0]] = $item;
     }
     
     return $killstats;
