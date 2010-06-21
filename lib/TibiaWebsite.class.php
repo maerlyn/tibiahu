@@ -466,24 +466,33 @@ abstract class TibiaWebsite
     if (false === ($website = RemoteFile::get("http://www.tibia.com/news/?subtopic=latestnews"))) {
       return null;
     }
-    
-    if (!preg_match("#<div id=\"newsticker\"(.+?)<div id=\"featuredarticle\"#is", $website, $matches)) {
+
+    $website = str_ireplace("&#160;", " ", $website);
+
+    $domd = new DOMDocument();
+    libxml_use_internal_errors(true);
+    $domd->loadHTML($website);
+    libxml_use_internal_errors(false);
+    $domx = new DOMXPath($domd);
+
+    $items = $domx->evaluate("//div[@id='newsticker']//div[normalize-space(@class)='Row']//div[@class='NewsTickerText']");
+
+    if ($items->length == 0) { //no newsticker items available, ie. when the website is offline
       return null;
     }
-    $newsticker = $matches[1];
-    
-    preg_match_all("#<div id='TickerEntry-\\d(.+?)</div>[\n ]+?</div>#is", $newsticker, $matches);
-    
-    $items = array();
-    foreach ($matches[0] as $v) {
-      $item = array(
-        "date"  =>  strtotime(str_replace("&#160;", " ", preg_replace("@.+?<span class='NewsTickerDate'>(.+?)&#160;-.*@is", "\\1", $v))),
-        "body"  =>  str_replace(array("\n", "\r"), array("", " "), preg_replace("#.+?class='NewsTickerFullText'>(.+?)<.div>.*#is", '\1', $v))
+
+    $ret = array();
+    foreach ($items as $item) { /* @var $item DOMElement */
+      $spans = $item->getElementsByTagName("span");
+      $divs = $item->getElementsByTagName("div");
+
+      $ret[] = array(
+        "date"  =>  strtotime(str_replace(" - ", "", $spans->item(0)->textContent)),
+        "body"  =>  $divs->item($divs->length-1)->textContent,
       );
-      $items[] = $item;
     }
-    
-    return $items;
+
+    return $ret;
   }
   
   /**
