@@ -554,26 +554,34 @@ abstract class TibiaWebsite
     if (false === ($website = RemoteFile::get("http://www.tibia.com/news/?subtopic=latestnews"))) {
       return null;
     }
-    
-    if (!preg_match(
-      "#<div id='TeaserThumbnail'><a href='http://www.tibia.com/news/.subtopic=latestnews&amp;id=(\d+)'><img#is",
-      $website,
-      $matches
-    )) {
-      //error
+
+    $website = str_replace("&#160;", " ", $website);
+
+    $domd = new DOMDocument();
+    libxml_use_internal_errors(true);
+    $domd->loadHTML($website);
+    libxml_use_internal_errors(false);
+    $domx = new DOMXPath($domd);
+
+    $link = $domx->query("//div[@id='featuredarticle']//a[@id='Link']");
+
+    if ($link->length == 0) { //ie. when the site is offline
       return null;
     }
+
+    $website = str_ireplace("&#160;", " ", RemoteFile::get($link->item(0)->getAttribute("href")));
+    libxml_use_internal_errors(true);
+    $domd->loadHTML($website);
+    libxml_use_internal_errors(false);
+    $domx = new DOMXPath($domd);
     
-    $website = RemoteFile::get("http://www.tibia.com/news/?subtopic=latestnews&id=" . $matches[1]);
-    preg_match("#<div id=\"featuredarticle\".+?<script#is", $website, $matches);
-    
-    $article = array(
-      "date"  =>  strtotime(str_replace("&#160;", " ", preg_replace("#.+?<div class='NewsHeadlineDate'>(.+?) - </div>.*#is", "\\1", $matches[0]))),
-      "title" =>  preg_replace("#.+?<div class='NewsHeadlineText'>(.+?)</div>.*#is", "\\1", $matches[0]),
-      "body"  =>  self::articleCleanup(preg_replace("#.+?<table.+?<tr>[\n ]+?<td.+?>(.+?)</td>[\n ]+?</tr><tr><td><div.*#is", "\\1", $matches[0]))
+    $box = $domx->query("//div[@id='featuredarticle']//div[normalize-space(@class)='BoxContent']")->item(0);
+
+    return array(
+      "date"  =>  strtotime(str_replace(" - ", "", $domx->query("descendant::div[normalize-space(@class)='NewsHeadlineDate']", $box)->item(0)->textContent)),
+      "title" =>  $domx->query("descendant::div[normalize-space(@class)='NewsHeadlineText']", $box)->item(0)->textContent,
+      "body"  =>  self::articleCleanup(self::innerHTML($domx->query("table//td[1]", $box)->item(0))),
     );
-    
-    return $article;
   }
   
   /**
