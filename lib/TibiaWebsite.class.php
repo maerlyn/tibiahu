@@ -595,20 +595,24 @@ abstract class TibiaWebsite
       return null;
     }
     
-    preg_match("#<b>Active Polls</b>(.+?)</table>#is", $website, $matches);
     
-    preg_match_all("#<tr.+?>(.+?)</tr>#is", $matches[1], $matches);
-    unset($matches[1][0]);
+    $website = str_replace("&#160;", " ", $website);
+
+    $domd = new DOMDocument();
+    libxml_use_internal_errors(true);
+    $domd->loadHTML($website);
+    libxml_use_internal_errors(false);
+    $domx = new DOMXPath($domd);
     
+    $items = $domx->query("//td[child::b='Active Polls']//ancestor::table[1]//tr[position() > 2]");
+
     $polls = array();
-    foreach ($matches[1] as $v) {
-      preg_match("#<td><a href='(.+?)'>(.+?)</a></td><td>(.+?)</td>#is", $v, $pollmatches);
-      $poll = array(
-        "url"   =>  $pollmatches[1],
-        "title" =>  $pollmatches[2],
-        "end"   =>  strtotime(str_replace("&#160;", " ", $pollmatches[3]))
+    foreach($items as $item) {
+      $polls[] = array(
+        "url"   =>  $domx->query("td[1]/a", $item)->item(0)->getAttribute("href"),
+        "title" =>  $domx->query("td[1]/a", $item)->item(0)->textContent,
+        "end"   =>  strtotime($domx->query("td[2]", $item)->item(0)->textContent),
       );
-      $polls[] = $poll;
     }
     
     return $polls;
