@@ -416,7 +416,7 @@ abstract class TibiaWebsite
     "<p>"       =>  ""
    );
    
-   $ret = preg_replace("#<img src=\"http://static\\.tibia\\.com/images/global/letters/letter_martel_(.)\\.gif\" BORDER=0 ALIGN=bottom>#is", 
+   $ret = preg_replace("#<img src=\"http://static\\.tibia\\.com/images/global/letters/letter_martel_(.)\\.gif\".+?>#is",
       "\\1", $input); //first letters
 
    /*$ret = preg_replace("#<img src=\"(.+?)\".+?(?:align=([\"']?)(left|right)\\2).+?>(?:</a>|)#is", 
@@ -505,16 +505,33 @@ abstract class TibiaWebsite
     if (false === ($website = RemoteFile::get("http://www.tibia.com/news/?subtopic=latestnews"))) {
       return null;
     }
-    
-    if (!preg_match_all(
-      "#<div class='NewsHeadline'>(.+?)</tr></table><br/>#is",
-      $website,
-      $matches
-    )) {
+
+    $website = str_ireplace("&#160;", " ", $website);
+
+    $domd = new DOMDocument();
+    libxml_use_internal_errors(true);
+    $domd->loadHTML($website);
+    libxml_use_internal_errors(false);
+    $domx = new DOMXPath($domd);
+
+    $headlines = $domx->query("//div[@id='news']//div[normalize-space(@class)='BoxContent']//div[@class='NewsHeadline']");
+    $tables = $domx->query("//div[@id='news']//div[normalize-space(@class)='BoxContent']/table");
+
+    if ($headlines->length == 0) { //ie. when the website is offline
       return null;
     }
-    
-    $items = array();
+
+    $ret = array();
+    for ($i = 0; $i < $headlines->length; ++$i) {
+      $ret[] = array(
+          "date"  =>  strtotime(str_replace(" - ", "", $domx->query("descendant::div[@class='NewsHeadlineDate']", $headlines->item($i))->item(0)->textContent)),
+          "title" =>  $domx->query("descendant::div[@class='NewsHeadlineText']", $headlines->item($i))->item(0)->textContent,
+          "body"  =>  self::articleCleanup(self::innerHTML($domx->query("descendant::tr[1]/td[1]", $tables->item($i))->item(0))),
+      );
+    }
+
+    return $ret;
+    /*
     foreach ($matches[0] as $v) {
       //echo $v;break;
       $item = array(
@@ -524,7 +541,7 @@ abstract class TibiaWebsite
       );
       $items[] = $item;
     }
-    return $items;
+     */
   }
   
   /**
@@ -638,6 +655,16 @@ abstract class TibiaWebsite
   {
     $charinfo = self::characterInfo($name);
     return (isset($charinfo["position"]) && $charinfo["position"] == "Gamemaster");
+  }
+
+  private static function innerHTML(DOMNode $node)
+  {
+    $doc = new DOMDocument();
+    foreach ($node->childNodes as $child) {
+      $doc->appendChild($doc->importNode($child, true));
+    }
+
+    return $doc->saveHTML();
   }
   
 }
