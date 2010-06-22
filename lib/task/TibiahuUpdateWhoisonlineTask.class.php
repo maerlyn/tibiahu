@@ -100,7 +100,7 @@ EOF;
           $char->save();
         }
         catch (Exception $e) {
-          echo("MENTESI HIBA\n" . $e->getMessage() . "\n");
+          echo("MENTESI HIBA\n" . $e->getFile() . " @ L" . $e->getLine() . ": " . $e->getMessage() . "\n");
         }
         
         //echo("\n");
