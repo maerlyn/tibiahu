@@ -78,11 +78,13 @@ abstract class TibiaWebsite
     libxml_use_internal_errors(false);
 
     $domx = new DOMXPath($domd);
-    $table = $domx->query("//td[child::b='Character Information']/ancestor::table[1]")->item(0);
+    $table = $domx->query("//td[child::b='Character Information']/ancestor::table[1]");
 
     if (!$table->length) {
       return null;
     }
+
+    $table = $table->item(0);
 
     $character = array(
       "name"        =>  $domx->query("//tr[child::td='Name:']/td[2]", $table)->item(0)->textContent,
@@ -92,7 +94,7 @@ abstract class TibiaWebsite
       "world"       =>  $domx->query("//tr[child::td='World:']/td[2]", $table)->item(0)->textContent,
       "residence"   =>  $domx->query("//tr[child::td='Residence:']/td[2]", $table)->item(0)->textContent,
       "lastlogin"   =>  strtotime($domx->query("//tr[child::td='Last login:']/td[2]", $table)->item(0)->textContent),
-      "accountstatus" =>  $domx->query("//tr[child::td='Account Status:']/td[2]", $table)->item(0)->textContent,
+      "accountstatus" => str_ireplace(" account", "", $domx->query("//tr[child::td='Account Status:']/td[2]", $table)->item(0)->textContent),
     );
 
     $married = $domx->query("//tr[child::td='Married to:']/td[2]", $table);
@@ -442,7 +444,7 @@ abstract class TibiaWebsite
        $link = false;
      }
      
-     $repl = "<img src=\"" . $src . "\" class=\"" . $class . "\" alt=\"\" />";
+     $repl = "\n\n<img src=\"" . $src . "\" class=\"" . $class . "\" alt=\"\" />";
      if ($link) {
        $repl = sprintf("<a href=\"%s\">%s</a>", $link, $repl);
      }
