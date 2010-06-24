@@ -80,6 +80,10 @@ abstract class TibiaWebsite
     $domx = new DOMXPath($domd);
     $table = $domx->query("//td[child::b='Character Information']/ancestor::table[1]")->item(0);
 
+    if (!$table->length) {
+      return null;
+    }
+
     $character = array(
       "name"        =>  $domx->query("//tr[child::td='Name:']/td[2]", $table)->item(0)->textContent,
       "sex"         =>  $domx->query("//tr[child::td='Sex:']/td[2]", $table)->item(0)->textContent,
