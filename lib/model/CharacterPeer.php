@@ -40,6 +40,7 @@ class CharacterPeer extends BaseCharacterPeer
   
   public static function searchByName($name, $max = null)
   {
+    @ini_set("memory_limit", "128M");
     $hits = self::getLuceneIndex()->find("name:\"" . $name . "*\"");
 
     $pks = array();
