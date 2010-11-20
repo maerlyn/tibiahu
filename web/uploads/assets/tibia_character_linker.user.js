@@ -33,7 +33,7 @@
       if (fc.innerHTML == 'Name:') {
         var slug = fc.nextSibling.textContent;
         var name = fc.nextSibling.textContent;
-        slug = slug.replace(/ /g, "_").replace(/[^\w\d_]/g, "-").toLowerCase().replace(/[^-\w]/g, "");
+        slug = slug.trim().replace(/,(.*)$/g, "").replace(/ /g, "_").replace(/[^\w\d_]/g, "-").toLowerCase().replace(/[^-\w]/g, "");
         
         fc.nextSibling.innerHTML = '<a href="http://tibia.hu/character/' + slug + '">' + name + '</a>';
       }
