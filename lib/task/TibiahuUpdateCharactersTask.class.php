@@ -67,7 +67,7 @@ EOF;
         }
         
         //minden rendben, mehet a feldolgozas
-        if (isset($info["name"]) && $character->getName() != $info["name"]) { //rename
+        if (isset($info["name"]) && ($character->getName() != $info["name"])) { //rename
           
           if ($character_new = CharacterPeer::retrieveByName($info["name"])) { //ha mar megvan az uj, egyesites
             //regi lvlupjainak atvezetese az ujhoz, regi torlese
