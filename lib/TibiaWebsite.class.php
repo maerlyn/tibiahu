@@ -20,7 +20,8 @@ abstract class TibiaWebsite
   public static function whoIsOnline($world = "Secura")
   {
     $world = ucfirst($world);
-    if (false === ($website = RemoteFile::get("http://www.tibia.com/community/?subtopic=whoisonline&world={$world}"))) {
+    //if (false === ($website = RemoteFile::get("http://www.tibia.com/community/?subtopic=whoisonline&world={$world}"))) {
+    if (false === ($website = RemoteFile::get("http://www.tibia.com/community/?subtopic=worlds&world={$world}"))) {
       return array();
     }
 
@@ -32,7 +33,7 @@ abstract class TibiaWebsite
     libxml_use_internal_errors(false);
 
     $domx = new DOMXPath($domd);
-    $rows = $domx->query("//div[@class='BoxContent']/table//table[position() = 2]//tr[position() > 1]");
+    $rows = $domx->query("//div[normalize-space(@class)='TableContainer']/table[normalize-space(@class)='Table2']//tr[position() > 1]");
 
     $return = array();
     foreach ($rows as $char) {
@@ -87,7 +88,7 @@ abstract class TibiaWebsite
     $table = $table->item(0);
 
     $character = array(
-      "name"        =>  $domx->query("//tr[child::td='Name:']/td[2]", $table)->item(0)->textContent,
+      "name"        =>  trim($domx->query("//tr[child::td='Name:']/td[2]", $table)->item(0)->textContent),
       "sex"         =>  $domx->query("//tr[child::td='Sex:']/td[2]", $table)->item(0)->textContent,
       "profession"  =>  $domx->query("//tr[child::td='Profession:']/td[2]", $table)->item(0)->textContent,
       "level"       =>  $domx->query("//tr[child::td='Level:']/td[2]", $table)->item(0)->textContent,
@@ -199,6 +200,10 @@ abstract class TibiaWebsite
   */
   private static function processDeaths($website)
   {
+    if (empty($website)) {
+      return array();
+    }
+  
     $deaths = array();
 
     $website = str_ireplace("&#160;", " ", $website);
