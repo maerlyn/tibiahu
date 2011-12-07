@@ -90,7 +90,7 @@ abstract class TibiaWebsite
     $character = array(
       "name"        =>  trim($domx->query("//tr[child::td='Name:']/td[2]", $table)->item(0)->textContent),
       "sex"         =>  $domx->query("//tr[child::td='Sex:']/td[2]", $table)->item(0)->textContent,
-      "profession"  =>  $domx->query("//tr[child::td='Profession:']/td[2]", $table)->item(0)->textContent,
+      "profession"  =>  $domx->query("//tr[child::td='Vocation:']/td[2]", $table)->item(0)->textContent,
       "level"       =>  $domx->query("//tr[child::td='Level:']/td[2]", $table)->item(0)->textContent,
       "world"       =>  $domx->query("//tr[child::td='World:']/td[2]", $table)->item(0)->textContent,
       "residence"   =>  $domx->query("//tr[child::td='Residence:']/td[2]", $table)->item(0)->textContent,
