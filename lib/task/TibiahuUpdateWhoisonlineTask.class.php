@@ -22,6 +22,7 @@ EOF;
     $databaseManager = new sfDatabaseManager($this->configuration);
     
     $servers = ServerPeer::getAllEnabled();
+    $chars_seen = 0;
     
     foreach ($servers as $server) { /** @var Server $server */
       echo("Whoisonline lista lekerese ({$server->getName()})...\n");
