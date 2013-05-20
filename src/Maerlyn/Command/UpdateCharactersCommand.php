@@ -33,7 +33,7 @@ class UpdateCharactersCommand extends Command {
         foreach ($characters as $character) {
             $info = $tibiacom->characterInfo($character["name"]);
 
-            if (!$info["vocation"] != $character["vocation"]) {
+            if ($info["vocation"] != $character["vocation"]) {
                 $character["vocation"] = $info["vocation"];
             }
 
