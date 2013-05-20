@@ -1,0 +1,16 @@
+<?php
+
+$app["debug"] = false;
+
+$app["db.options"] = array(
+  "driver"    =>  "pdo_mysql",
+  "host"      =>  "",
+  "user"      =>  "",
+  "password"  =>  "",
+  "dbname"    =>  "",
+  "charset"   =>  "utf8",
+  "driverOptions" => array(
+    \PDO::ATTR_ERRMODE            =>  \PDO::ERRMODE_EXCEPTION,
+    \PDO::MYSQL_ATTR_INIT_COMMAND =>  "SET NAMES utf8",
+  ),
+);
