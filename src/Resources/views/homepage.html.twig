@@ -1,5 +1,28 @@
 {% extends "layout.html.twig" %}
 
 {% block content %}
-    homepage
+<div class="page-header">
+    <h1>Karakterek</h1>
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Név</th>
+            <th>Szint</th>
+            <th>Kaszt</th>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+    {% for c in characters %}
+        <tr>
+            <td>{{ c.name }}</td>
+            <td>{{ c.level }}</td>
+            <td>{{ c.vocation }}</td>
+            <td></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
 {% endblock %}

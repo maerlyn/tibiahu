@@ -27,7 +27,7 @@ if (is_dir($dir = ROOT . "/src/Maerlyn/Command")) {
         $r = new \ReflectionClass($ns . "\\" . $file->getBasename(".php"));
 
         if ($r->isSubclassOf("Symfony\\Component\\Console\\Command\\Command") && !$r->isAbstract()) {
-            $console->add($r->newInstance());
+            $console->add($r->newInstance($app));
         }
     }
 }

@@ -49,6 +49,7 @@ $app->register(new Silex\Provider\ValidatorServiceProvider());
 
 
 $app->register(new Knp\Provider\RepositoryServiceProvider(), array("repository.repositories" => array(
+    "db.character"  =>  'Maerlyn\\Repository\\Character',
 )));
 
 if (!file_exists(__DIR__ . "/config.php")) {

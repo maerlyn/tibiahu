@@ -7,7 +7,9 @@ use Symfony\Component\HttpFoundation\Response;
 $app = require __DIR__ . "/bootstrap.php";
 
 $app->match("/", function () use ($app) {
-    return $app["twig"]->render("homepage.html.twig");
+    $characters = $app["db.character"]->findAll();
+
+    return $app["twig"]->render("homepage.html.twig", array("characters" => $characters));
 })->bind("homepage");
 
 return $app;

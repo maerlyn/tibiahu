@@ -4,6 +4,7 @@
         "twig/twig": "1.*",
         "monolog/monolog": "1.*",
         "doctrine/dbal": "2.*",
+        "guzzle/guzzle": "~3.5",
 
         "symfony/config": "~2.2",
         "symfony/console": "~2.2",

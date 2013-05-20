@@ -57,7 +57,7 @@ class TibiaDotCom
      */
     public function characterInfo($name)
     {
-        $html = $this->postUrl("http://www.tibia.com/community/?subtopic=characters", array("name" => $name));
+        $html = $this->getUrl("http://www.tibia.com/community/?subtopic=character&name=" . urlencode($name));
 
         if (false !== stripos($html, "<b>Could not find character</b>")) {
             throw new CharacterNotFoundException($name);
@@ -198,6 +198,6 @@ class TibiaDotCom
         $request->setBody($parameters);
         $response = $request->send();
 
-        return $response->getBody();
+        return $response->getBody(/* $asString = */ true);
     }
 }
