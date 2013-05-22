@@ -1,0 +1,26 @@
+{% extends "layout.html.twig" %}
+
+{% block content %}
+<div class="page-header">
+    <h1>{{ character.name }}, level {{ character.level }} {{ character.vocation }}</h1>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Új szint</th>
+            <th>Dátum</th>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+{% for lh in levelhistory %}
+        <tr class="{% if lh.is_death %}error{% else %}success{% endif %}">
+            <td>{{ lh.level }}</td>
+            <td>{{ lh.date }}</td>
+            <td></td>
+        </tr>
+{% endfor %}
+    </tbody>
+</table>
+{% endblock %}

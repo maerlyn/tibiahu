@@ -17,7 +17,7 @@
     <tbody>
     {% for c in characters %}
         <tr>
-            <td>{{ c.name }}</td>
+            <td><a href="{{ path("character", { "id": c.id }) }}">{{ c.name }}</a></td>
             <td>{{ c.level }}</td>
             <td>{{ c.vocation }}</td>
             <td></td>

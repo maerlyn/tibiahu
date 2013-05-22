@@ -49,7 +49,8 @@ $app->register(new Silex\Provider\ValidatorServiceProvider());
 
 
 $app->register(new Knp\Provider\RepositoryServiceProvider(), array("repository.repositories" => array(
-    "db.character"  =>  'Maerlyn\\Repository\\Character',
+    "db.character"      =>  'Maerlyn\\Repository\\Character',
+    "db.levelhistory"   =>  'Maerlyn\\Repository\\LevelHistory',
 )));
 
 if (!file_exists(__DIR__ . "/config.php")) {

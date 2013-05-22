@@ -12,4 +12,16 @@ $app->match("/", function () use ($app) {
     return $app["twig"]->render("homepage.html.twig", array("characters" => $characters));
 })->bind("homepage");
 
+//--------------------------------------------------------------------------------------------------
+
+$app->match("/karakter/{id}", function ($id) use ($app) {
+    if (!$character = $app["db.character"]->find($id)) $app->abort(404);
+    $levelhistory = $app["db.levelhistory"]->findByCharacterId($id);
+
+    return $app["twig"]->render("character.html.twig", array(
+        "character"     =>  $character,
+        "levelhistory"  =>  $levelhistory,
+    ));
+})->bind("character");
+
 return $app;
