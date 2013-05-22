@@ -29,6 +29,7 @@ class UpdateCharactersCommand extends Command {
         $app = $this->app;
         $tibiacom = new TibiaDotCom();
         $characters = $app["db.character"]->findAll();
+        $app["monolog"]->addInfo("Updating " . count($characters) . " characters");
 
         foreach ($characters as $character) {
             $info = $tibiacom->characterInfo($character["name"]);
