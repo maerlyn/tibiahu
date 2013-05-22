@@ -39,6 +39,26 @@ class UpdateCharactersCommand extends Command {
             }
 
             if ($info["level"] != $character["level"]) {
+                if ($info["level"] > $character["level"]) {
+                    // levelup
+                    $app["db.levelhistory"]->insert(array(
+                        "character_id"  =>  $character["id"],
+                        "level"         =>  $info["level"],
+                        "date"          =>  date("Y-m-d H:i:s"),
+                        "is_death"      =>  0,
+                    ));
+                } else {
+                    $deaths = $tibiacom->characterDeaths($character["name"]);
+                    $death = isset($deaths[0]) ? $deaths[0] : null;
+
+                    $app["db.levelhistory"]->insert(array(
+                        "character_id"  =>  $character["id"],
+                        "level"         =>  $info["level"],
+                        "date"          =>  isset($death["date"]) ? $death["date"]->format("Y-m-d H:i:s") : date("Y-m-d H:i:s"),
+                        "is_death"      =>  1,
+                    ));
+                }
+
                 $character["level"] = $info["level"];
             }
 
