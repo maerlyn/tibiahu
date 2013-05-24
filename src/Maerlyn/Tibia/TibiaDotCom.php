@@ -171,7 +171,7 @@ class TibiaDotCom
 
         // binary search, just for the lulz
         $start = 0;
-        $end = end(array_keys($whoIsOnline));
+        $end = count($whoIsOnline) - 1;
 
         while ($start < $end) {
             $middle = $start + (int)floor(($end - $start) / 2);
