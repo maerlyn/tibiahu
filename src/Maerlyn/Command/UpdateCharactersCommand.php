@@ -33,9 +33,11 @@ class UpdateCharactersCommand extends Command {
 
         foreach ($characters as $character) {
             $info = $tibiacom->characterInfo($character["name"]);
+            $modified = false;
 
             if ($info["vocation"] != $character["vocation"]) {
                 $character["vocation"] = $info["vocation"];
+                $modified = true;
             }
 
             if ($info["level"] != $character["level"]) {
@@ -60,9 +62,18 @@ class UpdateCharactersCommand extends Command {
                 }
 
                 $character["level"] = $info["level"];
+                $modified = true;
             }
 
-            $app["db.character"]->update($character, array("id" => $character["id"]));
+            $is_online = $tibiacom->isOnline($character["name"]);
+            if ($is_online != $character["is_online"]) {
+                $character["is_online"] = ($is_online ? 1 : 0);
+                $modified = true;
+            }
+
+            if ($modified) {
+                $app["db.character"]->update($character, array("id" => $character["id"]));
+            }
         }
     }
 }

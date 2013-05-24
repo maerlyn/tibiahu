@@ -57,93 +57,132 @@ class TibiaDotCom
      */
     public function characterInfo($name)
     {
-        $html = $this->getUrl("http://www.tibia.com/community/?subtopic=character&name=" . urlencode($name));
+        static $cache = array();
 
-        if (false !== stripos($html, "<b>Could not find character</b>")) {
-            throw new CharacterNotFoundException($name);
-        }
+        if (!isset($cache[$name])) {
+            $html = $this->getUrl("http://www.tibia.com/community/?subtopic=character&name=" . urlencode($name));
 
-        // this will be used later while we go through all the rows in the charinfo table
-        $map = array(
-            "Name:" => "name",
-            "Sex:" => "sex",
-            "Vocation:" => "vocation",
-            "Level:" => "level",
-            "World:" => "world",
-            "Residence:" => "residence",
-            "Achievement Points:" => "achievement_points",
-            "Last login:" => "last_login",
-            "Comment:" => "comment",
-            "Account Status:" => "account_status",
-            "Married to:" => "married_to",
-            "House:" => "house",
-            "Guild membership:" => "guild",
-        );
-
-        $domd = $this->getDOMDocument($html);
-        $domx = new \DOMXPath($domd);
-        $character = array();
-
-        $rows = $domx->query("//div[@class='BoxContent']/table[1]/tr[position() > 1]");
-        foreach ($rows as $row) {
-            $name  = trim($row->firstChild->nodeValue);
-            $value = trim($row->lastChild->nodeValue);
-
-            if (isset($map[$name])) {
-                $character[$map[$name]] = $value;
-            } else {
-                $character[$name] = $value;
+            if (false !== stripos($html, "<b>Could not find character</b>")) {
+                throw new CharacterNotFoundException($name);
             }
-        }
 
-        // value cleanup
-
-        $character["last_login"] = \DateTime::createFromFormat("M d Y, H:i:s T", $character["last_login"]);
-
-        if (isset($character["guild"])) {
-            $values = explode(" of the ", $character["guild"]);
-            $character["guild"] = array(
-                "name"  =>  $values[1],
-                "rank"  =>  $values[0],
+            // this will be used later while we go through all the rows in the charinfo table
+            $map = array(
+                "Name:" => "name",
+                "Sex:" => "sex",
+                "Vocation:" => "vocation",
+                "Level:" => "level",
+                "World:" => "world",
+                "Residence:" => "residence",
+                "Achievement Points:" => "achievement_points",
+                "Last login:" => "last_login",
+                "Comment:" => "comment",
+                "Account Status:" => "account_status",
+                "Married to:" => "married_to",
+                "House:" => "house",
+                "Guild membership:" => "guild",
             );
+
+            $domd = $this->getDOMDocument($html);
+            $domx = new \DOMXPath($domd);
+            $character = array();
+
+            $rows = $domx->query("//div[@class='BoxContent']/table[1]/tr[position() > 1]");
+            foreach ($rows as $row) {
+                $name  = trim($row->firstChild->nodeValue);
+                $value = trim($row->lastChild->nodeValue);
+
+                if (isset($map[$name])) {
+                    $character[$map[$name]] = $value;
+                } else {
+                    $character[$name] = $value;
+                }
+            }
+
+            // value cleanup
+
+            $character["last_login"] = \DateTime::createFromFormat("M d Y, H:i:s T", $character["last_login"]);
+
+            if (isset($character["guild"])) {
+                $values = explode(" of the ", $character["guild"]);
+                $character["guild"] = array(
+                    "name"  =>  $values[1],
+                    "rank"  =>  $values[0],
+                );
+            }
+
+            if (isset($character["house"])) {
+                $values = explode(" is paid until ", $character["house"]);
+                $character["house"] = $values[0];
+            }
+
+            $cache[$name] = $character;
         }
 
-        if (isset($character["house"])) {
-            $values = explode(" is paid until ", $character["house"]);
-            $character["house"] = $values[0];
-        }
-
-        return $character;
+        return $cache[$name];
     }
 
     /**
      * Return the list of characters online at the given world
      *
-     * @param type $world
+     * @param string $world
      * @return array characters with name, level and vocation
      */
     public function whoIsOnline($world)
     {
-        $html = $this->getUrl("http://www.tibia.com/community/?subtopic=worlds&world=" . $world);
-        $domd = $this->getDOMDocument($html);
+        static $cache = array();
 
-        $domx = new \DOMXPath($domd);
-        $characters = $domx->query("//table[@class='Table2']//tr[position() > 1]");
-        $ret = array();
+        if (!isset($cache[$world])) {
+            $html = $this->getUrl("http://www.tibia.com/community/?subtopic=worlds&world=" . $world);
+            $domd = $this->getDOMDocument($html);
 
-        foreach ($characters as $character) {
-            $name     = $domx->query("td[1]/a[@href]", $character)->item(0)->nodeValue;
-            $level    = $domx->query("td[2]", $character)->item(0)->nodeValue;
-            $vocation = $domx->query("td[3]", $character)->item(0)->nodeValue;
+            $domx = new \DOMXPath($domd);
+            $characters = $domx->query("//table[@class='Table2']//tr[position() > 1]");
+            $ret = array();
 
-            $ret[] = array(
-                "name"      =>  $name,
-                "level"     =>  $level,
-                "vocation"  =>  $vocation,
-            );
+            foreach ($characters as $character) {
+                $name     = $domx->query("td[1]/a[@href]", $character)->item(0)->nodeValue;
+                $level    = $domx->query("td[2]", $character)->item(0)->nodeValue;
+                $vocation = $domx->query("td[3]", $character)->item(0)->nodeValue;
+
+                $ret[] = array(
+                    "name"      =>  $name,
+                    "level"     =>  $level,
+                    "vocation"  =>  $vocation,
+                );
+            }
+
+            $cache[$world] = $ret;
         }
 
-        return $ret;
+        return $cache[$world];
+    }
+
+    /**
+     * Returns if the character is currently online
+     *
+     * @param string $name character's name
+     * @return bool
+     */
+    public function isOnline($name)
+    {
+        $character = $this->characterInfo($name);
+        $whoIsOnline = $this->whoIsOnline($character["world"]);
+
+        // binary search, just for the lulz
+        $start = 0;
+        $end = end(array_keys($whoIsOnline));
+
+        while ($start < $end) {
+            $middle = $start + (int)floor(($end - $start) / 2);
+
+            if ($whoIsOnline[$middle]["name"] == $name) return true;
+
+            if ($whoIsOnline[$middle]["name"] < $name) $start = $middle + 1;
+            else $end = $middle - 1;
+        }
+
+        return false;
     }
 
     /**

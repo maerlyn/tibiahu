@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 22, 2013 at 11:11 AM
+-- Generation Time: May 24, 2013 at 10:30 AM
 -- Server version: 5.5.31
 -- PHP Version: 5.4.6-1ubuntu1.2
 
@@ -25,6 +25,7 @@ CREATE TABLE IF NOT EXISTS `tibiahu_character` (
   `name` varchar(32) COLLATE utf8_hungarian_ci NOT NULL,
   `vocation` varchar(16) COLLATE utf8_hungarian_ci NOT NULL,
   `level` int(11) NOT NULL,
+  `is_online` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci AUTO_INCREMENT=2 ;
@@ -33,8 +34,8 @@ CREATE TABLE IF NOT EXISTS `tibiahu_character` (
 -- Dumping data for table `tibiahu_character`
 --
 
-INSERT INTO `tibiahu_character` (`id`, `name`, `vocation`, `level`) VALUES
-(1, 'Tele von Zsinor', 'Knight', 53);
+INSERT INTO `tibiahu_character` (`id`, `name`, `vocation`, `level`, `is_online`) VALUES
+(1, 'Tele von Zsinor', 'Knight', 53, 0);
 
 -- --------------------------------------------------------
 

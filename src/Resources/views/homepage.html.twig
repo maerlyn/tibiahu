@@ -20,7 +20,7 @@
             <td><a href="{{ path("character", { "id": c.id }) }}">{{ c.name }}</a></td>
             <td>{{ c.level }}</td>
             <td>{{ c.vocation }}</td>
-            <td></td>
+            <td>{% if c.is_online %}<span class="label label-success">online</span>{% endif %}</td>
         </tr>
     {% endfor %}
     </tbody>
