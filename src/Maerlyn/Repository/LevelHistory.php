@@ -15,7 +15,7 @@ class LevelHistory extends Repository
     public function recent()
     {
         return $this->db->fetchAll(sprintf("SELECT c.name, lh.level, lh.date, lh.is_death FROM %s lh "
-            . "INNER JOIN tibiahu_character c ON c.id = lh.id ORDER BY lh.date DESC LIMIT 10;", $this->getTableName()));
+            . "INNER JOIN tibiahu_character c ON c.id = lh.character_id ORDER BY lh.date DESC LIMIT 10;", $this->getTableName()));
     }
 
     public function getTableName()
