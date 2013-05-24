@@ -13,16 +13,10 @@
         <div class="container">
             <a class="brand" href="{{ path("homepage") }}">Tibiahu minimál</a>
 
-            {% if app.session.has("admin_authenticated") %}
-                <ul class="nav">
-                    {# ilyen egy menupont: <li><a href="{{ path("admin_harmadikbadge") }}">Harmadik badge</a></li> #}
-                </ul>
+            <ul class="nav">
+                <li><a href="{{ path("recent_level_changes") }}">Legújabb szintváltozások</a></li>
+            </ul>
 
-                <ul class="nav pull-right">
-                    <li><a href="{{ path("admin_logout") }}">Kijelentkezés</a></li>
-                </ul>
-            {% endif %}
-        </div>
     </div>
 </div>
 
