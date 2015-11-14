@@ -74,6 +74,8 @@ class UpdateCharactersCommand extends Command {
             if ($modified) {
                 $app["db.character"]->update($character, array("id" => $character["id"]));
             }
+
+            sleep(5);
         }
     }
 }
